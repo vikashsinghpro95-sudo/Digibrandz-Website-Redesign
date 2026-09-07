@@ -1,0 +1,102 @@
+@import url('https://api.fontshare.com/v2/css?f[]=clash-grotesk@200,300,400,500,600,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 324 54% 24%; /* #601D49 */
+    
+    --card: 0 0% 100%;
+    --card-foreground: 324 54% 24%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 324 54% 24%;
+    
+    --primary: 324 54% 24%; /* #601D49 */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 339 45% 54%; /* #BD5579 */
+    --secondary-foreground: 0 0% 100%;
+    
+    --muted: 0 0% 96%;
+    --muted-foreground: 324 10% 45%;
+    
+    --accent: 0 0% 96%;
+    --accent-foreground: 324 54% 24%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 324 54% 24%;
+
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 326 30% 8%; /* #1A0E15 derived from #601D49 */
+    --foreground: 43 100% 86%; /* #FFEBB8 */
+    
+    --card: 326 30% 10%;
+    --card-foreground: 43 100% 86%;
+    
+    --popover: 326 30% 10%;
+    --popover-foreground: 43 100% 86%;
+    
+    --primary: 339 45% 54%; /* #BD5579 */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 0 63% 77%; /* #EA9D9D */
+    --secondary-foreground: 326 30% 8%;
+    
+    --muted: 326 30% 15%;
+    --muted-foreground: 0 0% 70%;
+    
+    --accent: 326 30% 15%;
+    --accent-foreground: 43 100% 86%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 326 30% 20%;
+    --input: 326 30% 20%;
+    --ring: 339 45% 54%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    overscroll-behavior: none;
+  }
+  
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-brand-plum dark:text-brand-cream;
+  }
+}
