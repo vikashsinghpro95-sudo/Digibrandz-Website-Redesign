@@ -34,9 +34,12 @@ export default function TrustedBy() {
 
       {/* Auto-scrolling marquee */}
       <div className="relative flex overflow-hidden w-full group py-4">
-        
-        {/* Track 1 */}
-        <div className="flex animate-[marquee_40s_linear_infinite] whitespace-nowrap group-hover:[animation-play-state:paused]">
+        {/* Track */}
+        <motion.div 
+          className="flex whitespace-nowrap"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
+        >
           {MARQUEE_ITEMS.map((item, index) => (
             <div 
               key={`logo-${index}`} 
@@ -50,24 +53,7 @@ export default function TrustedBy() {
               </span>
             </div>
           ))}
-        </div>
-        
-        {/* Track 2 (Absolute positioned for seamless loop) */}
-        <div className="flex animate-[marquee_40s_linear_infinite] whitespace-nowrap absolute top-4 group-hover:[animation-play-state:paused] translate-x-full">
-          {MARQUEE_ITEMS.map((item, index) => (
-            <div 
-              key={`logo-dup-${index}`} 
-              className="flex items-center gap-3 justify-center mx-10 md:mx-16 min-w-fit grayscale hover:grayscale-0 transition-all duration-300 opacity-50 hover:opacity-100 cursor-default"
-            >
-              <div className="text-brand-plum dark:text-brand-cream text-3xl">
-                {item.icon}
-              </div>
-              <span className="font-display font-bold text-2xl text-foreground tracking-tight">
-                {item.name}
-              </span>
-            </div>
-          ))}
-        </div>
+        </motion.div>
         
         {/* Gradient overlays for smooth fading edges */}
         <div className="absolute top-0 left-0 w-32 md:w-64 h-full bg-gradient-to-r from-background to-transparent pointer-events-none z-10" />

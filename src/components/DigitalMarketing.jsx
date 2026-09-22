@@ -62,69 +62,98 @@ export default function DigitalMarketing() {
         
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
           
-          {/* Left Side: Sticky Header */}
-          <div className="lg:w-5/12 lg:sticky lg:top-32">
+          {/* Left Side: Sticky Header & Creative */}
+          <div className="lg:w-5/12 lg:sticky lg:top-24 flex flex-col">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-semibold text-brand-rose tracking-wider uppercase mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-semibold text-brand-rose tracking-wider uppercase mb-8 shadow-inner">
                 <span className="flex h-2 w-2 rounded-full bg-brand-rose animate-pulse"></span>
                 Digital Marketing
               </div>
               
-              <h2 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white mb-8 leading-tight tracking-tight">
+              <h2 className="font-display font-bold text-5xl md:text-6xl text-white mb-6 leading-tight tracking-tight">
                 Turn Attention <br/>
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-rose to-brand-blush">Into Customers</span>
               </h2>
               
-              <p className="text-lg md:text-xl text-brand-cream/70 leading-relaxed mb-10 font-medium max-w-md">
+              <p className="text-lg text-brand-cream/70 leading-relaxed mb-8 font-medium max-w-md">
                 We don't just drive traffic; we drive revenue. Our full-funnel marketing strategies are engineered to capture high-intent audiences and convert them into loyal customers.
               </p>
               
-              <Button size="lg" className="bg-brand-rose hover:bg-brand-rose/90 text-white rounded-full px-8 h-14 text-base font-bold shadow-xl shadow-brand-rose/20 transition-all hover:-translate-y-1 group">
+              <Button size="lg" className="bg-brand-rose hover:bg-brand-rose/90 text-white rounded-full px-8 h-14 text-base font-bold shadow-xl shadow-brand-rose/20 transition-all hover:-translate-y-1 group mb-12 w-fit">
                 See Our Marketing Results
                 <FaArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </motion.div>
+
+            {/* Premium 3D Creative Showcase (Visible on Desktop & Mobile) */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl shadow-brand-rose/10 group mb-12 lg:mb-0"
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-[#130610] via-[#130610]/20 to-transparent z-10 opacity-80" />
+              <img 
+                src="/images/digital-marketing-3d.jpg" 
+                alt="Digital Marketing Analytics 3D" 
+                className="w-full h-auto object-cover scale-105 group-hover:scale-110 transition-transform duration-1000 ease-out"
+                loading="lazy"
+              />
+              
+              {/* Floating Glassmorphism Badge */}
+              <div className="absolute bottom-6 left-6 right-6 z-20">
+                <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl p-4 md:p-5 flex items-center justify-between shadow-2xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                   <div>
+                     <div className="text-white/60 text-xs font-bold uppercase tracking-widest mb-1 flex items-center gap-2">
+                       <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+                       Live Campaign ROI
+                     </div>
+                     <div className="text-white font-display font-black text-3xl md:text-4xl">+310%</div>
+                   </div>
+                   <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-brand-rose/20 border border-brand-rose/30 flex items-center justify-center text-brand-rose shrink-0">
+                     <FaArrowTrendUp size={24} />
+                   </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
 
-          {/* Right Side: Scrolling Cards */}
-          <div className="lg:w-7/12 w-full space-y-6 pb-12">
+          {/* Right Side: Scrolling Cards Grid */}
+          <div className="lg:w-7/12 w-full grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 pb-12 lg:pt-0">
             {SUB_SERVICES.map((service, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: (idx % 3) * 0.1 }}
-                className="group relative bg-white/[0.03] border border-white/10 hover:border-brand-rose/50 hover:bg-white/[0.06] rounded-3xl p-8 md:p-10 transition-all duration-500 overflow-hidden"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: (idx % 4) * 0.1 }}
+                className="group relative bg-white/[0.02] border border-white/5 hover:border-brand-rose/30 hover:bg-white/[0.04] rounded-[2rem] p-6 md:p-8 transition-all duration-500 overflow-hidden flex flex-col h-full"
               >
                 {/* Card Hover Glow */}
-                <div className="absolute inset-0 bg-gradient-to-r from-brand-rose/0 via-brand-rose/5 to-brand-rose/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-rose/20 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 
-                <div className="relative z-10 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
-                  
-                  {/* Icon Container */}
-                  <div className="w-16 h-16 shrink-0 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl text-brand-rose shadow-inner group-hover:scale-110 group-hover:bg-brand-rose group-hover:text-white group-hover:border-brand-rose transition-all duration-500">
-                    {service.icon}
-                  </div>
-                  
-                  {/* Text Content */}
-                  <div>
-                    <h3 className="font-display font-bold text-2xl text-white mb-3 group-hover:text-brand-rose transition-colors">
-                      {service.name}
-                    </h3>
-                    <p className="text-brand-cream/60 leading-relaxed group-hover:text-brand-cream/80 transition-colors">
-                      {service.desc}
-                    </p>
-                  </div>
-                  
+                {/* Icon Container */}
+                <div className="w-14 h-14 shrink-0 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl text-brand-cream/80 shadow-inner group-hover:scale-110 group-hover:bg-brand-rose group-hover:text-white group-hover:border-brand-rose/50 transition-all duration-500 mb-6 relative z-10">
+                  {service.icon}
                 </div>
                 
-                {/* Decorative background icon */}
-                <div className="absolute -bottom-10 -right-10 text-[120px] text-white/[0.02] group-hover:text-white/[0.04] transition-colors duration-500 pointer-events-none rotate-12 group-hover:-rotate-12 group-hover:scale-125">
+                {/* Text Content */}
+                <div className="relative z-10 flex-grow">
+                  <h3 className="font-display font-bold text-xl md:text-2xl text-white mb-3 group-hover:text-brand-rose transition-colors">
+                    {service.name}
+                  </h3>
+                  <p className="text-sm md:text-base text-brand-cream/60 leading-relaxed group-hover:text-brand-cream/80 transition-colors">
+                    {service.desc}
+                  </p>
+                </div>
+                
+                {/* Decorative Background Icon */}
+                <div className="absolute -bottom-6 -right-6 text-[100px] text-white/[0.02] group-hover:text-brand-rose/[0.05] transition-colors duration-500 pointer-events-none rotate-12 group-hover:-rotate-12 group-hover:scale-110">
                   {service.icon}
                 </div>
               </motion.div>

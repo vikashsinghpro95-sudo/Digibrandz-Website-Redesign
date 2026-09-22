@@ -1,51 +1,208 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Typewriter } from 'react-simple-typewriter'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-scroll'
 import { Button } from './ui/button'
-import { FaArrowRight, FaCode, FaChartLine, FaRocket } from 'react-icons/fa6'
+import { FaArrowRight, FaSpinner, FaFilePdf, FaCode, FaLaptopCode, FaBullhorn, FaPenNib, FaGears, FaRobot } from 'react-icons/fa6'
+
+const ICON_URLS = [
+  "/icons/airtable.svg", "/icons/anthropic.svg", "/icons/asana.svg", "/icons/brevo.svg",
+  "/icons/calendly.svg", "/icons/clickup.svg", "/icons/cloudflare.svg", "/icons/datadog.svg",
+  "/icons/digitalocean.svg", "/icons/discord.svg", "/icons/docker.svg", "/icons/elevenlabs.svg",
+  "/icons/facebook.svg", "/icons/figma.svg", "/icons/firebase.svg", "/icons/flutter.svg",
+  "/icons/github.svg", "/icons/gmail.svg", "/icons/googleads.svg", "/icons/googleanalytics.svg",
+  "/icons/googlecloud.svg", "/icons/googledocs.svg", "/icons/googledrive.svg", "/icons/googlegemini.svg",
+  "/icons/googlemeet.svg", "/icons/googlesearchconsole.svg", "/icons/googlesheets.svg", "/icons/googletagmanager.svg",
+  "/icons/hotjar.svg", "/icons/hubspot.svg", "/icons/instagram.svg", "/icons/intercom.svg",
+  "/icons/jira.svg", "/icons/mailchimp.svg", "/icons/make.svg", "/icons/medium.svg",
+  "/icons/meta.svg", "/icons/mixpanel.svg", "/icons/mongodb.svg", "/icons/mysql.svg",
+  "/icons/n8n.svg", "/icons/netlify.svg", "/icons/nodedotjs.svg", "/icons/notion.svg",
+  "/icons/pinterest.svg", "/icons/postgresql.svg", "/icons/python.svg", "/icons/quora.svg",
+  "/icons/railway.svg", "/icons/razorpay.svg", "/icons/react.svg", "/icons/reddit.svg",
+  "/icons/redis.svg", "/icons/render.svg", "/icons/semrush.svg", "/icons/shopify.svg",
+  "/icons/snapchat.svg", "/icons/stripe.svg", "/icons/supabase.svg", "/icons/telegram.svg",
+  "/icons/threads.svg", "/icons/tiktok.svg", "/icons/trello.svg", "/icons/typeform.svg",
+  "/icons/vercel.svg", "/icons/webflow.svg", "/icons/whatsapp.svg", "/icons/wix.svg",
+  "/icons/woocommerce.svg", "/icons/wordpress.svg", "/icons/x.svg", "/icons/yoast.svg",
+  "/icons/youtube.svg", "/icons/zapier.svg", "/icons/zendesk.svg", "/icons/zoho.svg"
+]
+
+const HERO_SERVICES = [
+  { name: "Software Development", icon: <FaCode /> },
+  { name: "Web Development", icon: <FaLaptopCode /> },
+  { name: "Digital Marketing", icon: <FaBullhorn /> },
+  { name: "UI/UX", icon: <FaPenNib /> },
+  { name: "Automation", icon: <FaGears /> },
+  { name: "AI Solutions", icon: <FaRobot /> }
+];
+
+const FACTS = [
+  "अच्छा Content लोगों को रोकता है",
+  "सही SEO लगातार Traffic लाता है",
+  "Data देखकर बेहतर फैसले होते हैं",
+  "Social Media से Brand मजबूत होता है",
+  "सही Ads जल्दी Results दिखाते हैं",
+  "Videos ज्यादा लोगों का ध्यान खींचते हैं",
+  "भरोसा बढ़े तो Sales बढ़ती हैं",
+  "लगातार काम करने से Growth आती है",
+  "सही Audience तक पहुँचना जरूरी है",
+  "सही CTA लोगों को Action लेने देता है",
+  "Email Marketing पुराने Customers जोड़ता है",
+  "Retargeting interested Customers वापस लाती है",
+  "Analytics बताता है क्या काम कर रहा है",
+  "सही Keywords Search Traffic बढ़ाते हैं",
+  "मजबूत Branding लोगों को याद रहती है",
+  "साफ Code समझना और बदलना आसान होता है",
+  "Testing से Bugs समय पर पकड़ में आते हैं",
+  "Git से Code Changes सुरक्षित रहते हैं",
+  "अच्छी Documentation Team का समय बचाती है",
+  "Security को शुरुआत से ध्यान में रखना चाहिए",
+  "छोटे Functions Code को समझना आसान बनाते हैं",
+  "Reusable Code बार-बार मेहनत बचाता है",
+  "APIs अलग-अलग Systems को जोड़ती हैं",
+  "Database Application का Data संभालता है",
+  "Debugging से असली Problem पता चलती है",
+  "Automation बार-बार के काम को आसान बनाता है",
+  "Version Control पुराने Changes वापस लाता है",
+  "अच्छा UI Application इस्तेमाल करना आसान बनाता है",
+  "Fast Performance User Experience बेहतर करती है",
+  "AI अब Software Development का तरीका बदल रहा है"
+];
+
+let lastFactIndex = 1;
+const getRandomFact = () => {
+  let idx = Math.floor(Math.random() * FACTS.length);
+  while (idx === lastFactIndex) {
+    idx = Math.floor(Math.random() * FACTS.length);
+  }
+  lastFactIndex = idx;
+  return FACTS[idx];
+};
+
+const BackgroundIcons = () => {
+  const getColClasses = (index) => {
+    if (index < 3) return "flex";
+    if (index < 7) return "hidden sm:flex";
+    if (index < 9) return "hidden md:flex";
+    return "hidden lg:flex";
+  }
+
+  return (
+    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none flex items-center justify-center bg-background">
+       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-[0.03] dark:opacity-[0.05]" />
+       
+       <div className="absolute inset-0 z-0 hidden md:grid grid-cols-3 sm:grid-cols-7 md:grid-cols-9 lg:grid-cols-12 gap-8 px-4">
+          {Array.from({ length: 12 }).map((_, colIndex) => {
+             const isEven = colIndex % 2 === 0;
+             const startIdx = (colIndex * 13) % ICON_URLS.length;
+             // Reduced from 30 to 15 to halve DOM nodes while still spanning the entire screen
+             const columnIcons = Array.from({ length: 15 }).map((_, i) => ICON_URLS[(startIdx + i) % ICON_URLS.length]);
+             
+             return (
+               <div key={colIndex} className={`col-span-1 justify-center items-start overflow-visible ${getColClasses(colIndex)}`}>
+                  <motion.div
+                    className="flex flex-col will-change-transform transform-gpu"
+                    animate={{ y: isEven ? ["0%", "-50%"] : ["-50%", "0%"] }}
+                    transition={{ duration: 40 + (colIndex % 3) * 5, ease: "linear", repeat: Infinity }}
+                  >
+                     <div className="flex flex-col gap-8 pb-8">
+                       {columnIcons.map((url, i) => (
+                         <img key={`a-${i}`} src={url} alt="" className="w-10 h-10 object-contain dark:invert opacity-40 flex-shrink-0" loading="lazy" />
+                       ))}
+                     </div>
+                     <div className="flex flex-col gap-8 pb-8">
+                       {columnIcons.map((url, i) => (
+                         <img key={`b-${i}`} src={url} alt="" className="w-10 h-10 object-contain dark:invert opacity-40 flex-shrink-0" loading="lazy" />
+                       ))}
+                     </div>
+                  </motion.div>
+               </div>
+             )
+          })}
+       </div>
+
+       {/* Performant static overlay: solid background in center to hide icons behind text, fading to transparent at edges */}
+       <div 
+         className="absolute inset-0 z-10 pointer-events-none" 
+         style={{ background: 'radial-gradient(ellipse at center, hsl(var(--background)) 40%, transparent 80%)' }}
+       />
+    </div>
+  )
+}
 
 export default function Hero() {
+  const getDynamicFontSize = (text) => {
+    const len = text.length;
+    if (len > 35) return "text-[20px] sm:text-[28px] md:text-[34px] lg:text-[45px]";
+    if (len > 25) return "text-[26px] sm:text-[36px] md:text-[42px] lg:text-[55px]";
+    return "text-[32px] sm:text-[45px] md:text-[50px] lg:text-[70px]";
+  };
+
+  const [url, setUrl] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [rotation, setRotation] = useState(0);
+  const [fact1, setFact1] = useState(FACTS[0]);
+  const [fact2, setFact2] = useState(FACTS[1]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRotation((prev) => {
+        const nextRot = prev + 90;
+        const normalized = nextRot % 360;
+        
+        // Randomize the completely hidden face that's pointing backwards
+        if (normalized === 90) {
+          setFact2(getRandomFact());
+        } else if (normalized === 270) {
+          setFact1(getRandomFact());
+        }
+        
+        return nextRot;
+      });
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleAudit = async (e) => {
+    e.preventDefault();
+    if (!url) return;
+    
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const response = await fetch('http://localhost:3001/api/audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to audit website. Check URL or try again later.');
+      }
+
+      const blob = await response.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = `SEO_Audit_${new URL(url.startsWith('http') ? url : `https://${url}`).hostname || 'Report'}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(downloadUrl);
+      
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden pt-24 pb-16">
       
-      {/* Dynamic Background Mesh & Grid */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-[0.03] dark:opacity-[0.05]" />
-        
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-            x: [0, 50, -20, 0],
-            y: [0, -50, 20, 0],
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-0 -left-[10%] w-[500px] h-[500px] rounded-full bg-brand-rose/20 dark:bg-brand-rose/10 blur-[120px] mix-blend-multiply dark:mix-blend-screen will-change-transform transform-gpu"
-        />
-        
-        <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.2, 0.4, 0.2],
-            x: [0, -60, 40, 0],
-            y: [0, 60, -30, 0],
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-0 -right-[10%] w-[600px] h-[600px] rounded-full bg-brand-blush/30 dark:bg-brand-blush/10 blur-[150px] mix-blend-multiply dark:mix-blend-screen will-change-transform transform-gpu"
-        />
-
-        <motion.div
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.1, 0.3, 0.1],
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[40%] left-[40%] w-[400px] h-[400px] rounded-full bg-brand-plum/10 dark:bg-brand-cream/5 blur-[100px] will-change-transform transform-gpu"
-        />
-      </div>
-
-
+      <BackgroundIcons />
 
       <div className="container relative z-10 px-4 md:px-6 mx-auto flex flex-col items-center text-center">
         
@@ -62,84 +219,163 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Massive Brand Name */}
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="font-display font-bold text-7xl md:text-[100px] lg:text-[130px] leading-none tracking-tight mb-8 select-none"
-        >
-          <span className="text-transparent bg-clip-text bg-gradient-to-br from-brand-plum via-[#8a2b69] to-brand-rose dark:from-white dark:via-brand-cream dark:to-brand-blush">
-            DigiBrandz
-          </span>
-        </motion.h1>
+        {/* Main Hero Text (Responsive) */}
+        <div className="flex flex-col items-center">
+          
+          {/* 3D Box Infinite Roll Container */}
+          <div className="h-[90px] sm:h-[120px] lg:h-[150px] flex justify-center items-center mb-6 sm:mb-10 relative w-full max-w-5xl" style={{ perspective: 1200 }}>
+            <motion.div
+              animate={{ rotateX: rotation }}
+              transition={{ duration: 0.8, ease: [0.65, 0, 0.35, 1] }}
+              className="relative w-full h-full"
+              style={{ transformStyle: 'preserve-3d' }}
+            >
+              {/* Front Face (English) */}
+              <div 
+                className="absolute inset-0 flex items-center justify-center [transform:translateZ(45px)] sm:[transform:translateZ(60px)] lg:[transform:translateZ(75px)]"
+                style={{ backfaceVisibility: 'hidden' }}
+              >
+                <h1 className="font-display font-bold text-[65px] sm:text-[90px] md:text-[100px] lg:text-[130px] leading-none tracking-tight select-none">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-br from-brand-plum to-brand-rose py-4 inline-block">
+                    DigiBrandz
+                  </span>
+                </h1>
+              </div>
 
-        {/* Headline with Typewriter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="text-2xl md:text-4xl lg:text-5xl font-display font-medium text-foreground mb-8 max-w-4xl min-h-[100px] md:min-h-[60px] leading-tight"
-        >
-          We Build Digital Experiences That Grow{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-rose to-brand-plum dark:from-brand-blush dark:to-brand-cream font-bold inline-block relative mt-2 md:mt-0 px-2">
-            <span className="absolute inset-0 bg-brand-rose/10 dark:bg-brand-blush/10 rounded-lg -rotate-1 scale-105 pointer-events-none" />
-            <Typewriter
-              words={['Websites.', 'Software.', 'Marketing.', 'Automation.']}
-              loop={0}
-              cursor
-              cursorStyle="_"
-              typeSpeed={70}
-              deleteSpeed={40}
-              delaySpeed={1500}
-            />
-          </span>
-        </motion.div>
+              {/* Bottom Face (Hindi Fact 1) - Appears when rolling UP (+90deg) */}
+              <div 
+                className="absolute inset-0 flex items-center justify-center [transform:rotateX(-90deg)_translateZ(45px)] sm:[transform:rotateX(-90deg)_translateZ(60px)] lg:[transform:rotateX(-90deg)_translateZ(75px)]"
+                style={{ backfaceVisibility: 'hidden' }}
+              >
+                <h1 className={`font-sans font-black ${getDynamicFontSize(fact1)} leading-[1.2] tracking-tight select-none w-full text-center px-2 transition-all duration-300`}>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-br from-brand-rose to-brand-plum drop-shadow-sm py-4 inline-block">
+                    {fact1}
+                  </span>
+                </h1>
+              </div>
 
-        {/* Subheading */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-12 leading-relaxed"
-        >
-          From high-performance websites and custom software to result-driven digital marketing campaigns, we help businesses <strong className="font-semibold text-foreground">build, launch, and scale</strong> their digital presence.
-        </motion.p>
+              {/* Back Face (English) - Appears when rolling UP (+180deg) */}
+              <div 
+                className="absolute inset-0 flex items-center justify-center [transform:rotateX(-180deg)_translateZ(45px)] sm:[transform:rotateX(-180deg)_translateZ(60px)] lg:[transform:rotateX(-180deg)_translateZ(75px)]"
+                style={{ backfaceVisibility: 'hidden' }}
+              >
+                <h1 className="font-display font-bold text-[65px] sm:text-[90px] md:text-[100px] lg:text-[130px] leading-none tracking-tight select-none">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-br from-brand-plum to-brand-rose py-4 inline-block">
+                    DigiBrandz
+                  </span>
+                </h1>
+              </div>
 
-        {/* CTAs */}
+              {/* Top Face (Hindi Fact 2) - Appears when rolling UP (+270deg) */}
+              <div 
+                className="absolute inset-0 flex items-center justify-center [transform:rotateX(-270deg)_translateZ(45px)] sm:[transform:rotateX(-270deg)_translateZ(60px)] lg:[transform:rotateX(-270deg)_translateZ(75px)]"
+                style={{ backfaceVisibility: 'hidden' }}
+              >
+                <h1 className={`font-sans font-black ${getDynamicFontSize(fact2)} leading-[1.2] tracking-tight select-none w-full text-center px-2 transition-all duration-300`}>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-br from-brand-rose to-brand-plum drop-shadow-sm py-4 inline-block">
+                    {fact2}
+                  </span>
+                </h1>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-medium text-foreground mb-6 max-w-4xl min-h-[80px] sm:min-h-[60px] leading-tight px-2"
+          >
+            We Build Digital Experiences That Grow{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-rose to-brand-blush font-bold inline-block w-[7em] text-center relative px-1 sm:px-2">
+              <span className="absolute inset-0 bg-brand-rose/10 dark:bg-brand-rose/20 rounded-lg -rotate-1 scale-105 pointer-events-none" />
+              <Typewriter
+                words={['Websites.', 'Software.', 'Marketing.', 'Automation.']}
+                loop={0}
+                cursor
+                cursorStyle="_"
+                typeSpeed={70}
+                deleteSpeed={40}
+                delaySpeed={1500}
+              />
+            </span>
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="text-lg sm:text-xl text-muted-foreground max-w-3xl mb-12 leading-relaxed px-4"
+          >
+            From high-performance websites and custom software to result-driven digital marketing campaigns, we help businesses <strong className="font-semibold text-foreground">build, launch, and scale</strong> their digital presence.
+          </motion.p>
+        </div>
+
+        {/* CTAs & SEO Audit Tool */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto mb-16"
+          className="w-full max-w-2xl mx-auto mb-16 flex flex-col items-center"
         >
-          <Link to="contact" smooth duration={500} offset={-80} className="w-full sm:w-auto">
-            <Button size="lg" className="w-full sm:w-auto bg-brand-plum hover:bg-brand-plum/90 dark:bg-brand-cream dark:text-brand-plum dark:hover:bg-brand-cream/90 text-white rounded-full px-8 h-14 text-base font-bold shadow-xl shadow-brand-plum/20 transition-all hover:-translate-y-1 group">
-              Start Your Project
-              <FaArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+          <form onSubmit={handleAudit} className="w-full relative flex flex-col sm:flex-row items-center gap-2 p-2 bg-background/60 backdrop-blur-xl border border-border/60 rounded-3xl sm:rounded-full shadow-2xl shadow-brand-rose/5">
+            <input 
+              type="text" 
+              placeholder="Enter your website URL (e.g. apple.com)" 
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              className="flex-grow w-full bg-transparent border-none text-foreground px-6 h-12 focus:ring-0 outline-none placeholder:text-muted-foreground/60 text-base"
+              disabled={loading}
+            />
+            <Button 
+              type="submit"
+              disabled={loading || !url}
+              size="lg" 
+              className="w-full sm:w-auto bg-brand-rose hover:bg-brand-rose/90 text-white rounded-full px-8 h-12 sm:h-14 text-base font-bold shadow-xl shadow-brand-rose/20 transition-all hover:-translate-y-0.5 group disabled:opacity-70 disabled:hover:-translate-y-0"
+            >
+              {loading ? (
+                <>
+                  <FaSpinner className="mr-2 w-4 h-4 animate-spin" />
+                  Generating PDF...
+                </>
+              ) : (
+                <>
+                  <FaFilePdf className="mr-2 w-4 h-4" />
+                  Get a Free SEO Audit
+                </>
+              )}
             </Button>
-          </Link>
-          <Link to="services" smooth duration={500} offset={-80} className="w-full sm:w-auto">
-            <Button size="lg" variant="outline" className="w-full sm:w-auto bg-background/50 backdrop-blur-sm border-border text-foreground hover:bg-muted/50 rounded-full px-8 h-14 text-base font-bold transition-all hover:-translate-y-1">
-              Explore Our Services
-            </Button>
-          </Link>
+          </form>
+          {error && <p className="text-destructive text-sm mt-4 font-medium">{error}</p>}
+          
+          <div className="flex items-center justify-center gap-6 mt-12 mb-6">
+            <span className="h-px w-12 bg-border"></span>
+            <span className="text-sm font-semibold text-muted-foreground tracking-widest uppercase">Explore Our Services</span>
+            <span className="h-px w-12 bg-border"></span>
+          </div>
         </motion.div>
 
-        {/* Trust Pills */}
+        {/* Highlighted Service Cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="flex flex-wrap justify-center gap-3 max-w-4xl"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl mx-auto"
         >
-          {["Software Development", "Web Development", "Digital Marketing", "UI/UX", "Automation", "AI Solutions"].map((service, idx) => (
-            <span 
-              key={idx} 
-              className="px-4 py-2 rounded-full bg-muted/40 backdrop-blur-sm border border-border text-sm font-medium text-foreground/80 hover:bg-brand-rose/10 hover:text-brand-rose hover:border-brand-rose/30 transition-colors cursor-default"
-            >
-              {service}
-            </span>
+          {HERO_SERVICES.map((service, idx) => (
+            <Link to="services" smooth duration={500} offset={-80} key={idx} className="block">
+              <motion.div 
+                whileHover={{ y: -5, scale: 1.02 }}
+                className="group flex items-center gap-3 px-5 py-4 rounded-2xl bg-background/50 backdrop-blur-xl border border-border/60 shadow-lg hover:shadow-brand-rose/20 hover:border-brand-rose/40 transition-all cursor-pointer h-full"
+              >
+                <div className="w-10 h-10 rounded-full bg-brand-plum/10 dark:bg-brand-cream/10 flex flex-shrink-0 items-center justify-center text-brand-plum dark:text-brand-cream group-hover:bg-brand-rose group-hover:text-white transition-colors">
+                  {service.icon}
+                </div>
+                <span className="text-sm md:text-base font-bold text-foreground/90 group-hover:text-brand-rose transition-colors">
+                  {service.name}
+                </span>
+              </motion.div>
+            </Link>
           ))}
         </motion.div>
 

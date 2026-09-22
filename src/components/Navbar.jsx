@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { FaBars, FaXmark, FaMoon, FaSun } from 'react-icons/fa6'
-import { Link } from 'react-scroll'
+import { motion } from 'framer-motion'
+import { FaMoon, FaSun, FaHouse, FaLayerGroup, FaTag, FaEnvelope } from 'react-icons/fa6'
+import { useNavigate, useLocation, Link as RouterLink } from 'react-router-dom'
+import { scroller, Link as ScrollLink } from 'react-scroll'
 import { useTheme } from './ThemeProvider'
 import { Button } from './ui/button'
 
@@ -14,12 +15,16 @@ const NAV_LINKS = [
   { name: 'Portfolio', to: 'portfolio' },
   { name: 'Process', to: 'process' },
   { name: 'Pricing', to: 'pricing' },
+  { name: 'Blog', to: '/blog', isRoute: true },
+  { name: 'Team', to: '/team', isRoute: true },
+  { name: 'Careers', to: '/careers', isRoute: true },
 ]
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { theme, setTheme } = useTheme()
+  const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,37 +38,77 @@ export default function Navbar() {
     setTheme(theme === 'dark' ? 'light' : 'dark')
   }
 
+  const handleNavClick = (to) => {
+    if (location.pathname !== '/') {
+      navigate('/')
+      setTimeout(() => {
+        scroller.scrollTo(to, {
+          duration: 500,
+          smooth: true,
+          offset: -80,
+        })
+      }, 100)
+    } else {
+      scroller.scrollTo(to, {
+        duration: 500,
+        smooth: true,
+        offset: -80,
+      })
+    }
+  }
+
+  const handleLogoClick = () => {
+    if (location.pathname !== '/') {
+      navigate('/')
+    } else {
+      scroller.scrollTo('hero', {
+        duration: 500,
+        smooth: true,
+        offset: -80,
+      })
+    }
+  }
+
+  const handleContactClick = () => {
+    handleNavClick('contact')
+  }
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background border-b border-border ${
         isScrolled
-          ? 'bg-background/80 backdrop-blur-md border-b border-border shadow-sm py-3'
-          : 'bg-transparent py-5'
+          ? 'shadow-md py-3'
+          : 'shadow-sm py-5'
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex-shrink-0 cursor-pointer">
-          <Link to="hero" smooth={true} duration={500} offset={-80}>
-            <span className="font-display font-bold text-2xl tracking-tight text-brand-plum dark:text-brand-cream">
-              DigiBrandz
-            </span>
-          </Link>
+        <div className="flex-shrink-0 cursor-pointer" onClick={handleLogoClick}>
+          <span className="font-display font-bold text-2xl tracking-tight text-brand-plum dark:text-brand-cream">
+            DigiBrandz
+          </span>
         </div>
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
           {NAV_LINKS.map((link) => (
-            <Link
-              key={link.name}
-              to={link.to}
-              smooth={true}
-              duration={500}
-              offset={-80}
-              className="text-sm font-medium text-foreground/80 hover:text-brand-rose transition-colors cursor-pointer"
-            >
-              {link.name}
-            </Link>
+            link.isRoute ? (
+              <RouterLink
+                key={link.name}
+                to={link.to}
+                className={`text-sm font-medium hover:text-brand-rose transition-colors cursor-pointer ${location.pathname === link.to ? 'text-brand-rose' : 'text-foreground/80'}`}
+              >
+                {link.name}
+              </RouterLink>
+            ) : (
+              <button
+                key={link.name}
+                onClick={() => handleNavClick(link.to)}
+                className="text-sm font-medium text-foreground/80 hover:text-brand-rose transition-colors cursor-pointer"
+              >
+                {link.name}
+              </button>
+            )
           ))}
         </nav>
 
@@ -77,14 +122,12 @@ export default function Navbar() {
             {theme === 'dark' ? <FaSun size={20} /> : <FaMoon size={20} />}
           </button>
           
-          <Link to="contact" smooth={true} duration={500} offset={-80}>
-            <Button className="bg-brand-rose hover:bg-brand-rose/90 text-white rounded-full px-6">
-              Get a Free Consultation
-            </Button>
-          </Link>
+          <Button onClick={handleContactClick} className="bg-brand-rose hover:bg-brand-rose/90 text-white rounded-full px-6">
+            Get a Free Consultation
+          </Button>
         </div>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Top Actions */}
         <div className="flex lg:hidden items-center space-x-4">
           <button
             onClick={toggleTheme}
@@ -92,63 +135,70 @@ export default function Navbar() {
           >
             {theme === 'dark' ? <FaSun size={20} /> : <FaMoon size={20} />}
           </button>
-          <button
-            className="p-2 text-foreground"
-            onClick={() => setMobileMenuOpen(true)}
-          >
-            <FaBars size={24} />
-          </button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-50 bg-background flex flex-col pt-20 px-6"
-          >
-            <button
-              className="absolute top-6 right-6 p-2 text-foreground bg-muted rounded-full"
-              onClick={() => setMobileMenuOpen(false)}
+      {/* Mobile Floating Bottom Dock */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex lg:hidden items-center justify-between w-[90%] max-w-[400px] bg-background/90 backdrop-blur-2xl border border-border/50 rounded-full px-6 sm:px-8 py-3 shadow-2xl shadow-brand-rose/20">
+        
+        {[
+          { id: 'hero', icon: FaHouse, label: 'Home' },
+          { id: 'services', icon: FaLayerGroup, label: 'Services' },
+          { id: 'pricing', icon: FaTag, label: 'Pricing' },
+        ].map((item) => (
+          location.pathname === '/' ? (
+            <ScrollLink
+              key={item.id}
+              to={item.id}
+              spy={true}
+              smooth={true}
+              offset={-80}
+              duration={500}
+              activeClass="!text-brand-rose !opacity-100 scale-110"
+              className="flex flex-col items-center gap-1 text-muted-foreground opacity-60 hover:opacity-100 transition-all cursor-pointer"
             >
-              <FaXmark size={24} />
+              <item.icon size={20} />
+              <span className="text-[10px] font-medium">{item.label}</span>
+            </ScrollLink>
+          ) : (
+            <button
+              key={item.id}
+              onClick={() => handleNavClick(item.id)}
+              className="flex flex-col items-center gap-1 text-muted-foreground opacity-60 hover:opacity-100 transition-all cursor-pointer"
+            >
+              <item.icon size={20} />
+              <span className="text-[10px] font-medium">{item.label}</span>
             </button>
-            
-            <div className="flex flex-col space-y-6 text-center mt-10">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.to}
-                  smooth={true}
-                  duration={500}
-                  offset={-80}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-2xl font-display font-medium text-foreground hover:text-brand-rose transition-colors"
-                >
-                  {link.name}
-                </Link>
-              ))}
-              <div className="pt-8 flex justify-center">
-                <Link 
-                  to="contact" 
-                  smooth={true} 
-                  duration={500} 
-                  offset={-80}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Button size="lg" className="bg-brand-rose hover:bg-brand-rose/90 text-white rounded-full w-full max-w-xs text-lg h-14">
-                    Get a Free Consultation
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </motion.div>
+          )
+        ))}
+
+        {location.pathname === '/' ? (
+           <ScrollLink
+             to="contact"
+             spy={true}
+             smooth={true}
+             offset={-80}
+             duration={500}
+             activeClass="!text-brand-plum dark:!text-white scale-110"
+             className="flex flex-col items-center gap-1 text-brand-rose hover:text-brand-rose/80 transition-all cursor-pointer group"
+           >
+             <div className="bg-brand-rose/10 p-2.5 rounded-full -mt-6 bg-background border border-brand-rose/30 shadow-lg group-hover:scale-110 transition-transform">
+                <FaEnvelope size={22} className="text-brand-rose group-[.active]:text-brand-plum dark:group-[.active]:text-white transition-colors" />
+             </div>
+             <span className="text-[10px] font-bold mt-0.5">Contact</span>
+           </ScrollLink>
+        ) : (
+           <button
+             onClick={() => handleNavClick('contact')}
+             className="flex flex-col items-center gap-1 text-brand-rose hover:text-brand-rose/80 transition-all cursor-pointer group"
+           >
+             <div className="bg-brand-rose/10 p-2.5 rounded-full -mt-6 bg-background border border-brand-rose/30 shadow-lg group-hover:scale-110 transition-transform">
+                <FaEnvelope size={22} className="text-brand-rose" />
+             </div>
+             <span className="text-[10px] font-bold mt-0.5">Contact</span>
+           </button>
         )}
-      </AnimatePresence>
+      </div>
     </header>
   )
 }

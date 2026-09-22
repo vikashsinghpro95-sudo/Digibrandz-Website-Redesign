@@ -42,6 +42,17 @@ export default function Contact() {
                   <Input id="name" placeholder="John Doe" required className="bg-background" />
                 </div>
                 <div className="space-y-2">
+                  <Label htmlFor="email">Email Address *</Label>
+                  <Input id="email" type="email" placeholder="john@example.com" required className="bg-background" />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="mobile">Mobile Number *</Label>
+                  <Input id="mobile" type="tel" placeholder="+91 0000000000" required className="bg-background" />
+                </div>
+                <div className="space-y-2">
                   <Label htmlFor="company">Company Name</Label>
                   <Input id="company" placeholder="Acme Inc." className="bg-background" />
                 </div>
@@ -49,49 +60,76 @@ export default function Contact() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email Address *</Label>
-                  <Input id="email" type="email" placeholder="john@example.com" required className="bg-background" />
+                  <Label htmlFor="website">Website (Optional)</Label>
+                  <Input id="website" type="url" placeholder="https://example.com" className="bg-background" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" type="tel" placeholder="+1 (555) 000-0000" className="bg-background" />
+                  <Label htmlFor="businessType">Business Type *</Label>
+                  <select id="businessType" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                    <option value="" disabled selected>Select Business Type</option>
+                    {["Startup", "IT & Software", "Real Estate", "Healthcare", "Education", "E-commerce", "Retail", "Manufacturing", "Logistics", "Finance", "Travel", "Event Management", "Food & Beverage", "Automobile", "Entertainment", "Agriculture", "Legal", "Government", "NGO", "Construction", "Fitness", "Consulting", "Other"].map(type => (
+                      <option key={type} value={type}>{type}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="service">Service Required *</Label>
-                  <select 
-                    id="service" 
-                    required 
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    <option value="" disabled selected>Select a service</option>
-                    <option value="Website Development">Website Development</option>
-                    <option value="Software Development">Software Development</option>
-                    <option value="Mobile App">Mobile App</option>
-                    <option value="Digital Marketing">Digital Marketing</option>
-                    <option value="SEO">SEO</option>
-                    <option value="Social Media Marketing">Social Media Marketing</option>
-                    <option value="AI & Automation">AI & Automation</option>
-                    <option value="UI/UX Design">UI/UX Design</option>
-                    <option value="E-Commerce">E-Commerce</option>
-                    <option value="Other">Other</option>
+                  <Label htmlFor="budget">Estimated Budget *</Label>
+                  <select id="budget" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                    <option value="" disabled selected>Select a range</option>
+                    <option value="Under $5k">Under $5k</option>
+                    <option value="$5k - $10k">$5k - $10k</option>
+                    <option value="$10k - $25k">$10k - $25k</option>
+                    <option value="$25k - $50k">$25k - $50k</option>
+                    <option value="$50k - $100k">$50k - $100k</option>
+                    <option value="$100k+">$100k+</option>
+                    <option value="Not sure">Not sure</option>
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="budget">Budget Range</Label>
-                  <select 
-                    id="budget" 
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    <option value="" disabled selected>Select a range</option>
-                    <option value="< $5k">Under $5k</option>
-                    <option value="$5k - $10k">$5k - $10k</option>
-                    <option value="$10k - $25k">$10k - $25k</option>
-                    <option value="$25k+">$25k+</option>
-                    <option value="Not sure">Not sure</option>
+                  <Label htmlFor="timeline">Project Timeline *</Label>
+                  <select id="timeline" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                    <option value="" disabled selected>Select timeline</option>
+                    <option value="Immediately">Immediately</option>
+                    <option value="1-3 Months">1-3 Months</option>
+                    <option value="3-6 Months">3-6 Months</option>
+                    <option value="Not sure yet">Not sure yet</option>
                   </select>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <Label>Services Interested In (Select Multiple) *</Label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 border border-border rounded-xl bg-background max-h-60 overflow-y-auto">
+                  {[
+                    "Website & App Development", "Social Media Management", "Meta Ads", "Google Ads / PPC",
+                    "Website SEO", "Google My Business / Local SEO", "Real Estate Lead Generation",
+                    "E-Commerce / Quick Commerce", "Performance Marketing", "AI Video Creation",
+                    "Influencer Marketing", "Video Editing & Creative Designing", "WhatsApp & SMS Marketing",
+                    "Videography & Photography", "Other"
+                  ].map((service) => (
+                    <label key={service} className="flex items-center gap-3 text-sm cursor-pointer group">
+                      <input type="checkbox" className="w-4 h-4 rounded border-border text-brand-rose focus:ring-brand-rose/20 cursor-pointer accent-brand-rose" value={service} />
+                      <span className="text-muted-foreground group-hover:text-foreground transition-colors">{service}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <Label>Preferred Contact Method *</Label>
+                <div className="flex gap-6">
+                  <label className="flex items-center gap-2 text-sm cursor-pointer">
+                    <input type="radio" name="contactMethod" value="Email" required className="accent-brand-rose" /> Email
+                  </label>
+                  <label className="flex items-center gap-2 text-sm cursor-pointer">
+                    <input type="radio" name="contactMethod" value="Phone" required className="accent-brand-rose" /> Phone Call
+                  </label>
+                  <label className="flex items-center gap-2 text-sm cursor-pointer">
+                    <input type="radio" name="contactMethod" value="WhatsApp" required className="accent-brand-rose" /> WhatsApp
+                  </label>
                 </div>
               </div>
 
@@ -99,14 +137,14 @@ export default function Contact() {
                 <Label htmlFor="details">Project Details *</Label>
                 <Textarea 
                   id="details" 
-                  placeholder="Tell us about your project goals, timelines, and any specific requirements..." 
+                  placeholder="Tell us about your project goals, any specific requirements, or challenges you're facing..." 
                   className="min-h-[120px] bg-background"
                   required 
                 />
               </div>
 
               <Button type="submit" size="lg" className="w-full bg-brand-plum hover:bg-brand-plum/90 dark:bg-brand-cream dark:text-brand-plum dark:hover:bg-brand-cream/90 text-white font-bold h-14 text-base rounded-full">
-                Send Enquiry
+                Submit Enquiry
               </Button>
               
             </form>
@@ -131,7 +169,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-bold text-white mb-1">Our Office</h4>
-                    <p className="leading-relaxed">Level 4, Tech Park Building<br/>Kalyani Nagar, Pune<br/>Maharashtra 411014, India</p>
+                    <p className="leading-relaxed">Office No. 323, Aston Plaza,<br/>Ambegaon Budruk, Pune<br/>Maharashtra 411046, India</p>
                   </div>
                 </div>
                 
@@ -141,8 +179,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-bold text-white mb-1">Email Us</h4>
-                    <p><a href="mailto:hello@digibrandz.com" className="hover:text-brand-rose transition-colors">hello@digibrandz.com</a></p>
-                    <p><a href="mailto:support@digibrandz.com" className="hover:text-brand-rose transition-colors">support@digibrandz.com</a></p>
+                    <p><a href="mailto:Digibrandzitsolutions@gmail.com" className="hover:text-brand-rose transition-colors break-all">Digibrandzitsolutions@gmail.com</a></p>
                   </div>
                 </div>
                 
@@ -152,7 +189,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-bold text-white mb-1">Call Us</h4>
-                    <p><a href="tel:+910000000000" className="hover:text-brand-rose transition-colors">+91 0000 000 000</a></p>
+                    <p><a href="tel:+918483082699" className="hover:text-brand-rose transition-colors">+91 8483082699</a></p>
                   </div>
                 </div>
 
@@ -162,7 +199,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-bold text-white mb-1">Working Hours</h4>
-                    <p>Mon - Fri: 10:00 AM - 7:00 PM (IST)</p>
+                    <p>Monday - Saturday: 10:00 AM - 6:30 PM</p>
                   </div>
                 </div>
               </div>

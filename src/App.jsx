@@ -1,42 +1,38 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, lazy, Suspense } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Lenis from 'lenis'
 import { ThemeProvider } from './components/ThemeProvider'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import Hero from './components/Hero'
-import TrustedBy from './components/TrustedBy'
-import AboutUs from './components/AboutUs'
-import ServicesOverview from './components/ServicesOverview'
-import DigitalMarketing from './components/DigitalMarketing'
-import SoftwareDevelopment from './components/SoftwareDevelopment'
-import WebDevelopment from './components/WebDevelopment'
-import MobileAppDevelopment from './components/MobileAppDevelopment'
-import AiAutomation from './components/AiAutomation'
-import UiUxDesign from './components/UiUxDesign'
-import TechStack from './components/TechStack'
-import Industries from './components/Industries'
-import Solutions from './components/Solutions'
-import WhyChooseUs from './components/WhyChooseUs'
-import ProcessTimeline from './components/ProcessTimeline'
-import Portfolio from './components/Portfolio'
-import CaseStudies from './components/CaseStudies'
-import Testimonials from './components/Testimonials'
-import Statistics from './components/Statistics'
-import Pricing from './components/Pricing'
-import FAQ from './components/FAQ'
-import Blog from './components/Blog'
-import LeadGenCTA from './components/LeadGenCTA'
-import Contact from './components/Contact'
+import Chatbot from './components/Chatbot'
+
+import Home from './pages/Home'
+const Careers = lazy(() => import('./pages/Careers'))
+const Team = lazy(() => import('./pages/Team'))
+const BlogList = lazy(() => import('./pages/BlogList'))
+const BlogPost = lazy(() => import('./pages/BlogPost'))
+const Admin = lazy(() => import('./pages/Admin'))
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
   useEffect(() => {
+    // Smooth scrolling using Lenis, but disable on mobile to preserve resources
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
       smoothTouch: false,
       touchMultiplier: 2,
       infinite: false,
@@ -46,8 +42,11 @@ function App() {
       lenis.raf(time)
       requestAnimationFrame(raf)
     }
-
-    requestAnimationFrame(raf)
+    
+    // Only run lenis on desktop sizes to prevent mobile lag
+    if (window.innerWidth >= 768) {
+      requestAnimationFrame(raf)
+    }
 
     return () => {
       lenis.destroy()
@@ -55,40 +54,25 @@ function App() {
   }, [])
 
   return (
-    <ThemeProvider defaultTheme="light" storageKey="digibrandz-theme">
-      <div className="min-h-screen flex flex-col relative overflow-hidden text-foreground selection:bg-brand-rose/30">
+    <ThemeProvider>
+      <div className="min-h-screen bg-background text-foreground font-sans selection:bg-brand-rose/30 selection:text-brand-rose">
+        <ScrollToTop />
         <Navbar />
         
         <main className="flex-grow">
-          <Hero />
-          <TrustedBy />
-          <AboutUs />
-          <ServicesOverview />
-          
-          <DigitalMarketing />
-          <SoftwareDevelopment />
-          <WebDevelopment />
-          <MobileAppDevelopment />
-          <AiAutomation />
-          <UiUxDesign />
-          <TechStack />
-          
-          <Industries />
-          <Solutions />
-          <WhyChooseUs />
-          <ProcessTimeline />
-          
-          <Portfolio />
-          <CaseStudies />
-          <Testimonials />
-          <Statistics />
-          <Pricing />
-          <FAQ />
-          <Blog />
-          <LeadGenCTA />
-          <Contact />
+          <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/team" element={<Team />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/blog" element={<BlogList />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/admin" element={<Admin />} />
+            </Routes>
+          </Suspense>
         </main>
-
+        
+        <Chatbot />
         <Footer />
       </div>
     </ThemeProvider>
