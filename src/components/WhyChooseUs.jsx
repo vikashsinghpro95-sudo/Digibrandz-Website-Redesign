@@ -52,8 +52,8 @@ export default function WhyChooseUs() {
             <div className="aspect-square md:aspect-video lg:aspect-square rounded-3xl bg-brand-cream/30 dark:bg-card border border-brand-rose/20 relative overflow-hidden flex items-center justify-center p-8">
               
               {/* Decorative shapes */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-brand-rose/20 rounded-full blur-[80px]" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-brand-blush/20 rounded-full blur-[60px]" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-brand-rose/20 rounded-full blur-[80px] transform-gpu" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-brand-blush/20 rounded-full blur-[60px] transform-gpu" />
               
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
@@ -62,9 +62,16 @@ export default function WhyChooseUs() {
                 transition={{ duration: 0.8 }}
                 className="relative z-10 w-full max-w-sm text-center"
               >
-                <div className="w-24 h-24 mx-auto bg-brand-plum dark:bg-brand-cream rounded-full flex items-center justify-center mb-6 shadow-xl">
-                  <span className="font-display font-bold text-4xl text-brand-cream dark:text-brand-plum">Dbz</span>
-                </div>
+                <motion.div 
+                  initial={{ backgroundPosition: '0% 50%' }}
+                  animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+                  transition={{ duration: 5, ease: "linear", repeat: Infinity }}
+                  className="mb-8"
+                >
+                  <span className="font-display font-black text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-brand-rose via-brand-plum to-brand-blush bg-[length:200%_auto] tracking-tight">
+                    DigiBrandz
+                  </span>
+                </motion.div>
                 <h3 className="font-display font-bold text-2xl text-foreground mb-4">Your Growth Partner</h3>
                 <p className="text-muted-foreground">
                   Experience the synergy of world-class engineering and data-driven marketing.

@@ -69,7 +69,7 @@ export default function Blog() {
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-brand-plum to-[#130610] group-hover:scale-110 transition-transform duration-700" />
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px] transform-gpu">
                     <span className="font-semibold text-white uppercase tracking-widest text-sm bg-black/50 px-4 py-2 rounded-full border border-white/20">Read Article</span>
                   </div>
                 </Link>

@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from './ui/button'
 
 export default function LeadGenCTA() {
-  return (
+    return (
     <section className="relative overflow-hidden">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-brand-plum to-brand-rose z-0" />
@@ -42,16 +42,19 @@ export default function LeadGenCTA() {
             transition={{ delay: 0.2 }}
             className="flex flex-col sm:flex-row justify-center items-center gap-4"
           >
-            <Button size="lg" className="bg-brand-cream hover:bg-white text-brand-plum rounded-full px-10 h-16 text-lg font-bold shadow-xl transition-transform hover:scale-105 active:scale-95 w-full sm:w-auto">
+            <Button size="lg" onClick={() => window.dispatchEvent(new CustomEvent('openConsultationModal'))} className="bg-brand-cream text-brand-plum hover:bg-white px-8 h-14 text-base font-bold rounded-full shadow-xl shadow-brand-cream/20 transition-all hover:-translate-y-1">
+                
               Start a Project
             </Button>
-            <Button size="lg" variant="outline" className="border-brand-cream/30 text-white bg-white/5 hover:bg-white/20 hover:text-white rounded-full px-10 h-16 text-lg font-bold backdrop-blur-sm transition-transform hover:scale-105 active:scale-95 w-full sm:w-auto">
+            <Button size="lg" onClick={() => window.dispatchEvent(new CustomEvent('openConsultationModal'))} variant="outline" className="border-brand-cream/30 text-white bg-white/5 hover:bg-white/20 hover:text-white rounded-full px-10 h-16 text-lg font-bold backdrop-blur-sm transition-transform hover:scale-105 active:scale-95 w-full sm:w-auto">
               Book a Free Consultation
-            </Button>
+            
+              </Button>
           </motion.div>
 
         </div>
       </div>
+      
     </section>
   )
 }

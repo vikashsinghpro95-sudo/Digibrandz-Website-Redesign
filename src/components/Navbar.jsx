@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { FaMoon, FaSun, FaHouse, FaLayerGroup, FaTag, FaEnvelope } from 'react-icons/fa6'
+import { FaMoon, FaSun, FaHouse, FaLayerGroup, FaTag, FaEnvelope, FaCircleInfo, FaBriefcase, FaBuilding, FaWandMagicSparkles, FaBars } from 'react-icons/fa6'
 import { useNavigate, useLocation, Link as RouterLink } from 'react-router-dom'
 import { scroller, Link as ScrollLink } from 'react-scroll'
 import { useTheme } from './ThemeProvider'
 import { Button } from './ui/button'
+import MobileDrawer from './MobileDrawer'
 
 const NAV_LINKS = [
-  { name: 'Home', to: 'hero' },
-  { name: 'About', to: 'about' },
-  { name: 'Services', to: 'services' },
-  { name: 'Solutions', to: 'solutions' },
-  { name: 'Industries', to: 'industries' },
-  { name: 'Portfolio', to: 'portfolio' },
-  { name: 'Process', to: 'process' },
-  { name: 'Pricing', to: 'pricing' },
+  { name: 'Home', to: '/', isRoute: true },
+  { name: 'About', to: '/about', isRoute: true },
+  { name: 'Services', to: '/services', isRoute: true },
+  { name: 'Solutions', to: '/solutions', isRoute: true },
+  { name: 'Industries', to: '/industries', isRoute: true },
+  { name: 'Portfolio', to: '/portfolio', isRoute: true },
+  { name: 'Process', to: '/process', isRoute: true },
+  { name: 'Pricing', to: '/pricing', isRoute: true },
   { name: 'Blog', to: '/blog', isRoute: true },
   { name: 'Team', to: '/team', isRoute: true },
   { name: 'Careers', to: '/careers', isRoute: true },
@@ -22,6 +23,7 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const { theme, setTheme } = useTheme()
   const navigate = useNavigate()
   const location = useLocation()
@@ -69,9 +71,7 @@ export default function Navbar() {
     }
   }
 
-  const handleContactClick = () => {
-    handleNavClick('contact')
-  }
+  const handleContactClick = () => { window.dispatchEvent(new CustomEvent('openConsultationModal')); }
 
   return (
     <header
@@ -139,66 +139,49 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Floating Bottom Dock */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex lg:hidden items-center justify-between w-[90%] max-w-[400px] bg-background/90 backdrop-blur-2xl border border-border/50 rounded-full px-6 sm:px-8 py-3 shadow-2xl shadow-brand-rose/20">
+      <div className="fixed bottom-6 left-0 right-0 mx-auto z-50 flex lg:hidden items-center justify-between w-[95%] max-w-[500px] bg-brand-darkPlum/95 backdrop-blur-2xl border border-white/10 rounded-2xl px-4 py-3 shadow-[0_20px_40px_rgba(0,0,0,0.4)] shadow-brand-rose/10">
         
         {[
-          { id: 'hero', icon: FaHouse, label: 'Home' },
-          { id: 'services', icon: FaLayerGroup, label: 'Services' },
-          { id: 'pricing', icon: FaTag, label: 'Pricing' },
-        ].map((item) => (
-          location.pathname === '/' ? (
-            <ScrollLink
-              key={item.id}
-              to={item.id}
-              spy={true}
-              smooth={true}
-              offset={-80}
-              duration={500}
-              activeClass="!text-brand-rose !opacity-100 scale-110"
-              className="flex flex-col items-center gap-1 text-muted-foreground opacity-60 hover:opacity-100 transition-all cursor-pointer"
-            >
-              <item.icon size={20} />
-              <span className="text-[10px] font-medium">{item.label}</span>
-            </ScrollLink>
-          ) : (
-            <button
-              key={item.id}
-              onClick={() => handleNavClick(item.id)}
-              className="flex flex-col items-center gap-1 text-muted-foreground opacity-60 hover:opacity-100 transition-all cursor-pointer"
-            >
-              <item.icon size={20} />
-              <span className="text-[10px] font-medium">{item.label}</span>
-            </button>
+          { id: '/about', icon: FaCircleInfo, label: 'About' },
+          { id: '/services', icon: FaLayerGroup, label: 'Services' },
+          { id: '/solutions', icon: FaWandMagicSparkles, label: 'Solutions' },
+          { id: '/industries', icon: FaBuilding, label: 'Industries' },
+          { id: '/portfolio', icon: FaBriefcase, label: 'Portfolio' },
+        ].map((item) => {
+          const isActive = location.pathname === item.id;
+          return (
+            <motion.div key={item.id} whileTap={{ scale: 0.85 }}>
+              <RouterLink
+                to={item.id}
+                onClick={() => setIsDrawerOpen(false)}
+                className={`relative flex flex-col items-center justify-center gap-1 w-12 h-12 transition-colors ${isActive ? 'text-brand-rose' : 'text-brand-cream/60 hover:text-brand-cream'}`}
+              >
+                {isActive && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="absolute inset-0 bg-brand-rose/10 rounded-xl"
+                  />
+                )}
+                <item.icon size={18} className="relative z-10" />
+                <span className="text-[9px] font-medium tracking-tight relative z-10">{item.label}</span>
+              </RouterLink>
+            </motion.div>
           )
-        ))}
+        })}
 
-        {location.pathname === '/' ? (
-           <ScrollLink
-             to="contact"
-             spy={true}
-             smooth={true}
-             offset={-80}
-             duration={500}
-             activeClass="!text-brand-plum dark:!text-white scale-110"
-             className="flex flex-col items-center gap-1 text-brand-rose hover:text-brand-rose/80 transition-all cursor-pointer group"
-           >
-             <div className="bg-brand-rose/10 p-2.5 rounded-full -mt-6 bg-background border border-brand-rose/30 shadow-lg group-hover:scale-110 transition-transform">
-                <FaEnvelope size={22} className="text-brand-rose group-[.active]:text-brand-plum dark:group-[.active]:text-white transition-colors" />
-             </div>
-             <span className="text-[10px] font-bold mt-0.5">Contact</span>
-           </ScrollLink>
-        ) : (
-           <button
-             onClick={() => handleNavClick('contact')}
-             className="flex flex-col items-center gap-1 text-brand-rose hover:text-brand-rose/80 transition-all cursor-pointer group"
-           >
-             <div className="bg-brand-rose/10 p-2.5 rounded-full -mt-6 bg-background border border-brand-rose/30 shadow-lg group-hover:scale-110 transition-transform">
-                <FaEnvelope size={22} className="text-brand-rose" />
-             </div>
-             <span className="text-[10px] font-bold mt-0.5">Contact</span>
-           </button>
-        )}
+        <motion.div whileTap={{ scale: 0.85 }}>
+          <button
+            onClick={() => setIsDrawerOpen(true)}
+            className={`flex flex-col items-center justify-center gap-1 w-12 h-12 transition-colors text-brand-cream/60 hover:text-brand-cream`}
+          >
+            <FaBars size={18} />
+            <span className="text-[9px] font-medium tracking-tight">More</span>
+          </button>
+        </motion.div>
       </div>
+      
+      <MobileDrawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
     </header>
   )
 }

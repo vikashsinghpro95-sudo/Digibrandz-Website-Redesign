@@ -25,7 +25,7 @@ export default function Careers() {
       {/* Careers Hero */}
       <section className="relative py-20 overflow-hidden">
         {/* Background glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-brand-rose/10 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-brand-rose/10 blur-[120px] rounded-full pointer-events-none transform-gpu" />
         
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
           <motion.div
@@ -186,8 +186,8 @@ export default function Careers() {
               </button>
 
               {/* Left: Job Details */}
-              <div className="w-full md:w-2/5 bg-brand-plum p-8 md:p-12 relative overflow-y-auto hidden md:block">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-rose/20 rounded-full blur-[80px]" />
+              <div className="w-full md:w-2/5 bg-brand-plum p-8 md:p-12 relative overflow-y-auto hidden md:block" data-lenis-prevent="true">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-rose/20 rounded-full blur-[80px] transform-gpu" />
                 
                 <div className="relative z-10 text-brand-cream">
                   <span className="text-brand-rose font-bold text-xs uppercase tracking-wider mb-4 block bg-brand-rose/10 w-fit px-3 py-1 rounded-full border border-brand-rose/20">
@@ -224,7 +224,7 @@ export default function Careers() {
               </div>
 
               {/* Right: Application Form */}
-              <div className="w-full md:w-3/5 p-8 md:p-12 overflow-y-auto bg-card relative">
+              <div className="w-full md:w-3/5 p-8 md:p-12 overflow-y-auto bg-card relative" data-lenis-prevent="true">
                 <button 
                   onClick={() => setSelectedJob(null)}
                   className="absolute top-6 right-6 w-10 h-10 rounded-full bg-muted hidden md:flex items-center justify-center hover:bg-brand-rose hover:text-white transition-colors z-10"
@@ -259,6 +259,20 @@ export default function Careers() {
                       <Input id="app-phone" type="tel" required className="bg-background" />
                     </div>
                     <div className="space-y-2">
+                      <Label htmlFor="app-qual">Highest Qualification *</Label>
+                      <select id="app-qual" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                        <option value="" disabled selected>Select Qualification</option>
+                        <option value="Undergraduate">Undergraduate</option>
+                        <option value="Graduate">Graduate</option>
+                        <option value="Post-Graduate">Post-Graduate</option>
+                        <option value="Diploma">Diploma</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-2">
                       <Label htmlFor="app-exp">Total Experience *</Label>
                       <select id="app-exp" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                         <option value="" disabled selected>Select Experience</option>
@@ -268,13 +282,13 @@ export default function Careers() {
                         <option value="5+ Years">5+ Years</option>
                       </select>
                     </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="app-portfolio">Portfolio / LinkedIn URL</Label>
                       <Input id="app-portfolio" type="url" placeholder="https://" className="bg-background" />
                     </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="app-resume">Resume / CV (PDF) *</Label>
                       <Input id="app-resume" type="file" accept=".pdf,.doc,.docx" required className="bg-background cursor-pointer" />

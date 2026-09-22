@@ -7,7 +7,7 @@ const TIERS = [
   {
     name: "Starter",
     description: "For small businesses looking to establish a digital presence.",
-    price: "$999",
+    price: "₹999",
     features: [
       "Basic SEO Setup",
       "Social Media Management (2 platforms)",
@@ -21,7 +21,7 @@ const TIERS = [
   {
     name: "Growth",
     description: "For growing brands ready to scale their customer acquisition.",
-    price: "$2,499",
+    price: "₹2,499",
     features: [
       "Advanced SEO & Content Strategy",
       "Social Media Management (4 platforms)",
@@ -138,6 +138,7 @@ export default function Pricing() {
                     ? 'bg-brand-rose hover:bg-brand-rose/90 text-white' 
                     : 'border-brand-plum text-brand-plum hover:bg-brand-plum/5 dark:border-brand-cream dark:text-brand-cream dark:hover:bg-brand-cream/10'
                 }`}
+              onClick={() => window.dispatchEvent(new CustomEvent('openConsultationModal'))}
               >
                 Get Started
               </Button>

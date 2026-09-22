@@ -1,15 +1,12 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { FaBuilding, FaMicrochip, FaGlobe, FaLightbulb, FaShieldHalved, FaLeaf } from 'react-icons/fa6'
+import { CASE_STUDIES } from '../data/content'
 
-const LOGOS = [
-  { name: "Acme Corp", icon: <FaBuilding /> },
-  { name: "TechFlow", icon: <FaMicrochip /> },
-  { name: "Global Industries", icon: <FaGlobe /> },
-  { name: "Innovate LLC", icon: <FaLightbulb /> },
-  { name: "Quantum Systems", icon: <FaShieldHalved /> },
-  { name: "Nexus Brands", icon: <FaLeaf /> },
-]
+const LOGOS = CASE_STUDIES.filter(study => study.logo).map(study => ({
+  name: study.client,
+  logo: study.logo,
+  website: study.website
+}))
 
 // Duplicate the array for seamless infinite scrolling
 const MARQUEE_ITEMS = [...LOGOS, ...LOGOS, ...LOGOS, ...LOGOS]
@@ -41,17 +38,15 @@ export default function TrustedBy() {
           transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
         >
           {MARQUEE_ITEMS.map((item, index) => (
-            <div 
+            <a 
               key={`logo-${index}`} 
-              className="flex items-center gap-3 justify-center mx-10 md:mx-16 min-w-fit grayscale hover:grayscale-0 transition-all duration-300 opacity-50 hover:opacity-100 cursor-default"
+              href={item.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center mx-10 md:mx-16 min-w-[120px] max-w-[200px] h-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
             >
-              <div className="text-brand-plum dark:text-brand-cream text-3xl">
-                {item.icon}
-              </div>
-              <span className="font-display font-bold text-2xl text-foreground tracking-tight">
-                {item.name}
-              </span>
-            </div>
+              <img src={item.logo} alt={`${item.name} logo`} className="max-h-full max-w-full object-contain" />
+            </a>
           ))}
         </motion.div>
         

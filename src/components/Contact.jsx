@@ -67,7 +67,7 @@ export default function Contact() {
                   <Label htmlFor="businessType">Business Type *</Label>
                   <select id="businessType" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                     <option value="" disabled selected>Select Business Type</option>
-                    {["Startup", "IT & Software", "Real Estate", "Healthcare", "Education", "E-commerce", "Retail", "Manufacturing", "Logistics", "Finance", "Travel", "Event Management", "Food & Beverage", "Automobile", "Entertainment", "Agriculture", "Legal", "Government", "NGO", "Construction", "Fitness", "Consulting", "Other"].map(type => (
+                    {["Startup", "Small Business (SME)", "Enterprise / Corporate", "E-commerce Business", "Healthcare", "Real Estate", "Education & Institute", "Restaurant & Café", "Hotel & Tourism", "Construction", "Manufacturing / Industrial", "Retail Store", "Fashion & Apparel", "Beauty & Salon", "Fitness & Gym", "Finance & Insurance", "Automobile", "Agriculture", "IT & Software", "NGO", "Government", "Other"].map(type => (
                       <option key={type} value={type}>{type}</option>
                     ))}
                   </select>
@@ -79,13 +79,13 @@ export default function Contact() {
                   <Label htmlFor="budget">Estimated Budget *</Label>
                   <select id="budget" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                     <option value="" disabled selected>Select a range</option>
-                    <option value="Under $5k">Under $5k</option>
-                    <option value="$5k - $10k">$5k - $10k</option>
-                    <option value="$10k - $25k">$10k - $25k</option>
-                    <option value="$25k - $50k">$25k - $50k</option>
-                    <option value="$50k - $100k">$50k - $100k</option>
-                    <option value="$100k+">$100k+</option>
-                    <option value="Not sure">Not sure</option>
+                    <option value="Under ₹20,000">Under ₹20,000</option>
+                    <option value="₹20,000 - ₹25,000">₹20,000 - ₹25,000</option>
+                    <option value="₹25,000 - ₹40,000">₹25,000 - ₹40,000</option>
+                    <option value="₹40,000 - ₹60,000">₹40,000 - ₹60,000</option>
+                    <option value="₹60,000 - ₹1,00,000">₹60,000 - ₹1,00,000</option>
+                    <option value="Above ₹1,00,000">Above ₹1,00,000</option>
+                    <option value="Let's Discuss">Let's Discuss</option>
                   </select>
                 </div>
                 <div className="space-y-2">
@@ -93,16 +93,17 @@ export default function Contact() {
                   <select id="timeline" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                     <option value="" disabled selected>Select timeline</option>
                     <option value="Immediately">Immediately</option>
-                    <option value="1-3 Months">1-3 Months</option>
-                    <option value="3-6 Months">3-6 Months</option>
-                    <option value="Not sure yet">Not sure yet</option>
+                    <option value="Within 15 Days">Within 15 Days</option>
+                    <option value="Within 1 Month">Within 1 Month</option>
+                    <option value="Within 3 Months">Within 3 Months</option>
+                    <option value="Flexible">Flexible</option>
                   </select>
                 </div>
               </div>
 
               <div className="space-y-3">
                 <Label>Services Interested In (Select Multiple) *</Label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 border border-border rounded-xl bg-background max-h-60 overflow-y-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 border border-border rounded-xl bg-background max-h-60 overflow-y-auto" data-lenis-prevent="true">
                   {[
                     "Website & App Development", "Social Media Management", "Meta Ads", "Google Ads / PPC",
                     "Website SEO", "Google My Business / Local SEO", "Real Estate Lead Generation",
@@ -129,6 +130,9 @@ export default function Contact() {
                   </label>
                   <label className="flex items-center gap-2 text-sm cursor-pointer">
                     <input type="radio" name="contactMethod" value="WhatsApp" required className="accent-brand-rose" /> WhatsApp
+                  </label>
+                  <label className="flex items-center gap-2 text-sm cursor-pointer">
+                    <input type="radio" name="contactMethod" value="Google Meet" required className="accent-brand-rose" /> Google Meet
                   </label>
                 </div>
               </div>
@@ -158,7 +162,7 @@ export default function Contact() {
             className="w-full lg:w-2/5 flex flex-col gap-8"
           >
             <div className="bg-brand-plum dark:bg-brand-darkPlum text-white rounded-3xl p-8 relative overflow-hidden flex-grow shadow-md">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-brand-rose/20 rounded-full blur-[60px]" />
+              <div className="absolute top-0 right-0 w-48 h-48 bg-brand-rose/20 rounded-full blur-[60px] transform-gpu" />
               
               <h3 className="font-display font-bold text-2xl mb-8 text-brand-cream relative z-10">Contact Information</h3>
               
@@ -169,7 +173,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-bold text-white mb-1">Our Office</h4>
-                    <p className="leading-relaxed">Office No. 323, Aston Plaza,<br/>Ambegaon Budruk, Pune<br/>Maharashtra 411046, India</p>
+                    <p className="leading-relaxed">Office no.23, 3rd Floor, Aston Plaza,<br/>Narhe Ambegaon Rd, above Star Bazaar,<br/>Ambegaon Budruk, Pune, Maharashtra 411046</p>
                   </div>
                 </div>
                 
@@ -205,13 +209,18 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Map Visual Placeholder */}
-            <div className="w-full h-48 bg-muted rounded-3xl overflow-hidden border border-border relative flex items-center justify-center">
-              <div className="absolute inset-0 bg-brand-plum/5 dark:bg-brand-cream/5 pattern-grid-lg opacity-50" />
-              <div className="relative z-10 flex flex-col items-center gap-2">
-                <FaLocationDot className="text-brand-rose" size={32} />
-                <span className="font-display font-semibold text-foreground tracking-wide">PUNE, INDIA</span>
-              </div>
+            {/* Google Map Embed */}
+            <div className="w-full h-64 md:h-80 bg-muted rounded-3xl overflow-hidden border border-border relative">
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://www.google.com/maps?q=Ambegaon+Budruk%2C+Pune%2C+Maharashtra+411046&z=14&t=m&hl=en&output=embed" 
+                style={{ border: 0, display: "block", width: "100%", height: "100%" }} 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade" 
+                title="Google Map of DigiBrandz IT Solutions, Pune"
+              ></iframe>
             </div>
           </motion.div>
 

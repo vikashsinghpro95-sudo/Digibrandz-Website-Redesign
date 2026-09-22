@@ -350,6 +350,8 @@ export const CASE_STUDIES = [
     id: "speed-homes",
     industry: "Real Estate",
     client: "Speed Homes (Projects: Elite Sparsh, Aura Bliss, Vision Group, Krishna Kapital & Dugad Heights)",
+    logo: "https://speedhomesandloans.com/wp-content/uploads/2023/12/Happy__10_-removebg-preview-e1703595200684.png",
+    website: "https://speedhomesandloans.com",
     overview: "Speed Homes is a leading real estate marketing and property consultancy promoting premium residential and commercial projects... The brand connects buyers with quality developments through digital marketing.",
     challenges: [
       "High cost per lead (CPL) from paid campaigns.",
@@ -398,6 +400,8 @@ export const CASE_STUDIES = [
     id: "health-easy-emi",
     industry: "Healthcare",
     client: "Health Easy EMI",
+    logo: "https://healtheasyemi.com/logo/logo.png",
+    website: "https://healtheasyemi.com",
     overview: "Health Easy EMI is a healthcare financing platform offering flexible Medical EMI solutions, Free Ambulance Services, Video Consultation, and Doctor Consultation to make healthcare more accessible.",
     challenges: [
       "Launching a new healthcare startup",
@@ -440,6 +444,8 @@ export const CASE_STUDIES = [
     id: "dr-hamades-curesure",
     industry: "Healthcare",
     client: "Dr. Hamade’s CureSure Surgery Centre",
+    logo: "https://drhemadescuresure.com/Images/Logo.jpg",
+    website: "https://drhemadescuresure.com",
     overview: "Dr. Hamade’s CureSure Surgery Centre is a specialized healthcare clinic in Pune offering advanced Laser Surgery and Minimally Invasive Surgical Treatments for conditions including Piles, Fissure, Fistula, Hernia, Varicose Veins, and Gallbladder Stones.",
     challenges: [
       "Building a professional Digital Presence for a specialized healthcare clinic.",
@@ -482,6 +488,8 @@ export const CASE_STUDIES = [
     id: "bharati-vidyapeeth",
     industry: "Education",
     client: "Bharati Vidyapeeth (Deemed to be University)",
+    logo: "https://www.bvuniversity.edu.in/images/bharati_vidyapeeth_logo-new.webp",
+    website: "https://www.bvuniversity.edu.in",
     overview: "Bharati Vidyapeeth is one of India's premier higher education institutions, offering diverse undergraduate, postgraduate, and professional programs. Known for its academic excellence, modern campus, and industry-focused education.",
     challenges: [
       "Low student admission enquiries through digital platforms.",
@@ -525,6 +533,8 @@ export const CASE_STUDIES = [
     id: "sparktech-pro-agile",
     industry: "Education",
     client: "Sparktech Pro Agile",
+    logo: "https://sparktechproagile.com/logo.png",
+    website: "https://sparktechproagile.com",
     overview: "SparkTech Pro Agile is a professional IT Training & Placement Assistance Institute offering industry-oriented technical courses, skill development programs, and career-focused training.",
     challenges: [
       "No active presence on social media platforms.",
@@ -564,6 +574,8 @@ export const CASE_STUDIES = [
     id: "shamudri-tourism",
     industry: "Travel & Tourism",
     client: "Shamudri Tourism LLC",
+    logo: "https://www.shamudritourism.ae/logo%20only%20(1).png",
+    website: "https://www.shamudritourism.ae",
     overview: "Shamudri Tourism LLC is a Dubai-based travel and tourism company specializing in World tour packages, visa assistance, desert safaris, city tours, and luxury holiday experiences.",
     challenges: [
       "No active presence on major social media platforms.",
@@ -607,6 +619,8 @@ export const CASE_STUDIES = [
     id: "happenstance",
     industry: "Footwear Brand",
     client: "Happenstance",
+    logo: "https://happenstance.com/storage/media/vNWKNshyEJFpsHVuKOvBFwHICC9WNGtlJi8klASZ.webp",
+    website: "https://happenstance.com",
     overview: "Happenstance is a premium footwear brand known for its innovative designs, advanced comfort technology, and stylish collections. The brand operates across major cities including Pune, Mumbai, Ahmedabad, and Hyderabad.",
     challenges: [
       "Building a professional Social Media Presence for the brand.",
@@ -646,6 +660,8 @@ export const CASE_STUDIES = [
     id: "bluesky-scaffolding",
     industry: "Construction",
     client: "Bluesky Scaffolding",
+    logo: "http://blueskyscaffolding.com/assets/img/logo.png",
+    website: "http://blueskyscaffolding.com",
     overview: "Bluesky Scaffolding is a professional scaffolding solutions provider offering reliable and safe scaffolding services for the construction, infrastructure, and industrial sectors.",
     challenges: [
       "Building strong Brand Awareness in the competitive construction industry.",
@@ -687,6 +703,8 @@ export const CASE_STUDIES = [
     id: "yashraj-systems",
     industry: "Automation",
     client: "YashRaj Systems & Services",
+    logo: "https://www.yashrajsystems.com/YASHRAJ%20LOGO%204.png",
+    website: "https://www.yashrajsystems.com",
     overview: "YashRaj Systems & Services is a trusted provider of industrial automation, software solutions, and IT services, delivering innovative technology solutions to businesses across various industries.",
     challenges: [
       "No professional business website to showcase services.",
@@ -723,6 +741,8 @@ export const CASE_STUDIES = [
     id: "shri-samartha-krupa-ghee",
     industry: "Food",
     client: "Shri Samartha Krupa Ghee",
+    logo: "https://www.shrisamarthakrupamilkproducts.com/uploads/Logo.png",
+    website: "https://www.shrisamarthakrupamilkproducts.com",
     overview: "Shri Samartha Krupa Ghee is a trusted dairy brand offering pure, high-quality desi ghee made using traditional methods. The brand focuses on delivering authentic dairy products to households and retailers.",
     challenges: [
       "Strong offline presence but limited online brand visibility.",
@@ -764,7 +784,137 @@ export const CASE_STUDIES = [
         "Increased product visibility across social media, e-commerce, and quick commerce platforms."
       ]
     }
-  }
+  },
+
+  {
+    id: "tanaji-group",
+    industry: "Construction",
+    client: "Tanaji Group",
+    logo: "https://www.tanajigroup.com/assets/images/logos/header-logo.png",
+    website: "https://www.tanajigroup.com",
+    overview: "Tanaji Group is a leading industrial construction company providing cost-effective and intelligent infrastructure solutions across the pharmaceutical, chemical, food & beverage, automobile, heavy engineering, warehousing, petrochemical, and institutional sectors.",
+    challenges: [
+      "Building a professional Digital Presence for an industrial construction company.",
+      "Showcasing expertise across multiple Industrial Construction sectors.",
+      "Creating a modern platform to present projects, services, and capabilities.",
+      "Improving Brand Visibility among industrial clients and businesses.",
+      "Developing a scalable and SEO-Friendly Website for future growth."
+    ],
+    whatWeDid: {
+      "Dynamic Website Development": [
+        "Designed and developed a modern dynamic website tailored for the industrial construction industry.",
+        "Created dedicated pages to showcase services, industries served, and completed projects.",
+        "Built a scalable website for easy content management and future updates.",
+        "Delivered a fully responsive website for seamless access across all devices."
+      ],
+      "UI/UX Design": [
+        "Designed a clean and professional UI/UX aligned with the company's corporate identity.",
+        "Created an intuitive navigation structure for better user experience.",
+        "Organized content for easy access to services and project information.",
+        "Enhanced visual presentation to strengthen brand credibility."
+      ],
+      "Website Performance & Optimization": [
+        "Optimized website speed and overall performance.",
+        "Improved mobile responsiveness and cross-browser compatibility.",
+        "Enhanced website functionality for smooth browsing.",
+        "Delivered a reliable and user-friendly digital experience."
+      ],
+      "SEO-Friendly Website Structure": [
+        "Built an SEO-friendly website architecture for better search engine visibility.",
+        "Optimized page structure, metadata, and service content.",
+        "Implemented industry-specific SEO keywords for improved discoverability.",
+        "Created a strong foundation for long-term Organic Traffic growth."
+      ]
+    }
+  },
+  {
+    id: "techport-solutions",
+    industry: "Automation",
+    client: "TechPort Solutions",
+    logo: "https://techportsolutions.in/assets/img/logo.png",
+    website: "https://techportsolutions.in",
+    overview: "TechPort Solutions is a leading Industrial Automation company specializing in Process Automation, Factory Automation, PLC Programming, SCADA, Machine Automation, RTU, Energy Management Systems, Building Automation, and Engineering Services.",
+    challenges: [
+      "No professional business website to showcase products and services.",
+      "No active LinkedIn presence for corporate branding.",
+      "Limited online visibility in the industrial automation sector.",
+      "No platform to present technical expertise and completed projects.",
+      "Difficulty reaching potential B2B clients digitally.",
+      "Weak digital brand identity compared to competitors."
+    ],
+    whatWeDid: {
+      "Static Website Development": [
+        "Designed and developed a modern static website with a professional and responsive layout.",
+        "Structured dedicated pages for automation services, engineering solutions, products, and company information.",
+        "Created a fast-loading website with seamless navigation and mobile responsive.",
+        "Built a professional digital platform to strengthen the company's online presence."
+      ],
+      "LinkedIn Branding": [
+        "Created and optimized the company's LinkedIn Business Page.",
+        "Developed a professional company profile highlighting industrial automation expertise.",
+        "Published technical and industry-focused content to increase brand credibility.",
+        "Improved corporate visibility and engagement among B2B professionals."
+      ],
+      "UI/UX Design": [
+        "Designed a clean, user-friendly interface for better user experience.",
+        "Maintained consistent corporate branding throughout the website.",
+        "Organized content to help visitors easily explore services and solutions.",
+        "Enhanced website usability with a structured navigation flow."
+      ],
+      "Digital Brand Presence": [
+        "Established a strong online presence through a professional website and LinkedIn branding.",
+        "Strengthened the company's digital identity in the Industrial Automation industry.",
+        "Improved business credibility with a modern corporate presentation.",
+        "Created a reliable platform to showcase technical capabilities and generate business enquiries."
+      ]
+    }
+  },
+  {
+    id: "venkateshwara-agro",
+    industry: "Agriculture",
+    client: "Venkateshwara Co-operative Power & Agro Processing Ltd.",
+    logo: "https://www.venkateshwarapoweragro.com/assets/logo-Cf76YeYC.png",
+    website: "https://www.venkateshwarapoweragro.com",
+    overview: "Venkateshwara Co-operative Power & Agro Processing Ltd. is a leading organization in the agriculture and agro-processing sector, committed to empowering farmers through sustainable agricultural practices, agro-processing, and cooperative development.",
+    challenges: [
+      "No active presence across Instagram, Facebook, YouTube, and X (Twitter).",
+      "Limited brand awareness in the digital space.",
+      "Low audience engagement on social media.",
+      "Offline brand recognition with minimal online visibility.",
+      "No structured content strategy to showcase agricultural initiatives and events.",
+      "Difficulty reaching farmers, stakeholders, and the wider agricultural community online.",
+      "Lack of consistent branding across digital platforms."
+    ],
+    whatWeDid: {
+      "Social Media Marketing": [
+        "Created and professionally managed Instagram, Facebook, YouTube, and X (Twitter) accounts.",
+        "Developed a strategic content calendar featuring agricultural initiatives, corporate events, farmer programs, and company achievements.",
+        "Published consistent reels, videos, creatives, and informative posts to increase audience engagement.",
+        "Strengthened the brand's digital identity through professional and consistent communication."
+      ],
+      "Brand Awareness": [
+        "Increased the company's online presence through regular and engaging content.",
+        "Showcased agricultural projects, community activities, and corporate milestones.",
+        "Improved brand recognition among farmers, business partners, and the agricultural community.",
+        "Connected the offline brand with a stronger and more impactful digital presence."
+      ],
+      "Content Strategy & Engagement": [
+        "Created event-focused, educational, and awareness-driven content.",
+        "Highlighted farmer initiatives, agro-processing operations, and corporate activities.",
+        "Increased engagement through interactive posts, reels, and storytelling.",
+        "Built a loyal digital community around the brand."
+      ],
+      "Performance Optimization": [
+        "Optimized social media profiles with professional branding and strategic call-to-actions.",
+        "Monitored audience insights and engagement metrics to improve content performance.",
+        "Enhanced profile visibility through consistent optimization and content planning.",
+        "Improved overall digital reach and brand recall across multiple platforms."
+      ]
+    }
+  },
+  
+  
+
 ];
 
 export const CAREERS = {
@@ -788,12 +938,12 @@ export const CAREERS = {
   workingHours: "10:00 AM - 6:30 PM",
   jobs: [
     {
-      id: "social-media-executive",
-      title: "Social Media Executive",
+      id: "digital-marketing-executive",
+      title: "Digital Marketing Executive",
       experience: "1-3 Years",
       type: "Full-Time",
-      description: "Manage multiple brand accounts, plan content calendars, and drive audience engagement.",
-      skills: ["Content Strategy", "Trend Analysis", "Copywriting", "Community Management", "Platform Knowledge (IG, FB, LI, YT)"]
+      description: "Manage end-to-end digital marketing strategies to improve brand presence and lead generation.",
+      skills: ["SEO", "Social Media", "Google Ads", "Content Marketing", "Analytics"]
     },
     {
       id: "seo-executive",
@@ -804,12 +954,28 @@ export const CAREERS = {
       skills: ["Keyword Research", "On-Page SEO", "Link Building", "Google Analytics", "Search Console", "Local SEO (GMB)"]
     },
     {
-      id: "performance-marketer",
-      title: "Performance Marketer (Meta/Google Ads)",
-      experience: "2-4 Years",
+      id: "social-media-executive",
+      title: "Social Media Executive",
+      experience: "1-3 Years",
       type: "Full-Time",
-      description: "Plan, execute, and optimize paid advertising campaigns to generate quality leads and maximize ROI.",
-      skills: ["Meta Ads Manager", "Google Ads (PPC)", "Conversion Tracking", "Budget Management", "A/B Testing", "ROAS Optimization"]
+      description: "Manage multiple brand accounts, plan content calendars, and drive audience engagement.",
+      skills: ["Content Strategy", "Trend Analysis", "Copywriting", "Community Management", "Platform Knowledge (IG, FB, LI, YT)"]
+    },
+    {
+      id: "business-development-executive",
+      title: "Business Development Executive",
+      experience: "1-3 Years",
+      type: "Full-Time",
+      description: "Generate new business opportunities, build client relationships, and drive agency sales.",
+      skills: ["B2B Sales", "Lead Generation", "Client Pitching", "CRM Management", "Negotiation", "Networking"]
+    },
+    {
+      id: "business-analyst",
+      title: "Business Analyst",
+      experience: "1-3 Years",
+      type: "Full-Time",
+      description: "Analyze business processes, gather requirements, and create data-driven strategies for client projects.",
+      skills: ["Requirement Gathering", "Data Analysis", "Client Communication", "Agile Methodologies", "Documentation"]
     },
     {
       id: "graphic-designer",
@@ -820,14 +986,6 @@ export const CAREERS = {
       skills: ["Adobe Photoshop", "Illustrator", "Canva", "Typography", "Color Theory", "Brand Identity Design"]
     },
     {
-      id: "ui-ux-designer",
-      title: "UI/UX Designer",
-      experience: "2-4 Years",
-      type: "Full-Time",
-      description: "Design intuitive, user-friendly, and beautiful interfaces for websites and mobile applications.",
-      skills: ["Figma", "Adobe XD", "Wireframing", "Prototyping", "User Research", "Responsive Design"]
-    },
-    {
       id: "video-editor",
       title: "Video Editor",
       experience: "1-3 Years",
@@ -836,36 +994,28 @@ export const CAREERS = {
       skills: ["Premiere Pro", "After Effects", "Color Grading", "Audio Mixing", "Motion Graphics", "Reel Editing"]
     },
     {
-      id: "content-writer",
-      title: "Content Writer",
-      experience: "1-3 Years",
-      type: "Full-Time",
-      description: "Write compelling copy for websites, blogs, social media, and advertising campaigns.",
-      skills: ["SEO Writing", "Copywriting", "Blog Writing", "Social Media Captions", "Proofreading", "Creative Storytelling"]
-    },
-    {
-      id: "web-developer",
-      title: "Web Developer (Frontend / Full-Stack)",
+      id: "website-developer",
+      title: "Website Developer",
       experience: "2-4 Years",
       type: "Full-Time",
       description: "Develop fast, responsive, and secure websites and web applications.",
       skills: ["HTML/CSS/JS", "React.js", "Node.js", "WordPress (Optional)", "API Integration", "Database Management"]
     },
     {
-      id: "business-development-executive",
-      title: "Business Development Executive (BDE)",
-      experience: "1-3 Years",
+      id: "ui-ux-designer",
+      title: "UI/UX Designer",
+      experience: "2-4 Years",
       type: "Full-Time",
-      description: "Generate new business opportunities, build client relationships, and drive agency sales.",
-      skills: ["B2B Sales", "Lead Generation", "Client Pitching", "CRM Management", "Negotiation", "Networking"]
+      description: "Design intuitive, user-friendly, and beautiful interfaces for websites and mobile applications.",
+      skills: ["Figma", "Adobe XD", "Wireframing", "Prototyping", "User Research", "Responsive Design"]
     },
     {
-      id: "ai-prompt-engineer",
-      title: "AI Prompt Engineer / AI Video Creator",
-      experience: "0-2 Years",
+      id: "content-writer",
+      title: "Content Writer",
+      experience: "1-3 Years",
       type: "Full-Time",
-      description: "Leverage AI tools to create innovative video content, generated images, and automated workflows.",
-      skills: ["Midjourney", "ChatGPT/Claude", "Runway/HeyGen", "Prompt Structuring", "AI Automation", "Creative Thinking"]
+      description: "Write compelling copy for websites, blogs, social media, and advertising campaigns.",
+      skills: ["SEO Writing", "Copywriting", "Blog Writing", "Social Media Captions", "Proofreading", "Creative Storytelling"]
     }
   ]
 };

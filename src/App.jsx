@@ -13,6 +13,19 @@ const BlogList = lazy(() => import('./pages/BlogList'))
 const BlogPost = lazy(() => import('./pages/BlogPost'))
 const Admin = lazy(() => import('./pages/Admin'))
 
+const About = lazy(() => import('./pages/About'))
+const Services = lazy(() => import('./pages/Services'))
+const ServiceDetails = lazy(() => import('./pages/ServiceDetails'))
+const ConsultationModal = lazy(() => import('./components/ConsultationModal'))
+const Solutions = lazy(() => import('./pages/Solutions'))
+const Industries = lazy(() => import('./pages/Industries'))
+const Portfolio = lazy(() => import('./pages/Portfolio'))
+const Process = lazy(() => import('./pages/Process'))
+const PricingPage = lazy(() => import('./pages/PricingPage'))
+const ContactPage = lazy(() => import('./pages/ContactPage'))
+const TestimonialsPage = lazy(() => import('./pages/TestimonialsPage'))
+
+
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -63,12 +76,23 @@ function App() {
           <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/services/:id" element={<ServiceDetails />} />
+              <Route path="/solutions" element={<Solutions />} />
+              <Route path="/industries" element={<Industries />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/process" element={<Process />} />
+              <Route path="/pricing" element={<PricingPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/testimonials" element={<TestimonialsPage />} />
               <Route path="/team" element={<Team />} />
               <Route path="/careers" element={<Careers />} />
               <Route path="/blog" element={<BlogList />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/admin" element={<Admin />} />
             </Routes>
+            <ConsultationModal />
           </Suspense>
         </main>
         

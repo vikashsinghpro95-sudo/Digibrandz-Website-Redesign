@@ -31,8 +31,8 @@ export default function Footer() {
     <footer className="relative bg-[#130610] text-brand-cream/90 pt-32 pb-12 overflow-hidden border-t border-brand-rose/10">
       
       {/* Background Glow Effects */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-rose/5 blur-[150px] rounded-[100%] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand-plum/10 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-rose/5 blur-[150px] rounded-[100%] pointer-events-none transform-gpu" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand-plum/10 blur-[150px] rounded-full pointer-events-none transform-gpu" />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-20">

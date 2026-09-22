@@ -22,8 +22,8 @@ export default function AiAutomation() {
     <section className="py-24 relative overflow-hidden bg-[#1A0E15]">
       {/* Futuristic Background Gradients */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-brand-rose/10 rounded-full blur-[150px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-blush/10 rounded-full blur-[120px]" />
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-brand-rose/10 rounded-full blur-[150px] transform-gpu" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-blush/10 rounded-full blur-[120px] transform-gpu" />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
@@ -78,7 +78,7 @@ export default function AiAutomation() {
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
         >
-          <Button size="lg" className="bg-brand-rose hover:bg-brand-rose/90 text-white rounded-full px-8 shadow-[0_0_30px_rgba(189,85,121,0.4)]">
+          <Button size="lg" onClick={() => window.dispatchEvent(new CustomEvent('openConsultationModal'))} className="bg-brand-rose hover:bg-brand-rose/90 text-white rounded-full px-8 shadow-[0_0_30px_rgba(189,85,121,0.4)]">
             Automate My Business
           </Button>
         </motion.div>

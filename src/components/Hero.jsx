@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Typewriter } from 'react-simple-typewriter'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Link } from 'react-scroll'
+import { Link } from 'react-router-dom'
 import { Button } from './ui/button'
-import { FaArrowRight, FaSpinner, FaFilePdf, FaCode, FaLaptopCode, FaBullhorn, FaPenNib, FaGears, FaRobot } from 'react-icons/fa6'
+import { 
+  FaArrowRight, FaSpinner, FaFilePdf, FaCode, FaLaptopCode, FaBullhorn, FaPenNib, FaGears, FaRobot,
+  FaShareNodes, FaGoogle, FaMagnifyingGlass, FaMapLocationDot, FaHouseChimney, FaCartShopping, FaChartLine, FaVideo, FaUserGroup, FaWandMagicSparkles, FaMessage, FaCamera
+} from 'react-icons/fa6'
 
 const ICON_URLS = [
   "/icons/airtable.svg", "/icons/anthropic.svg", "/icons/asana.svg", "/icons/brevo.svg",
@@ -28,12 +31,20 @@ const ICON_URLS = [
 ]
 
 const HERO_SERVICES = [
-  { name: "Software Development", icon: <FaCode /> },
-  { name: "Web Development", icon: <FaLaptopCode /> },
-  { name: "Digital Marketing", icon: <FaBullhorn /> },
-  { name: "UI/UX", icon: <FaPenNib /> },
-  { name: "Automation", icon: <FaGears /> },
-  { name: "AI Solutions", icon: <FaRobot /> }
+  { id: "social-media-management", name: "Social Media Management", icon: <FaShareNodes /> },
+  { id: "meta-ads", name: "Meta Ads", icon: <FaBullhorn /> },
+  { id: "google-ads", name: "Google Ads / PPC", icon: <FaGoogle /> },
+  { id: "website-seo", name: "Website SEO", icon: <FaMagnifyingGlass /> },
+  { id: "google-my-business", name: "Local SEO", icon: <FaMapLocationDot /> },
+  { id: "website-app-development", name: "Web & App Dev", icon: <FaLaptopCode /> },
+  { id: "real-estate-lead-gen", name: "Real Estate Lead Gen", icon: <FaHouseChimney /> },
+  { id: "ecommerce-quick-commerce", name: "E-Commerce", icon: <FaCartShopping /> },
+  { id: "performance-marketing", name: "Performance Marketing", icon: <FaChartLine /> },
+  { id: "ai-video-creation", name: "AI Video Creation", icon: <FaVideo /> },
+  { id: "influencer-marketing", name: "Influencer Marketing", icon: <FaUserGroup /> },
+  { id: "video-editing-creative-designing", name: "Video & Design", icon: <FaWandMagicSparkles /> },
+  { id: "whatsapp-sms-marketing", name: "WhatsApp & SMS", icon: <FaMessage /> },
+  { id: "videography-photography", name: "Photography", icon: <FaCamera /> }
 ];
 
 const FACTS = [
@@ -318,20 +329,20 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
           className="w-full max-w-2xl mx-auto mb-16 flex flex-col items-center"
         >
-          <form onSubmit={handleAudit} className="w-full relative flex flex-col sm:flex-row items-center gap-2 p-2 bg-background/60 backdrop-blur-xl border border-border/60 rounded-3xl sm:rounded-full shadow-2xl shadow-brand-rose/5">
+          <form onSubmit={handleAudit} className="w-full relative flex flex-col sm:flex-row items-center gap-2 p-2 bg-background/80 backdrop-blur-xl border-2 border-brand-rose/50 rounded-3xl sm:rounded-full shadow-[0_0_40px_-10px_rgba(255,8,68,0.5)]">
             <input 
               type="text" 
               placeholder="Enter your website URL (e.g. apple.com)" 
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              className="flex-grow w-full bg-transparent border-none text-foreground px-6 h-12 focus:ring-0 outline-none placeholder:text-muted-foreground/60 text-base"
+              className="flex-grow w-full bg-transparent border-none text-foreground font-bold px-6 h-12 focus:ring-0 outline-none placeholder:text-muted-foreground/80 placeholder:font-semibold text-lg"
               disabled={loading}
             />
             <Button 
               type="submit"
               disabled={loading || !url}
               size="lg" 
-              className="w-full sm:w-auto bg-brand-rose hover:bg-brand-rose/90 text-white rounded-full px-8 h-12 sm:h-14 text-base font-bold shadow-xl shadow-brand-rose/20 transition-all hover:-translate-y-0.5 group disabled:opacity-70 disabled:hover:-translate-y-0"
+              className="w-full sm:w-auto bg-gradient-to-r from-[#ff0844] to-[#ffb199] hover:from-[#e0003b] hover:to-[#ff9b7d] text-white rounded-full px-8 h-14 sm:h-16 text-lg font-black tracking-wide shadow-xl shadow-brand-rose/30 transition-all hover:-translate-y-1 group disabled:opacity-70 disabled:hover:-translate-y-0"
             >
               {loading ? (
                 <>
@@ -360,10 +371,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl mx-auto"
+          className="flex flex-wrap justify-center gap-4 w-full max-w-4xl mx-auto"
         >
           {HERO_SERVICES.map((service, idx) => (
-            <Link to="services" smooth duration={500} offset={-80} key={idx} className="block">
+            <Link to={`/services/${service.id}`} key={idx} className="block w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)]">
               <motion.div 
                 whileHover={{ y: -5, scale: 1.02 }}
                 className="group flex items-center gap-3 px-5 py-4 rounded-2xl bg-background/50 backdrop-blur-xl border border-border/60 shadow-lg hover:shadow-brand-rose/20 hover:border-brand-rose/40 transition-all cursor-pointer h-full"

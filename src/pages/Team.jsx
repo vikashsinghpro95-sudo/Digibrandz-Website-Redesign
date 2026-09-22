@@ -55,7 +55,7 @@ export default function Team() {
       {/* Team Hero */}
       <section className="relative py-20 overflow-hidden">
         {/* Background glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-brand-rose/5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-brand-rose/5 blur-[120px] rounded-full pointer-events-none transform-gpu" />
         
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
           <motion.div
@@ -143,7 +143,7 @@ export default function Team() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto text-center bg-brand-plum dark:bg-card border border-border rounded-[3rem] p-12 md:p-20 relative overflow-hidden shadow-2xl">
             {/* Glowing orb */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-brand-rose/20 blur-[100px] rounded-full pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-brand-rose/20 blur-[100px] rounded-full pointer-events-none transform-gpu" />
             
             <h2 className="font-display font-bold text-4xl md:text-5xl text-white mb-6 relative z-10">
               Want to join our amazing team?

@@ -83,7 +83,7 @@ export default function DigitalMarketing() {
                 We don't just drive traffic; we drive revenue. Our full-funnel marketing strategies are engineered to capture high-intent audiences and convert them into loyal customers.
               </p>
               
-              <Button size="lg" className="bg-brand-rose hover:bg-brand-rose/90 text-white rounded-full px-8 h-14 text-base font-bold shadow-xl shadow-brand-rose/20 transition-all hover:-translate-y-1 group mb-12 w-fit">
+              <Button size="lg" onClick={() => window.dispatchEvent(new CustomEvent('openConsultationModal'))} className="bg-brand-rose hover:bg-brand-rose/90 text-white rounded-full px-8 h-14 text-base font-bold shadow-xl shadow-brand-rose/20 transition-all hover:-translate-y-1 group mb-12 w-fit">
                 See Our Marketing Results
                 <FaArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Button>
@@ -135,7 +135,7 @@ export default function DigitalMarketing() {
                 className="group relative bg-white/[0.02] border border-white/5 hover:border-brand-rose/30 hover:bg-white/[0.04] rounded-[2rem] p-6 md:p-8 transition-all duration-500 overflow-hidden flex flex-col h-full"
               >
                 {/* Card Hover Glow */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-rose/20 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-rose/20 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none transform-gpu" />
                 
                 {/* Icon Container */}
                 <div className="w-14 h-14 shrink-0 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl text-brand-cream/80 shadow-inner group-hover:scale-110 group-hover:bg-brand-rose group-hover:text-white group-hover:border-brand-rose/50 transition-all duration-500 mb-6 relative z-10">

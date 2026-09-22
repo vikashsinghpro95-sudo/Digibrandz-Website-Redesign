@@ -18,8 +18,8 @@ export default function AboutUs() {
   return (
     <section id="about" className="py-24 bg-background overflow-hidden relative">
       {/* Background elements */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-rose/5 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-plum/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-rose/5 blur-[120px] rounded-full pointer-events-none transform-gpu" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-plum/5 blur-[120px] rounded-full pointer-events-none transform-gpu" />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         
@@ -78,7 +78,7 @@ export default function AboutUs() {
             className="w-full lg:w-2/3"
           >
             <div className="bg-card border border-border p-8 md:p-12 rounded-3xl shadow-sm h-full min-h-[300px] flex items-center relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-brand-rose/10 rounded-full blur-[80px] pointer-events-none" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-brand-rose/10 rounded-full blur-[80px] pointer-events-none transform-gpu" />
               
               <AnimatePresence mode="wait">
                 {ABOUT_TABS.map((tab) => (
