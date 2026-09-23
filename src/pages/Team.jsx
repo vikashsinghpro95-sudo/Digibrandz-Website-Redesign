@@ -3,50 +3,8 @@ import { motion } from 'framer-motion'
 import { FaLinkedin, FaTwitter, FaEnvelope, FaArrowRight } from 'react-icons/fa6'
 import { Button } from '../components/ui/button'
 
-const TEAM_MEMBERS = [
-  {
-    name: 'Sarah Jenkins',
-    role: 'Founder & CEO',
-    bio: 'Former VP of Marketing at top tech firms. Sarah leads DigiBrandz with a vision to merge tech and marketing seamlessly.',
-    initials: 'SJ',
-    color: 'from-brand-rose to-[#ff0844]',
-  },
-  {
-    name: 'Michael Chen',
-    role: 'Chief Technology Officer',
-    bio: 'Full-stack engineering veteran. Architect of scalable systems and passionate about clean, maintainable code.',
-    initials: 'MC',
-    color: 'from-blue-500 to-cyan-400',
-  },
-  {
-    name: 'Priya Sharma',
-    role: 'Head of Digital Strategy',
-    bio: 'Data-driven marketing expert specializing in high-ROI performance campaigns and conversion rate optimization.',
-    initials: 'PS',
-    color: 'from-brand-plum to-purple-500',
-  },
-  {
-    name: 'David Okafor',
-    role: 'Lead UI/UX Designer',
-    bio: 'Award-winning designer obsessed with creating frictionless, beautiful digital experiences that users love.',
-    initials: 'DO',
-    color: 'from-emerald-400 to-teal-500',
-  },
-  {
-    name: 'Elena Rostova',
-    role: 'SEO & Content Director',
-    bio: 'Master of organic growth. Elena has scaled organic traffic by 10x for enterprise clients across multiple industries.',
-    initials: 'ER',
-    color: 'from-orange-400 to-brand-rose',
-  },
-  {
-    name: 'James Wilson',
-    role: 'Senior App Developer',
-    bio: 'Mobile ecosystem expert. Building high-performance native and cross-platform applications.',
-    initials: 'JW',
-    color: 'from-indigo-400 to-brand-plum',
-  }
-]
+import { TEAM_MEMBERS } from '../data/team'
+import { Link } from 'react-router-dom'
 
 export default function Team() {
   return (
@@ -94,45 +52,45 @@ export default function Team() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {TEAM_MEMBERS.map((member, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group bg-background border border-border rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-brand-rose/10 hover:border-brand-rose/30 transition-all duration-500"
-              >
-                {/* Avatar Placeholder Area */}
-                <div className={`h-48 w-full bg-gradient-to-br ${member.color} relative overflow-hidden flex items-center justify-center`}>
-                  {/* Subtle glass overlay */}
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
+              <Link key={i} to={`/team/${member.id}`} className="block">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  className="group bg-background border border-border rounded-3xl p-8 flex flex-col items-center text-center hover:shadow-2xl hover:shadow-brand-rose/10 hover:border-brand-rose/30 transition-all duration-500 h-full cursor-pointer"
+                >
+                  {/* Circular Avatar */}
+                  <div className={`h-40 w-40 rounded-full bg-gradient-to-br ${member.color} relative overflow-hidden flex items-center justify-center mb-6 shadow-lg group-hover:scale-105 transition-transform duration-500`}>
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
+                    <span className="text-5xl font-display font-bold text-white/90 drop-shadow-md">
+                      {member.initials}
+                    </span>
+                  </div>
                   
-                  {/* Initials fallback in case of no image */}
-                  <span className="text-6xl font-display font-bold text-white/90 drop-shadow-md transform group-hover:scale-110 transition-transform duration-500">
-                    {member.initials}
-                  </span>
-                </div>
-                
-                <div className="p-8">
-                  <h3 className="font-display font-bold text-2xl mb-1 text-foreground">{member.name}</h3>
+                  <h3 className="font-display font-bold text-2xl mb-1 text-foreground group-hover:text-brand-rose transition-colors">{member.name}</h3>
                   <p className="text-brand-rose font-semibold text-sm uppercase tracking-wider mb-4">{member.role}</p>
                   <p className="text-muted-foreground leading-relaxed mb-6">
                     {member.bio}
                   </p>
                   
-                  <div className="flex gap-4">
-                    <a href="#" className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-brand-rose hover:text-white transition-colors">
-                      <FaLinkedin size={18} />
-                    </a>
-                    <a href="#" className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-brand-rose hover:text-white transition-colors">
-                      <FaTwitter size={18} />
-                    </a>
-                    <a href="#" className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-brand-rose hover:text-white transition-colors">
-                      <FaEnvelope size={18} />
-                    </a>
+                  <div className="flex gap-4 mt-auto">
+                    {member.socials?.linkedin && (
+                      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-brand-rose hover:text-white transition-colors">
+                        <FaLinkedin size={18} />
+                      </div>
+                    )}
+                    {member.socials?.twitter && (
+                      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-brand-rose hover:text-white transition-colors">
+                        <FaTwitter size={18} />
+                      </div>
+                    )}
+                    <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-brand-rose hover:text-white transition-colors">
+                      <FaArrowRight size={18} />
+                    </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>

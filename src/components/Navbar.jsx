@@ -15,7 +15,6 @@ const NAV_LINKS = [
   { name: 'Industries', to: '/industries', isRoute: true },
   { name: 'Portfolio', to: '/portfolio', isRoute: true },
   { name: 'Process', to: '/process', isRoute: true },
-  { name: 'Pricing', to: '/pricing', isRoute: true },
   { name: 'Blog', to: '/blog', isRoute: true },
   { name: 'Team', to: '/team', isRoute: true },
   { name: 'Careers', to: '/careers', isRoute: true },

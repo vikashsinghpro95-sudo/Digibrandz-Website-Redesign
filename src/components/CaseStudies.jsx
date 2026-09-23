@@ -3,9 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { FaArrowRight, FaXmark, FaCheck } from 'react-icons/fa6'
 import { Button } from './ui/button'
 import { CASE_STUDIES } from '../data/content'
+import { Link } from 'react-router-dom'
 
-export default function CaseStudies() {
+export default function CaseStudies({ limit }) {
   const [selectedStudy, setSelectedStudy] = useState(null)
+  
+  const displayedStudies = limit ? CASE_STUDIES.slice(0, limit) : CASE_STUDIES;
 
   return (
     <section className="py-24 bg-background overflow-hidden relative">
@@ -25,7 +28,7 @@ export default function CaseStudies() {
 
         {/* Grid Container */}
         <div className="flex flex-wrap justify-center gap-6 pb-12 pt-4">
-          {CASE_STUDIES.map((study, index) => (
+          {displayedStudies.map((study, index) => (
             <motion.div 
               key={study.id}
               initial={{ opacity: 0, y: 50 }}
@@ -75,6 +78,17 @@ export default function CaseStudies() {
             </motion.div>
           ))}
         </div>
+
+        {limit && limit < CASE_STUDIES.length && (
+          <div className="flex justify-center mt-8">
+            <Link to="/portfolio">
+              <Button size="lg" className="bg-brand-rose hover:bg-white hover:text-brand-plum text-white rounded-full px-10 py-6 text-lg font-bold shadow-xl shadow-brand-rose/20 transition-all hover:-translate-y-1">
+                Show More Case Studies
+                <FaArrowRight className="ml-2" />
+              </Button>
+            </Link>
+          </div>
+        )}
 
       </div>
 

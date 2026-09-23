@@ -6,7 +6,6 @@ import { FaXmark, FaHouse, FaTags, FaNewspaper, FaUsers, FaBriefcase, FaEnvelope
 const DRAWER_LINKS = [
   { name: 'Home', to: '/', icon: FaHouse },
   { name: 'Process', to: '/process', icon: FaListCheck },
-  { name: 'Pricing', to: '/pricing', icon: FaTags },
   { name: 'Blog', to: '/blog', icon: FaNewspaper },
   { name: 'Team', to: '/team', icon: FaUsers },
   { name: 'Careers', to: '/careers', icon: FaBriefcase },

@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { FaMagnifyingGlass, FaArrowPointer, FaShareNodes, FaFileLines, FaEnvelope, FaUsers, FaArrowTrendUp, FaArrowRight } from 'react-icons/fa6'
 import { FaFacebook } from 'react-icons/fa'
 import { Button } from './ui/button'
@@ -8,42 +9,50 @@ const SUB_SERVICES = [
   { 
     name: "Search Engine Optimization", 
     desc: "Dominate search rankings and drive high-intent organic traffic to your website through technical optimization and authoritative content.",
-    icon: <FaMagnifyingGlass /> 
+    icon: <FaMagnifyingGlass />,
+    slug: "seo"
   },
   { 
     name: "Google Ads / PPC", 
     desc: "Capture customers exactly when they are searching for your services with hyper-targeted, high-ROI search campaigns.",
-    icon: <FaArrowPointer /> 
+    icon: <FaArrowPointer />,
+    slug: "google-ads"
   },
   { 
     name: "Meta Advertising", 
     desc: "Scale your customer acquisition with data-driven social advertising across Facebook, Instagram, and WhatsApp.",
-    icon: <FaFacebook /> 
+    icon: <FaFacebook />,
+    slug: "meta-advertising"
   },
   { 
     name: "Social Media Marketing", 
     desc: "Build a loyal community and elevate your brand presence with engaging, platform-native content strategies.",
-    icon: <FaShareNodes /> 
+    icon: <FaShareNodes />,
+    slug: "social-media-marketing"
   },
   { 
     name: "Content Marketing", 
     desc: "Establish industry authority and educate your audience with high-quality blogs, videos, and high-converting lead magnets.",
-    icon: <FaFileLines /> 
+    icon: <FaFileLines />,
+    slug: "content-marketing"
   },
   { 
     name: "Email Automation", 
     desc: "Nurture leads and maximize customer lifetime value with highly personalized, automated email sequences.",
-    icon: <FaEnvelope /> 
+    icon: <FaEnvelope />,
+    slug: "email-automation"
   },
   { 
     name: "B2B Lead Generation", 
     desc: "Fill your sales pipeline with qualified prospects using proven multi-channel acquisition funnels and outreach.",
-    icon: <FaUsers /> 
+    icon: <FaUsers />,
+    slug: "lead-generation"
   },
   { 
     name: "Performance Marketing", 
     desc: "A holistic, revenue-focused approach where every dollar spent is meticulously tracked, optimized, and scaled.",
-    icon: <FaArrowTrendUp /> 
+    icon: <FaArrowTrendUp />,
+    slug: "performance-marketing"
   },
 ]
 
@@ -126,37 +135,38 @@ export default function DigitalMarketing() {
           {/* Right Side: Scrolling Cards Grid */}
           <div className="lg:w-7/12 w-full grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 pb-12 lg:pt-0">
             {SUB_SERVICES.map((service, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: (idx % 4) * 0.1 }}
-                className="group relative bg-white/[0.02] border border-white/5 hover:border-brand-rose/30 hover:bg-white/[0.04] rounded-[2rem] p-6 md:p-8 transition-all duration-500 overflow-hidden flex flex-col h-full"
-              >
-                {/* Card Hover Glow */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-rose/20 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none transform-gpu" />
-                
-                {/* Icon Container */}
-                <div className="w-14 h-14 shrink-0 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl text-brand-cream/80 shadow-inner group-hover:scale-110 group-hover:bg-brand-rose group-hover:text-white group-hover:border-brand-rose/50 transition-all duration-500 mb-6 relative z-10">
-                  {service.icon}
-                </div>
-                
-                {/* Text Content */}
-                <div className="relative z-10 flex-grow">
-                  <h3 className="font-display font-bold text-xl md:text-2xl text-white mb-3 group-hover:text-brand-rose transition-colors">
-                    {service.name}
-                  </h3>
-                  <p className="text-sm md:text-base text-brand-cream/60 leading-relaxed group-hover:text-brand-cream/80 transition-colors">
-                    {service.desc}
-                  </p>
-                </div>
-                
-                {/* Decorative Background Icon */}
-                <div className="absolute -bottom-6 -right-6 text-[100px] text-white/[0.02] group-hover:text-brand-rose/[0.05] transition-colors duration-500 pointer-events-none rotate-12 group-hover:-rotate-12 group-hover:scale-110">
-                  {service.icon}
-                </div>
-              </motion.div>
+              <Link key={idx} to={`/services/${service.slug}`} className="block h-full">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: (idx % 4) * 0.1 }}
+                  className="group relative bg-white/[0.02] border border-white/5 hover:border-brand-rose/30 hover:bg-white/[0.04] rounded-[2rem] p-6 md:p-8 transition-all duration-500 overflow-hidden flex flex-col h-full cursor-pointer"
+                >
+                  {/* Card Hover Glow */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-brand-rose/20 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none transform-gpu" />
+                  
+                  {/* Icon Container */}
+                  <div className="w-14 h-14 shrink-0 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl text-brand-cream/80 shadow-inner group-hover:scale-110 group-hover:bg-brand-rose group-hover:text-white group-hover:border-brand-rose/50 transition-all duration-500 mb-6 relative z-10">
+                    {service.icon}
+                  </div>
+                  
+                  {/* Text Content */}
+                  <div className="relative z-10 flex-grow">
+                    <h3 className="font-display font-bold text-xl md:text-2xl text-white mb-3 group-hover:text-brand-rose transition-colors">
+                      {service.name}
+                    </h3>
+                    <p className="text-sm md:text-base text-brand-cream/60 leading-relaxed group-hover:text-brand-cream/80 transition-colors">
+                      {service.desc}
+                    </p>
+                  </div>
+                  
+                  {/* Decorative Background Icon */}
+                  <div className="absolute -bottom-6 -right-6 text-[100px] text-white/[0.02] group-hover:text-brand-rose/[0.05] transition-colors duration-500 pointer-events-none rotate-12 group-hover:-rotate-12 group-hover:scale-110">
+                    {service.icon}
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </div>
 

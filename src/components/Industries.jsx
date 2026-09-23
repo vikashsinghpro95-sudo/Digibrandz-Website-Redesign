@@ -2,21 +2,23 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { FaGraduationCap, FaStethoscope, FaHouse, FaCartShopping, FaLandmark, FaIndustry, FaTruck, FaUtensils, FaPlane, FaCar, FaBriefcase, FaRocket, FaTag, FaTv } from 'react-icons/fa6'
 
+import { Link } from 'react-router-dom'
+
 const INDUSTRIES = [
-  { name: "Education", icon: <FaGraduationCap /> },
-  { name: "Healthcare", icon: <FaStethoscope /> },
-  { name: "Real Estate", icon: <FaHouse /> },
-  { name: "E-Commerce", icon: <FaCartShopping /> },
-  { name: "Finance", icon: <FaLandmark /> },
-  { name: "Manufacturing", icon: <FaIndustry /> },
-  { name: "Logistics", icon: <FaTruck /> },
-  { name: "Restaurants", icon: <FaUtensils /> },
-  { name: "Travel & Tourism", icon: <FaPlane /> },
-  { name: "Automotive", icon: <FaCar /> },
-  { name: "Professional Services", icon: <FaBriefcase /> },
-  { name: "Startups", icon: <FaRocket /> },
-  { name: "Retail", icon: <FaTag /> },
-  { name: "Entertainment", icon: <FaTv /> },
+  { name: "Education", icon: <FaGraduationCap />, slug: "education" },
+  { name: "Healthcare", icon: <FaStethoscope />, slug: "healthcare" },
+  { name: "Real Estate", icon: <FaHouse />, slug: "real-estate" },
+  { name: "E-Commerce", icon: <FaCartShopping />, slug: "e-commerce" },
+  { name: "Finance", icon: <FaLandmark />, slug: "finance" },
+  { name: "Manufacturing", icon: <FaIndustry />, slug: "manufacturing" },
+  { name: "Logistics", icon: <FaTruck />, slug: "logistics" },
+  { name: "Restaurants", icon: <FaUtensils />, slug: "restaurants" },
+  { name: "Travel & Tourism", icon: <FaPlane />, slug: "travel-tourism" },
+  { name: "Automotive", icon: <FaCar />, slug: "automotive" },
+  { name: "Professional Services", icon: <FaBriefcase />, slug: "professional-services" },
+  { name: "Startups", icon: <FaRocket />, slug: "startups" },
+  { name: "Retail", icon: <FaTag />, slug: "retail" },
+  { name: "Entertainment", icon: <FaTv />, slug: "entertainment" },
 ]
 
 export default function Industries() {
@@ -46,19 +48,20 @@ export default function Industries() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
           {INDUSTRIES.map((ind, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
-              className="flex flex-col items-center text-center gap-3 group cursor-pointer"
-            >
-              <div className="w-16 h-16 rounded-2xl bg-card border border-border flex items-center justify-center text-brand-plum/50 dark:text-brand-cream/50 group-hover:bg-brand-rose group-hover:border-brand-rose group-hover:text-white group-hover:scale-110 transition-all duration-300 shadow-sm">
-                {React.cloneElement(ind.icon, { size: 28 })}
-              </div>
-              <span className="font-medium text-sm text-foreground">{ind.name}</span>
-            </motion.div>
+            <Link key={idx} to={`/industries/${ind.slug}`} className="block h-full">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                className="flex flex-col items-center text-center gap-3 group cursor-pointer h-full"
+              >
+                <div className="w-16 h-16 rounded-2xl bg-card border border-border flex items-center justify-center text-brand-plum/50 dark:text-brand-cream/50 group-hover:bg-brand-rose group-hover:border-brand-rose group-hover:text-white group-hover:scale-110 transition-all duration-300 shadow-sm">
+                  {React.cloneElement(ind.icon, { size: 28 })}
+                </div>
+                <span className="font-medium text-sm text-foreground group-hover:text-brand-rose transition-colors">{ind.name}</span>
+              </motion.div>
+            </Link>
           ))}
         </div>
 

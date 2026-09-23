@@ -9,6 +9,599 @@ export const ABOUT_US = {
 
 export const SERVICES = [
   {
+    "id": "ai-chatbots",
+    "title": "AI Chatbots",
+    "description": "Intelligent, conversational AI chatbots that understand natural language, engage website visitors 24/7, and guide users through complex sales funnels.",
+    "offers": [
+      "Custom LLM Integration",
+      "Lead Qualification Bots",
+      "E-commerce Shopping Assistants",
+      "Multi-lingual Support",
+      "CRM Syncing"
+    ],
+    "faqs": [
+      {
+        "q": "Are these simple rule-based bots?",
+        "a": "No, we build advanced NLP (Natural Language Processing) bots using LLMs like OpenAI that understand context and intent."
+      },
+      {
+        "q": "Can the chatbot answer specific questions about our business?",
+        "a": "Yes, we train the AI on your specific company data, FAQs, and documents using RAG (Retrieval-Augmented Generation)."
+      }
+    ]
+  },
+  {
+    "id": "ai-customer-support",
+    "title": "AI Customer Support",
+    "description": "Automate tier-1 and tier-2 customer support with AI agents capable of resolving tickets, answering queries, and escalating complex issues seamlessly.",
+    "offers": [
+      "Zendesk/Intercom Integration",
+      "Ticket Auto-Resolution",
+      "Sentiment Analysis",
+      "24/7 Global Support",
+      "Agent Handoff Workflows"
+    ],
+    "faqs": [
+      {
+        "q": "Will AI replace my support team?",
+        "a": "AI handles the repetitive inquiries, allowing your human agents to focus on complex, high-value customer interactions."
+      }
+    ]
+  },
+  {
+    "id": "whatsapp-automation",
+    "title": "WhatsApp Automation",
+    "description": "Turn the world's most popular messaging app into a powerful sales and support channel with custom conversational flows and AI integration.",
+    "offers": [
+      "WhatsApp Business API Setup",
+      "Automated Order Updates",
+      "Drip Campaigns",
+      "Conversational Commerce",
+      "Broadcast Messaging"
+    ],
+    "faqs": [
+      {
+        "q": "Can users buy directly through WhatsApp?",
+        "a": "Yes, we can build end-to-end conversational commerce flows where users browse and purchase within WhatsApp."
+      }
+    ]
+  },
+  {
+    "id": "business-process-automation",
+    "title": "Business Process Automation",
+    "description": "Replace manual, error-prone corporate processes with intelligent, automated workflows that connect your disparate software systems.",
+    "offers": [
+      "Robotic Process Automation (RPA)",
+      "Data Entry Automation",
+      "Invoice Processing",
+      "HR Onboarding Workflows",
+      "Cross-Platform Syncing"
+    ],
+    "faqs": [
+      {
+        "q": "What systems can you integrate with?",
+        "a": "We can connect almost any modern software that has an API, including ERPs, CRMs, and accounting software."
+      }
+    ]
+  },
+  {
+    "id": "ai-content-generation",
+    "title": "AI Content Generation",
+    "description": "Scale your marketing efforts with custom-tuned AI models that generate brand-aligned blogs, social media posts, and product descriptions at scale.",
+    "offers": [
+      "Programmatic SEO",
+      "Social Media Post Generation",
+      "Dynamic Email Copy",
+      "Product Description Generation",
+      "Brand Voice Fine-tuning"
+    ],
+    "faqs": [
+      {
+        "q": "Will the content sound robotic?",
+        "a": "No, we fine-tune the models using your existing content to ensure it perfectly mimics your unique brand voice."
+      }
+    ]
+  },
+  {
+    "id": "ai-agents",
+    "title": "AI Agents",
+    "description": "Deploy autonomous AI agents capable of researching, reasoning, and executing complex multi-step tasks across the internet on your behalf.",
+    "offers": [
+      "Autonomous Task Execution",
+      "Web Scraping Agents",
+      "Competitive Analysis Bots",
+      "Scheduling Assistants",
+      "Multi-Agent Systems"
+    ],
+    "faqs": [
+      {
+        "q": "What is the difference between a chatbot and an AI agent?",
+        "a": "A chatbot responds to user input. An AI agent is given a goal and autonomously decides the steps needed to achieve it."
+      }
+    ]
+  },
+  {
+    "id": "workflow-automation",
+    "title": "Workflow Automation",
+    "description": "Seamlessly connect your tech stack using Zapier, Make, and custom webhooks so data flows perfectly without human intervention.",
+    "offers": [
+      "Zapier & Make Setup",
+      "Custom Webhooks",
+      "Trigger-Based Workflows",
+      "Error Handling & Logging",
+      "API Scripting"
+    ],
+    "faqs": [
+      {
+        "q": "Do we need enterprise software for this?",
+        "a": "No, we can automate workflows between everyday tools like Google Sheets, Slack, Gmail, and Trello."
+      }
+    ]
+  },
+  {
+    "id": "ai-dashboards",
+    "title": "AI Dashboards",
+    "description": "Visualize complex data and receive AI-driven insights, predictive forecasts, and anomaly detection in real-time.",
+    "offers": [
+      "Predictive Analytics",
+      "Real-Time Data Visualization",
+      "Anomaly Detection",
+      "Natural Language Querying",
+      "Custom KPI Tracking"
+    ],
+    "faqs": [
+      {
+        "q": "Can I ask the dashboard questions?",
+        "a": "Yes, we can build 'Chat-to-Data' interfaces where you can type questions and get instant charts and insights."
+      }
+    ]
+  },
+  {
+    "id": "document-processing",
+    "title": "Document Processing",
+    "description": "Instantly extract, categorize, and validate data from thousands of PDFs, invoices, and forms using intelligent OCR and AI.",
+    "offers": [
+      "Intelligent OCR",
+      "Invoice & Receipt Parsing",
+      "Contract Analysis",
+      "Automated Data Entry",
+      "Language Translation"
+    ],
+    "faqs": [
+      {
+        "q": "Is the data extraction accurate?",
+        "a": "Modern AI models achieve near-human accuracy, even with unstructured data or varying document layouts."
+      }
+    ]
+  },
+  {
+    "id": "recommendation-systems",
+    "title": "Recommendation Systems",
+    "description": "Increase cart size and user retention with AI models that predict user behavior and recommend hyper-personalized products or content.",
+    "offers": [
+      "Collaborative Filtering",
+      "Content-Based Filtering",
+      "E-commerce Upselling",
+      "Real-Time Personalization",
+      "User Behavior Tracking"
+    ],
+    "faqs": [
+      {
+        "q": "How much data is needed for this to work?",
+        "a": "While more data is better, we can implement hybrid models that work effectively even for new users (cold start problem)."
+      }
+    ]
+  },
+  {
+    "id": "api-ai-integrations",
+    "title": "API & AI Integrations",
+    "description": "Connect the world's most powerful AI models (OpenAI, Anthropic, Google) directly into your proprietary software and workflows.",
+    "offers": [
+      "OpenAI API Integration",
+      "Anthropic Claude Setup",
+      "Local LLM Deployment",
+      "Voice & Speech APIs",
+      "Vision AI Integration"
+    ],
+    "faqs": [
+      {
+        "q": "Is our data safe with these APIs?",
+        "a": "Yes, enterprise API endpoints for models like OpenAI are private and do not use your data for training future models."
+      }
+    ]
+  },
+  {
+    "id": "custom-software",
+    "title": "Custom Software",
+    "description": "We build tailored software solutions from the ground up, designed to perfectly match your specific business requirements, workflows, and long-term goals.",
+    "offers": [
+      "Requirements Analysis",
+      "System Architecture Design",
+      "Full-Stack Development",
+      "Legacy System Modernization",
+      "Testing & QA",
+      "Deployment & Maintenance"
+    ],
+    "faqs": [
+      {
+        "q": "How long does custom software development take?",
+        "a": "Timelines vary based on complexity, but most projects range from 3 to 6 months."
+      },
+      {
+        "q": "Will I own the source code?",
+        "a": "Yes, upon project completion and full payment, you own 100% of the intellectual property."
+      }
+    ]
+  },
+  {
+    "id": "web-apps",
+    "title": "Web Apps",
+    "description": "High-performance, scalable web applications built with modern frameworks like React, Node.js, and Next.js, delivering seamless user experiences across all devices.",
+    "offers": [
+      "Single Page Applications (SPA)",
+      "Progressive Web Apps (PWA)",
+      "Custom Portals",
+      "Cloud-Native Development",
+      "API Integrations"
+    ],
+    "faqs": [
+      {
+        "q": "Are your web apps mobile-friendly?",
+        "a": "Absolutely. All our web applications are built with a mobile-first, responsive design approach."
+      },
+      {
+        "q": "What technologies do you use?",
+        "a": "We specialize in the MERN stack (MongoDB, Express, React, Node) and Next.js for high performance."
+      }
+    ]
+  },
+  {
+    "id": "mobile-apps",
+    "title": "Mobile Apps",
+    "description": "Engaging, high-performance native and cross-platform mobile applications for iOS and Android that users love and businesses rely on.",
+    "offers": [
+      "iOS App Development",
+      "Android App Development",
+      "Cross-Platform (React Native/Flutter)",
+      "App UI/UX Design",
+      "App Store Optimization (ASO)"
+    ],
+    "faqs": [
+      {
+        "q": "Do you build for both iOS and Android?",
+        "a": "Yes, we build native apps for both platforms as well as cost-effective cross-platform solutions."
+      },
+      {
+        "q": "Can you help publish the app to the stores?",
+        "a": "Yes, we handle the entire submission process for both the Apple App Store and Google Play Store."
+      }
+    ]
+  },
+  {
+    "id": "saas-platforms",
+    "title": "SaaS Platforms",
+    "description": "End-to-end development of Software-as-a-Service (SaaS) products, featuring multi-tenant architectures, subscription billing, and robust security.",
+    "offers": [
+      "Multi-Tenant Architecture",
+      "Subscription Billing Integration",
+      "User Role Management",
+      "Data Analytics Dashboards",
+      "Scalable Cloud Hosting"
+    ],
+    "faqs": [
+      {
+        "q": "Can you integrate Stripe or PayPal for subscriptions?",
+        "a": "Yes, we have extensive experience integrating Stripe, PayPal, Razorpay, and other payment gateways."
+      },
+      {
+        "q": "Is the architecture scalable?",
+        "a": "We design SaaS platforms using scalable cloud infrastructures (AWS/GCP) to support rapid user growth."
+      }
+    ]
+  },
+  {
+    "id": "crm-systems",
+    "title": "CRM Systems",
+    "description": "Custom Customer Relationship Management systems designed to streamline your sales pipeline, automate follow-ups, and improve customer retention.",
+    "offers": [
+      "Lead Management",
+      "Sales Pipeline Tracking",
+      "Automated Workflows",
+      "Email Integration",
+      "Custom Analytics & Reporting"
+    ],
+    "faqs": [
+      {
+        "q": "Why choose a custom CRM over Salesforce or HubSpot?",
+        "a": "A custom CRM is tailored exactly to your unique processes without the expensive recurring licensing fees of off-the-shelf products."
+      },
+      {
+        "q": "Can it integrate with my website?",
+        "a": "Yes, we can seamlessly connect your website lead forms directly into the CRM."
+      }
+    ]
+  },
+  {
+    "id": "erp-solutions",
+    "title": "ERP Solutions",
+    "description": "Comprehensive Enterprise Resource Planning systems that unify your business processes, from inventory and HR to finance and supply chain.",
+    "offers": [
+      "Inventory Management",
+      "HR & Payroll Modules",
+      "Financial Accounting",
+      "Supply Chain Tracking",
+      "Real-Time Dashboard Reporting"
+    ],
+    "faqs": [
+      {
+        "q": "Is it possible to migrate data from our old system?",
+        "a": "Yes, we provide secure data migration services to ensure a smooth transition to your new ERP."
+      },
+      {
+        "q": "How secure is the ERP data?",
+        "a": "We implement enterprise-grade security protocols, encryption, and role-based access controls."
+      }
+    ]
+  },
+  {
+    "id": "e-commerce",
+    "title": "E-Commerce",
+    "description": "High-converting, scalable custom e-commerce platforms designed to provide frictionless shopping experiences and drive online sales.",
+    "offers": [
+      "Custom Storefronts",
+      "Secure Payment Gateways",
+      "Inventory Syncing",
+      "Order Management Systems",
+      "Abandoned Cart Recovery"
+    ],
+    "faqs": [
+      {
+        "q": "Do you build on Shopify or custom stacks?",
+        "a": "We offer both headless Shopify development and fully custom e-commerce solutions built from scratch."
+      },
+      {
+        "q": "Can you handle multi-vendor marketplaces?",
+        "a": "Yes, we have the technical expertise to build complex multi-vendor marketplace platforms."
+      }
+    ]
+  },
+  {
+    "id": "api-development",
+    "title": "API Development",
+    "description": "Secure, well-documented, and highly scalable RESTful and GraphQL APIs that connect your software systems and enable seamless data exchange.",
+    "offers": [
+      "REST & GraphQL APIs",
+      "Third-Party API Integration",
+      "API Gateway Setup",
+      "OAuth & Security Implementation",
+      "Comprehensive Documentation"
+    ],
+    "faqs": [
+      {
+        "q": "Do you provide API documentation?",
+        "a": "Yes, we use tools like Swagger/OpenAPI to provide clear, interactive documentation for your developers."
+      },
+      {
+        "q": "How do you ensure API security?",
+        "a": "We use robust authentication (like JWT/OAuth), rate limiting, and encryption to secure all endpoints."
+      }
+    ]
+  },
+  {
+    "id": "database-design",
+    "title": "Database Design",
+    "description": "Optimized, scalable database architectures tailored for high performance, data integrity, and complex querying requirements.",
+    "offers": [
+      "Relational Databases (SQL)",
+      "NoSQL Databases (MongoDB)",
+      "Database Migration",
+      "Performance Tuning",
+      "Data Warehousing"
+    ],
+    "faqs": [
+      {
+        "q": "What databases do you work with?",
+        "a": "We work with PostgreSQL, MySQL, MongoDB, Redis, and various cloud-native databases."
+      },
+      {
+        "q": "Can you optimize our slow queries?",
+        "a": "Yes, our database tuning services involve indexing, query refactoring, and caching to improve speed."
+      }
+    ]
+  },
+  {
+    "id": "enterprise-software",
+    "title": "Enterprise Software",
+    "description": "Robust, enterprise-grade software solutions designed to solve complex corporate challenges, improve efficiency, and scale securely.",
+    "offers": [
+      "Corporate Intranets",
+      "Workflow Automation",
+      "Legacy Modernization",
+      "Data Security & Compliance",
+      "Cloud Infrastructure"
+    ],
+    "faqs": [
+      {
+        "q": "Do you offer post-launch support?",
+        "a": "Yes, we provide SLA-backed maintenance and support to ensure maximum uptime."
+      },
+      {
+        "q": "Is your software compliant with industry standards?",
+        "a": "We can build software compliant with GDPR, HIPAA, or other industry-specific regulations upon request."
+      }
+    ]
+  },
+  {
+    "id": "business-automation",
+    "title": "Business Automation",
+    "description": "Replace repetitive manual tasks with intelligent automated workflows, reducing human error and freeing your team to focus on growth.",
+    "offers": [
+      "Robotic Process Automation (RPA)",
+      "Zapier/Make Integrations",
+      "Custom Scripting",
+      "Data Sync Automation",
+      "Automated Reporting"
+    ],
+    "faqs": [
+      {
+        "q": "What kind of tasks can be automated?",
+        "a": "Data entry, email responses, invoice generation, lead routing, and file transfers are just a few examples."
+      },
+      {
+        "q": "Will automation replace my staff?",
+        "a": "No, it empowers your staff by removing tedious tasks so they can focus on high-value, strategic work."
+      }
+    ]
+  },
+  {
+    "id": "ai-applications",
+    "title": "AI Applications",
+    "description": "Cutting-edge artificial intelligence integration, from custom LLMs and chatbots to predictive analytics and machine learning models.",
+    "offers": [
+      "Custom AI Chatbots",
+      "OpenAI/LLM Integration",
+      "Predictive Analytics",
+      "Image & Text Processing",
+      "Machine Learning Models"
+    ],
+    "faqs": [
+      {
+        "q": "Can you train an AI on our company data?",
+        "a": "Yes, we can build specialized AI models (like RAG systems) trained securely on your proprietary documents."
+      },
+      {
+        "q": "How much does AI integration cost?",
+        "a": "It depends on the complexity and token usage of the models, but we offer scalable solutions for all budgets."
+      }
+    ]
+  },
+  {
+    "id": "seo",
+    "title": "Search Engine Optimization (SEO)",
+    "description": "Dominate search rankings and drive high-intent organic traffic to your website through technical optimization, authoritative content, and ethical backlinking.",
+    "offers": [
+      "On-Page SEO",
+      "Technical SEO",
+      "Link Building",
+      "Local SEO",
+      "Content Strategy"
+    ],
+    "faqs": [
+      {
+        "q": "How long does SEO take to see results?",
+        "a": "SEO is a long-term strategy. Significant results typically take 3 to 6 months depending on competition."
+      }
+    ]
+  },
+  {
+    "id": "meta-advertising",
+    "title": "Meta Advertising",
+    "description": "Scale your customer acquisition with data-driven social advertising across Facebook, Instagram, and WhatsApp.",
+    "offers": [
+      "Campaign Strategy",
+      "A/B Testing",
+      "Retargeting",
+      "Creative Design",
+      "Conversion Tracking"
+    ],
+    "faqs": [
+      {
+        "q": "What is a good budget for Meta Ads?",
+        "a": "We recommend starting with at least $1000/month to gather enough data for proper optimization."
+      }
+    ]
+  },
+  {
+    "id": "social-media-marketing",
+    "title": "Social Media Marketing",
+    "description": "Build a loyal community and elevate your brand presence with engaging, platform-native content strategies.",
+    "offers": [
+      "Content Creation",
+      "Community Management",
+      "Influencer Outreach",
+      "Analytics Reporting",
+      "Brand Strategy"
+    ],
+    "faqs": [
+      {
+        "q": "Which platforms should we focus on?",
+        "a": "It depends on your audience. B2B often performs best on LinkedIn, while B2C thrives on Instagram and TikTok."
+      }
+    ]
+  },
+  {
+    "id": "content-marketing",
+    "title": "Content Marketing",
+    "description": "Establish industry authority and educate your audience with high-quality blogs, videos, and high-converting lead magnets.",
+    "offers": [
+      "Blog Writing",
+      "Video Production",
+      "Ebooks & Whitepapers",
+      "Email Newsletters",
+      "SEO Content"
+    ],
+    "faqs": [
+      {
+        "q": "Do you write the content?",
+        "a": "Yes, our team of expert copywriters and industry researchers handle all content creation."
+      }
+    ]
+  },
+  {
+    "id": "email-automation",
+    "title": "Email Automation",
+    "description": "Nurture leads and maximize customer lifetime value with highly personalized, automated email sequences.",
+    "offers": [
+      "Drip Campaigns",
+      "Newsletter Management",
+      "Abandoned Cart Flows",
+      "List Segmentation",
+      "A/B Testing"
+    ],
+    "faqs": [
+      {
+        "q": "What email platforms do you use?",
+        "a": "We work with Mailchimp, Klaviyo, ActiveCampaign, HubSpot, and more."
+      }
+    ]
+  },
+  {
+    "id": "lead-generation",
+    "title": "B2B Lead Generation",
+    "description": "Fill your sales pipeline with qualified prospects using proven multi-channel acquisition funnels and outreach.",
+    "offers": [
+      "Cold Email Outreach",
+      "LinkedIn Automation",
+      "Landing Page Optimization",
+      "Lead Magnet Creation",
+      "CRM Setup"
+    ],
+    "faqs": [
+      {
+        "q": "Are the leads qualified?",
+        "a": "Yes, we use strict targeting parameters to ensure you only speak with decision-makers in your target market."
+      }
+    ]
+  },
+  {
+    "id": "performance-marketing",
+    "title": "Performance Marketing",
+    "description": "A holistic, revenue-focused approach where every dollar spent is meticulously tracked, optimized, and scaled.",
+    "offers": [
+      "Omnichannel Strategy",
+      "ROI Tracking",
+      "Conversion Rate Optimization",
+      "Data Analytics",
+      "Budget Scaling"
+    ],
+    "faqs": [
+      {
+        "q": "What does performance marketing mean?",
+        "a": "It means our primary focus is on measurable actions: leads, sales, and ROI, rather than just brand awareness."
+      }
+    ]
+  },
+  {
     id: "social-media-management",
     title: "Social Media Management",
     description: "Build a strong digital presence with DigiBrandz Social Media Management Services. We create platform-specific strategies, engaging content, and visually appealing creatives that help your brand connect with the right audience. From content planning and creative design to community engagement and performance tracking, our team manages every aspect of your social media to increase brand awareness, boost engagement, and generate quality leads. Whether you're a startup or an established business, we help you grow consistently across Instagram, Facebook, LinkedIn, YouTube, and other leading social platforms.",
@@ -350,7 +943,7 @@ export const CASE_STUDIES = [
     id: "speed-homes",
     industry: "Real Estate",
     client: "Speed Homes (Projects: Elite Sparsh, Aura Bliss, Vision Group, Krishna Kapital & Dugad Heights)",
-    logo: "https://speedhomesandloans.com/wp-content/uploads/2023/12/Happy__10_-removebg-preview-e1703595200684.png",
+    logo: "/assets/logos/client-0.png",
     website: "https://speedhomesandloans.com",
     overview: "Speed Homes is a leading real estate marketing and property consultancy promoting premium residential and commercial projects... The brand connects buyers with quality developments through digital marketing.",
     challenges: [
@@ -400,7 +993,7 @@ export const CASE_STUDIES = [
     id: "health-easy-emi",
     industry: "Healthcare",
     client: "Health Easy EMI",
-    logo: "https://healtheasyemi.com/logo/logo.png",
+    logo: "/assets/logos/client-1.png",
     website: "https://healtheasyemi.com",
     overview: "Health Easy EMI is a healthcare financing platform offering flexible Medical EMI solutions, Free Ambulance Services, Video Consultation, and Doctor Consultation to make healthcare more accessible.",
     challenges: [
@@ -444,7 +1037,7 @@ export const CASE_STUDIES = [
     id: "dr-hamades-curesure",
     industry: "Healthcare",
     client: "Dr. Hamade’s CureSure Surgery Centre",
-    logo: "https://drhemadescuresure.com/Images/Logo.jpg",
+    logo: "/assets/logos/client-2.jpg",
     website: "https://drhemadescuresure.com",
     overview: "Dr. Hamade’s CureSure Surgery Centre is a specialized healthcare clinic in Pune offering advanced Laser Surgery and Minimally Invasive Surgical Treatments for conditions including Piles, Fissure, Fistula, Hernia, Varicose Veins, and Gallbladder Stones.",
     challenges: [
@@ -488,7 +1081,7 @@ export const CASE_STUDIES = [
     id: "bharati-vidyapeeth",
     industry: "Education",
     client: "Bharati Vidyapeeth (Deemed to be University)",
-    logo: "https://www.bvuniversity.edu.in/images/bharati_vidyapeeth_logo-new.webp",
+    logo: "/assets/logos/client-3.webp",
     website: "https://www.bvuniversity.edu.in",
     overview: "Bharati Vidyapeeth is one of India's premier higher education institutions, offering diverse undergraduate, postgraduate, and professional programs. Known for its academic excellence, modern campus, and industry-focused education.",
     challenges: [
@@ -533,7 +1126,7 @@ export const CASE_STUDIES = [
     id: "sparktech-pro-agile",
     industry: "Education",
     client: "Sparktech Pro Agile",
-    logo: "https://sparktechproagile.com/logo.png",
+    logo: "/assets/logos/client-4.png",
     website: "https://sparktechproagile.com",
     overview: "SparkTech Pro Agile is a professional IT Training & Placement Assistance Institute offering industry-oriented technical courses, skill development programs, and career-focused training.",
     challenges: [
@@ -574,7 +1167,7 @@ export const CASE_STUDIES = [
     id: "shamudri-tourism",
     industry: "Travel & Tourism",
     client: "Shamudri Tourism LLC",
-    logo: "https://www.shamudritourism.ae/logo%20only%20(1).png",
+    logo: "/assets/logos/client-5.png",
     website: "https://www.shamudritourism.ae",
     overview: "Shamudri Tourism LLC is a Dubai-based travel and tourism company specializing in World tour packages, visa assistance, desert safaris, city tours, and luxury holiday experiences.",
     challenges: [
@@ -619,7 +1212,7 @@ export const CASE_STUDIES = [
     id: "happenstance",
     industry: "Footwear Brand",
     client: "Happenstance",
-    logo: "https://happenstance.com/storage/media/vNWKNshyEJFpsHVuKOvBFwHICC9WNGtlJi8klASZ.webp",
+    logo: "/assets/logos/client-6.webp",
     website: "https://happenstance.com",
     overview: "Happenstance is a premium footwear brand known for its innovative designs, advanced comfort technology, and stylish collections. The brand operates across major cities including Pune, Mumbai, Ahmedabad, and Hyderabad.",
     challenges: [
@@ -659,10 +1252,10 @@ export const CASE_STUDIES = [
   {
     id: "bluesky-scaffolding",
     industry: "Construction",
-    client: "Bluesky Scaffolding",
-    logo: "http://blueskyscaffolding.com/assets/img/logo.png",
+    client: "BlueSkye Scaffolding",
+    logo: "/assets/logos/client-7.png",
     website: "http://blueskyscaffolding.com",
-    overview: "Bluesky Scaffolding is a professional scaffolding solutions provider offering reliable and safe scaffolding services for the construction, infrastructure, and industrial sectors.",
+    overview: "BlueSkye Scaffolding is a professional scaffolding solutions provider offering reliable and safe scaffolding services for the construction, infrastructure, and industrial sectors.",
     challenges: [
       "Building strong Brand Awareness in the competitive construction industry.",
       "Creating a professional Digital Presence for an industrial brand.",
@@ -703,7 +1296,7 @@ export const CASE_STUDIES = [
     id: "yashraj-systems",
     industry: "Automation",
     client: "YashRaj Systems & Services",
-    logo: "https://www.yashrajsystems.com/YASHRAJ%20LOGO%204.png",
+    logo: "/assets/logos/client-8.png",
     website: "https://www.yashrajsystems.com",
     overview: "YashRaj Systems & Services is a trusted provider of industrial automation, software solutions, and IT services, delivering innovative technology solutions to businesses across various industries.",
     challenges: [
@@ -741,7 +1334,7 @@ export const CASE_STUDIES = [
     id: "shri-samartha-krupa-ghee",
     industry: "Food",
     client: "Shri Samartha Krupa Ghee",
-    logo: "https://www.shrisamarthakrupamilkproducts.com/uploads/Logo.png",
+    logo: "/assets/logos/client-9.png",
     website: "https://www.shrisamarthakrupamilkproducts.com",
     overview: "Shri Samartha Krupa Ghee is a trusted dairy brand offering pure, high-quality desi ghee made using traditional methods. The brand focuses on delivering authentic dairy products to households and retailers.",
     challenges: [
@@ -790,7 +1383,7 @@ export const CASE_STUDIES = [
     id: "tanaji-group",
     industry: "Construction",
     client: "Tanaji Group",
-    logo: "https://www.tanajigroup.com/assets/images/logos/header-logo.png",
+    logo: "/assets/logos/client-10.png",
     website: "https://www.tanajigroup.com",
     overview: "Tanaji Group is a leading industrial construction company providing cost-effective and intelligent infrastructure solutions across the pharmaceutical, chemical, food & beverage, automobile, heavy engineering, warehousing, petrochemical, and institutional sectors.",
     challenges: [
@@ -831,7 +1424,7 @@ export const CASE_STUDIES = [
     id: "techport-solutions",
     industry: "Automation",
     client: "TechPort Solutions",
-    logo: "https://techportsolutions.in/assets/img/logo.png",
+    logo: "/assets/logos/client-11.png",
     website: "https://techportsolutions.in",
     overview: "TechPort Solutions is a leading Industrial Automation company specializing in Process Automation, Factory Automation, PLC Programming, SCADA, Machine Automation, RTU, Energy Management Systems, Building Automation, and Engineering Services.",
     challenges: [
@@ -873,7 +1466,7 @@ export const CASE_STUDIES = [
     id: "venkateshwara-agro",
     industry: "Agriculture",
     client: "Venkateshwara Co-operative Power & Agro Processing Ltd.",
-    logo: "https://www.venkateshwarapoweragro.com/assets/logo-Cf76YeYC.png",
+    logo: "/assets/logos/client-12.png",
     website: "https://www.venkateshwarapoweragro.com",
     overview: "Venkateshwara Co-operative Power & Agro Processing Ltd. is a leading organization in the agriculture and agro-processing sector, committed to empowering farmers through sustainable agricultural practices, agro-processing, and cooperative development.",
     challenges: [
@@ -1019,3 +1612,257 @@ export const CAREERS = {
     }
   ]
 };
+export const INDUSTRIES = [
+  {
+    "id": "education",
+    "title": "Education",
+    "description": "Transforming the education sector with scalable e-learning platforms, student management systems, and targeted digital marketing campaigns to drive enrollments.",
+    "offers": [
+      "E-Learning Platform Development",
+      "Student Information Systems",
+      "Lead Generation for Admissions",
+      "Virtual Classrooms (WebRTC)",
+      "Alumni Network Portals"
+    ],
+    "faqs": [
+      {
+        "q": "Can you integrate Zoom or Teams into the platform?",
+        "a": "Yes, we can seamlessly integrate video conferencing tools directly into your custom LMS."
+      }
+    ]
+  },
+  {
+    "id": "healthcare",
+    "title": "Healthcare",
+    "description": "Secure, compliant, and patient-centric digital solutions for hospitals, clinics, and telehealth providers.",
+    "offers": [
+      "Telemedicine App Development",
+      "HIPAA-Compliant Portals",
+      "Patient Booking Systems",
+      "Healthcare SEO & Lead Gen",
+      "EHR/EMR Integrations"
+    ],
+    "faqs": [
+      {
+        "q": "Are your healthcare apps HIPAA compliant?",
+        "a": "Absolutely. We follow strict security protocols and encryption standards to ensure full compliance."
+      }
+    ]
+  },
+  {
+    "id": "real-estate",
+    "title": "Real Estate",
+    "description": "Empowering real estate agencies and developers with high-converting property portals, CRM systems, and aggressive lead generation strategies.",
+    "offers": [
+      "Property Listing Portals",
+      "Real Estate CRM",
+      "Lead Generation via Meta & Google",
+      "3D Virtual Tours Integration",
+      "Automated Follow-ups"
+    ],
+    "faqs": [
+      {
+        "q": "Can you sync listings from MLS?",
+        "a": "Yes, we can build direct API integrations to sync properties from MLS or other listing networks."
+      }
+    ]
+  },
+  {
+    "id": "e-commerce",
+    "title": "E-Commerce",
+    "description": "Scalable, high-performance e-commerce platforms designed to maximize conversions and streamline inventory management.",
+    "offers": [
+      "Custom Shopify Development",
+      "Headless E-Commerce",
+      "Multi-Vendor Marketplaces",
+      "Abandoned Cart Automation",
+      "Conversion Rate Optimization"
+    ],
+    "faqs": [
+      {
+        "q": "Can you handle high-traffic flash sales?",
+        "a": "Yes, we build our custom e-commerce platforms on scalable cloud infrastructure to handle traffic spikes."
+      }
+    ]
+  },
+  {
+    "id": "finance",
+    "title": "Finance & Fintech",
+    "description": "Secure, robust financial software and marketing strategies for banks, fintech startups, and accounting firms.",
+    "offers": [
+      "Secure Payment Gateways",
+      "Fintech App Development",
+      "Financial Dashboards",
+      "SEO for Financial Services",
+      "Data Encryption & Security"
+    ],
+    "faqs": [
+      {
+        "q": "Do you follow financial compliance standards?",
+        "a": "Yes, we build software adhering to PCI-DSS and other relevant financial security standards."
+      }
+    ]
+  },
+  {
+    "id": "manufacturing",
+    "title": "Manufacturing",
+    "description": "Digital transformation for the manufacturing sector, including ERP solutions, B2B portals, and industrial IoT dashboards.",
+    "offers": [
+      "Custom ERP Solutions",
+      "B2B Wholesale Portals",
+      "Inventory Management Systems",
+      "Industrial Marketing",
+      "Supply Chain Automation"
+    ],
+    "faqs": [
+      {
+        "q": "Can your ERP integrate with our old machines?",
+        "a": "Through IoT integrations, we can often bridge the gap between legacy machinery and modern software."
+      }
+    ]
+  },
+  {
+    "id": "logistics",
+    "title": "Logistics",
+    "description": "Streamlining operations with advanced fleet management, real-time tracking, and route optimization software.",
+    "offers": [
+      "Fleet Tracking Apps",
+      "Warehouse Management Systems",
+      "Route Optimization APIs",
+      "B2B Lead Generation",
+      "Customer Tracking Portals"
+    ],
+    "faqs": [
+      {
+        "q": "Do you provide real-time GPS tracking?",
+        "a": "Yes, we integrate Google Maps and custom GPS hardware APIs for real-time tracking."
+      }
+    ]
+  },
+  {
+    "id": "restaurants",
+    "title": "Restaurants & Hospitality",
+    "description": "Enhancing the dining experience with custom POS systems, online ordering apps, and local SEO to drive foot traffic.",
+    "offers": [
+      "Online Ordering Systems",
+      "Restaurant POS Integrations",
+      "Local SEO & GMB Optimization",
+      "Social Media Marketing",
+      "Loyalty Programs"
+    ],
+    "faqs": [
+      {
+        "q": "Is the ordering system commission-free?",
+        "a": "Yes, when we build a custom ordering system for you, you own it—no third-party commissions."
+      }
+    ]
+  },
+  {
+    "id": "travel-tourism",
+    "title": "Travel & Tourism",
+    "description": "Immersive booking platforms and digital marketing campaigns that inspire wanderlust and drive bookings.",
+    "offers": [
+      "Custom Booking Engines",
+      "Travel Agency Portals",
+      "Social Media Advertising",
+      "SEO for Travel Agencies",
+      "Review Management"
+    ],
+    "faqs": [
+      {
+        "q": "Can you integrate flight and hotel APIs?",
+        "a": "Yes, we integrate with Amadeus, Sabre, and various hotel APIs for real-time inventory."
+      }
+    ]
+  },
+  {
+    "id": "automotive",
+    "title": "Automotive",
+    "description": "Accelerating growth for dealerships and automotive brands with dynamic inventory systems and targeted lead gen.",
+    "offers": [
+      "Dealership Inventory Portals",
+      "Service Booking Systems",
+      "Targeted PPC Campaigns",
+      "Automotive CRM",
+      "Virtual Showrooms"
+    ],
+    "faqs": [
+      {
+        "q": "Can the website sync with our dealership management system?",
+        "a": "Yes, we build automated data feeds to sync your existing inventory directly to the website."
+      }
+    ]
+  },
+  {
+    "id": "professional-services",
+    "title": "Professional Services",
+    "description": "Building authority and driving qualified leads for law firms, consultants, and B2B service providers.",
+    "offers": [
+      "Authority Building SEO",
+      "LinkedIn Lead Generation",
+      "Appointment Scheduling Portals",
+      "Client Portals",
+      "Email Automation"
+    ],
+    "faqs": [
+      {
+        "q": "How do you generate leads for B2B?",
+        "a": "We use a mix of LinkedIn automation, cold email outreach, and high-intent Google Search campaigns."
+      }
+    ]
+  },
+  {
+    "id": "startups",
+    "title": "Startups",
+    "description": "Agile, scalable MVPs and aggressive growth marketing strategies to help startups achieve product-market fit fast.",
+    "offers": [
+      "MVP Development",
+      "SaaS Architecture",
+      "Growth Hacking Campaigns",
+      "Pitch Deck Design",
+      "Investor Portals"
+    ],
+    "faqs": [
+      {
+        "q": "Do you build MVPs quickly?",
+        "a": "Yes, we focus on rapid prototyping and agile development to get your MVP to market in weeks, not months."
+      }
+    ]
+  },
+  {
+    "id": "retail",
+    "title": "Retail",
+    "description": "Bridging the gap between physical and digital retail with omnichannel solutions and localized marketing.",
+    "offers": [
+      "Omnichannel POS Sync",
+      "Local SEO Campaigns",
+      "Loyalty Apps",
+      "Click-and-Collect Systems",
+      "Inventory Automation"
+    ],
+    "faqs": [
+      {
+        "q": "Can you link our physical POS to the online store?",
+        "a": "Yes, we build integrations to ensure your online and in-store inventory is always perfectly synced."
+      }
+    ]
+  },
+  {
+    "id": "entertainment",
+    "title": "Entertainment",
+    "description": "Engaging digital experiences for media companies, event organizers, and creators.",
+    "offers": [
+      "Ticketing Platforms",
+      "Video Streaming Portals",
+      "Social Media Hype Campaigns",
+      "Influencer Marketing",
+      "Creator Portals"
+    ],
+    "faqs": [
+      {
+        "q": "Can you build a platform that handles high video bandwidth?",
+        "a": "Yes, we use advanced CDNs and cloud infrastructure to ensure smooth video streaming."
+      }
+    ]
+  }
+];

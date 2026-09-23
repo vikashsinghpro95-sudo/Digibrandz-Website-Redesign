@@ -3,18 +3,20 @@ import { motion } from 'framer-motion'
 import { FaRobot, FaMessage, FaPhone, FaGear, FaPenNib, FaBrain, FaDiagramProject, FaGauge, FaFileInvoice, FaWandMagicSparkles, FaCubes } from 'react-icons/fa6'
 import { Button } from './ui/button'
 
+import { Link } from 'react-router-dom'
+
 const AI_SERVICES = [
-  { name: "AI Chatbots", icon: <FaMessage /> },
-  { name: "AI Customer Support", icon: <FaPhone /> },
-  { name: "WhatsApp Automation", icon: <FaMessage /> },
-  { name: "Business Process Automation", icon: <FaGear /> },
-  { name: "AI Content Generation", icon: <FaPenNib /> },
-  { name: "AI Agents", icon: <FaRobot /> },
-  { name: "Workflow Automation", icon: <FaDiagramProject /> },
-  { name: "AI Dashboards", icon: <FaGauge /> },
-  { name: "Document Processing", icon: <FaFileInvoice /> },
-  { name: "Recommendation Systems", icon: <FaWandMagicSparkles /> },
-  { name: "API & AI Integrations", icon: <FaCubes /> },
+  { name: "AI Chatbots", icon: <FaMessage />, slug: "ai-chatbots" },
+  { name: "AI Customer Support", icon: <FaPhone />, slug: "ai-customer-support" },
+  { name: "WhatsApp Automation", icon: <FaMessage />, slug: "whatsapp-automation" },
+  { name: "Business Process Automation", icon: <FaGear />, slug: "business-process-automation" },
+  { name: "AI Content Generation", icon: <FaPenNib />, slug: "ai-content-generation" },
+  { name: "AI Agents", icon: <FaRobot />, slug: "ai-agents" },
+  { name: "Workflow Automation", icon: <FaDiagramProject />, slug: "workflow-automation" },
+  { name: "AI Dashboards", icon: <FaGauge />, slug: "ai-dashboards" },
+  { name: "Document Processing", icon: <FaFileInvoice />, slug: "document-processing" },
+  { name: "Recommendation Systems", icon: <FaWandMagicSparkles />, slug: "recommendation-systems" },
+  { name: "API & AI Integrations", icon: <FaCubes />, slug: "api-ai-integrations" },
 ]
 
 export default function AiAutomation() {
@@ -56,19 +58,20 @@ export default function AiAutomation() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-16 max-w-5xl mx-auto">
           {AI_SERVICES.map((service, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
-              className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 hover:bg-white/10 hover:border-brand-rose/50 transition-colors group cursor-pointer"
-            >
-              <div className="text-brand-blush group-hover:text-white group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
-                {React.cloneElement(service.icon, { size: 32 })}
-              </div>
-              <span className="font-medium text-sm text-white/90">{service.name}</span>
-            </motion.div>
+            <Link key={idx} to={`/services/${service.slug}`} className="block h-full">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.3, delay: idx * 0.05 }}
+                className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col items-center justify-center text-center gap-3 hover:bg-white/10 hover:border-brand-rose/50 transition-colors group h-full cursor-pointer"
+              >
+                <div className="text-white/50 group-hover:text-brand-rose transition-colors duration-300">
+                  {React.cloneElement(service.icon, { size: 28 })}
+                </div>
+                <span className="font-medium text-sm text-white group-hover:text-brand-cream transition-colors">{service.name}</span>
+              </motion.div>
+            </Link>
           ))}
         </div>
 

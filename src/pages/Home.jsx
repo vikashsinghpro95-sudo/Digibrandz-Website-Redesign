@@ -24,7 +24,7 @@ export default function Home() {
       <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center text-muted-foreground">Loading...</div>}>
         <ServicesOverview />
         <WhyChooseUs />
-        <CaseStudies />
+        <CaseStudies limit={6} />
         <Testimonials />
         <Blog />
         <LeadGenCTA />

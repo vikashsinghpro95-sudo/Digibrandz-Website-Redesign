@@ -19,11 +19,12 @@ const ServiceDetails = lazy(() => import('./pages/ServiceDetails'))
 const ConsultationModal = lazy(() => import('./components/ConsultationModal'))
 const Solutions = lazy(() => import('./pages/Solutions'))
 const Industries = lazy(() => import('./pages/Industries'))
+const IndustryDetails = lazy(() => import('./pages/IndustryDetails'))
 const Portfolio = lazy(() => import('./pages/Portfolio'))
 const Process = lazy(() => import('./pages/Process'))
-const PricingPage = lazy(() => import('./pages/PricingPage'))
 const ContactPage = lazy(() => import('./pages/ContactPage'))
 const TestimonialsPage = lazy(() => import('./pages/TestimonialsPage'))
+const TeamMemberDetails = lazy(() => import('./pages/TeamMemberDetails'))
 
 
 function ScrollToTop() {
@@ -81,12 +82,13 @@ function App() {
               <Route path="/services/:id" element={<ServiceDetails />} />
               <Route path="/solutions" element={<Solutions />} />
               <Route path="/industries" element={<Industries />} />
+              <Route path="/industries/:id" element={<IndustryDetails />} />
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/process" element={<Process />} />
-              <Route path="/pricing" element={<PricingPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/testimonials" element={<TestimonialsPage />} />
               <Route path="/team" element={<Team />} />
+              <Route path="/team/:id" element={<TeamMemberDetails />} />
               <Route path="/careers" element={<Careers />} />
               <Route path="/blog" element={<BlogList />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
