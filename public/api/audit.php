@@ -22,7 +22,10 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
 }
 
 // Read API Key from .env file
-$envPath = __DIR__ . '/../../.env';
+$envPath = __DIR__ . '/../.env'; // Look in public_html/.env
+if (!file_exists($envPath)) {
+    $envPath = __DIR__ . '/../../.env'; // Look outside public_html for better security
+}
 $apiKey = '';
 if (file_exists($envPath)) {
     $env = parse_ini_file($envPath);

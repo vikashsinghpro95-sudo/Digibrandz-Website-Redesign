@@ -8,4 +8,9 @@
 
   # Rewrite all other requests to index.html to allow React Router to handle it
   RewriteRule ^ index.html [L]
+
+  # Block access to .env files for security
+  <Files ".env">
+    Require all denied
+  </Files>
 </IfModule>
