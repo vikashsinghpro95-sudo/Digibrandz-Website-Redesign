@@ -183,9 +183,9 @@ export default function Hero() {
     setError(null);
     
     try {
-      // In dev, use localhost:3001. In production, use empty string to fetch from the same origin.
-      const apiUrl = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:3001' : '');
-      const response = await fetch(`${apiUrl}/api/audit`, {
+      // Use relative path to hit the new PHP script in the public/api folder
+      const apiUrl = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5173' : '');
+      const response = await fetch(`${apiUrl}/api/audit.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url })
