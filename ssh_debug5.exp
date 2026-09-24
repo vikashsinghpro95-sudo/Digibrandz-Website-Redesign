@@ -1,0 +1,10 @@
+#!/usr/bin/expect -f
+set timeout 30
+spawn ssh -p 65002 -o StrictHostKeyChecking=no u445085246@145.79.212.119
+expect "password:"
+send "Codeforthelife@99\r"
+expect -re {\[.*\]\$ }
+send "curl -s -X POST https://honeydew-narwhal-750496.hostingersite.com/api/audit.php -H 'Content-Type: application/json' -d '{\"url\":\"https://example.com\"}' | strings | grep 'AI Analysis'\r"
+expect -re {\[.*\]\$ }
+send "exit\r"
+expect eof
