@@ -583,24 +583,7 @@ export const SERVICES = [
       }
     ]
   },
-  {
-    "id": "performance-marketing",
-    "title": "Performance Marketing",
-    "description": "A holistic, revenue-focused approach where every dollar spent is meticulously tracked, optimized, and scaled.",
-    "offers": [
-      "Omnichannel Strategy",
-      "ROI Tracking",
-      "Conversion Rate Optimization",
-      "Data Analytics",
-      "Budget Scaling"
-    ],
-    "faqs": [
-      {
-        "q": "What does performance marketing mean?",
-        "a": "It means our primary focus is on measurable actions: leads, sales, and ROI, rather than just brand awareness."
-      }
-    ]
-  },
+
   {
     id: "social-media-management",
     title: "Social Media Management",

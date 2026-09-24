@@ -8,7 +8,7 @@ const ServicesOverview = lazy(() => import('../components/ServicesOverview'))
 const WhyChooseUs = lazy(() => import('../components/WhyChooseUs'))
 const CaseStudies = lazy(() => import('../components/CaseStudies'))
 const Testimonials = lazy(() => import('../components/Testimonials'))
-const Blog = lazy(() => import('../components/Blog'))
+
 const LeadGenCTA = lazy(() => import('../components/LeadGenCTA'))
 const Contact = lazy(() => import('../components/Contact'))
 
@@ -26,7 +26,7 @@ export default function Home() {
         <WhyChooseUs />
         <CaseStudies limit={6} />
         <Testimonials />
-        <Blog />
+
         <LeadGenCTA />
         <Contact />
       </Suspense>

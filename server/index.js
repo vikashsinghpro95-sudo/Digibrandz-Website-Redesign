@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const axios = require('axios');
 const cheerio = require('cheerio');
@@ -8,6 +9,9 @@ const PDFDocument = require('pdfkit');
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// Serve static files from the React frontend build
+app.use(express.static(path.join(__dirname, '../dist')));
 
 app.post('/api/audit', async (req, res) => {
   let { url } = req.body;
@@ -257,7 +261,12 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-const PORT = 3001;
+// Catch-all route to serve the React app for any unhandled routes (supports React Router)
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
+
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`SEO Audit Backend running on http://localhost:${PORT}`);
 });

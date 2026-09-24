@@ -67,7 +67,7 @@ export default function ServicesOverview() {
         </div>
 
         {/* Grid */}
-        <div className="flex flex-wrap justify-center gap-6 group/grid relative z-10">
+        <div className="flex flex-wrap justify-center gap-4 relative z-10">
           {SERVICES.map((service, index) => {
             const bgImage = bgImages[index % bgImages.length]
             
@@ -76,7 +76,7 @@ export default function ServicesOverview() {
                 layoutId={service.id}
                 onClick={() => navigate(`/services/${service.id}`)}
                 key={service.id}
-                className="group/card w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] rounded-[2rem] border border-border/50 p-8 flex flex-col justify-between cursor-pointer overflow-hidden relative transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 hover:shadow-2xl min-h-[300px] transform-gpu"
+                className="group/card w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.75rem)] lg:w-[calc(25%-0.75rem)] xl:w-[calc(20%-0.8rem)] rounded-xl border border-border/50 p-5 flex flex-col justify-between cursor-pointer overflow-hidden relative transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-lg min-h-[220px] transform-gpu"
               >
                 {/* Background Image */}
                 <div 
@@ -91,20 +91,20 @@ export default function ServicesOverview() {
                 {/* Top Section */}
                 <div className="relative z-10 flex justify-end items-start">
                   <div className="flex items-center gap-2 opacity-0 -translate-x-4 group-hover/card:opacity-100 group-hover/card:translate-x-0 transition-all duration-300">
-                    <span className="text-sm font-bold text-white uppercase tracking-wider">Explore</span>
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white/20 backdrop-blur-md border border-white/20 text-white shadow-lg">
+                    <span className="text-xs font-bold text-white uppercase tracking-wider">Explore</span>
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center bg-white/20 backdrop-blur-md border border-white/20 text-white shadow-md text-sm">
                       <FaArrowRight />
                     </div>
                   </div>
                 </div>
                 
                 {/* Bottom Section */}
-                <div className="relative z-10 mt-auto pt-6 text-white transform transition-transform duration-500 group-hover/card:-translate-y-2">
-                  <div className="w-12 h-1 bg-brand-rose mb-4 rounded-full opacity-0 scale-x-0 origin-left group-hover/card:opacity-100 group-hover/card:scale-x-100 transition-all duration-500 delay-100" />
-                  <h3 className="font-display font-bold text-2xl mb-3 text-white group-hover/card:text-brand-cream transition-colors drop-shadow-md">
+                <div className="relative z-10 mt-auto pt-4 text-white transform transition-transform duration-500 group-hover/card:-translate-y-1">
+                  <div className="w-8 h-1 bg-brand-rose mb-3 rounded-full opacity-0 scale-x-0 origin-left group-hover/card:opacity-100 group-hover/card:scale-x-100 transition-all duration-500 delay-75" />
+                  <h3 className="font-display font-bold text-lg mb-2 text-white group-hover/card:text-brand-cream transition-colors drop-shadow-md leading-tight">
                     {service.title}
                   </h3>
-                  <p className="text-sm leading-relaxed text-white/80 drop-shadow-sm line-clamp-2">
+                  <p className="text-xs leading-relaxed text-white/80 drop-shadow-sm line-clamp-2">
                     {service.description}
                   </p>
                 </div>
