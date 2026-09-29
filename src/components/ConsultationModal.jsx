@@ -4,10 +4,13 @@ import { FaXmark, FaWhatsapp } from 'react-icons/fa6';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
+import { turso } from '../lib/turso';
+import { useSettings } from '../contexts/SettingsContext';
 
 export const openConsultation = () => window.dispatchEvent(new Event('openConsultationModal'));
 
 export default function ConsultationModal() {
+  const settings = useSettings() || {};
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -18,7 +21,21 @@ export default function ConsultationModal() {
   useEffect(() => {
     const handleOpen = () => setIsOpen(true);
     window.addEventListener('openConsultationModal', handleOpen);
-    return () => window.removeEventListener('openConsultationModal', handleOpen);
+    
+    // 3 Second Automatic Popup
+    const hasSeenPopup = sessionStorage.getItem('hasSeenConsultationPopup');
+    let timer;
+    if (!hasSeenPopup) {
+      timer = setTimeout(() => {
+        setIsOpen(true);
+        sessionStorage.setItem('hasSeenConsultationPopup', 'true');
+      }, 3000);
+    }
+    
+    return () => {
+      window.removeEventListener('openConsultationModal', handleOpen);
+      if (timer) clearTimeout(timer);
+    };
   }, []);
 
   // Lock body scroll when open
@@ -39,11 +56,29 @@ export default function ConsultationModal() {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
+    try {
+      await turso.execute({
+        sql: `INSERT INTO client_requests (name, email, phone, company, service, message) VALUES (?, ?, ?, ?, ?, ?)`,
+        args: [
+          formData.name,
+          formData.email,
+          formData.phone,
+          '',
+          'Consultation',
+          'Free Consultation Request'
+        ]
+      });
+    } catch (err) {
+      console.error('Failed to save to database', err);
+    }
+
     // Construct WhatsApp Message
-    const phoneNumber = "918483082699";
+    let phoneNumber = settings.contactPhone ? settings.contactPhone.replace(/\D/g, '') : "918483082699";
+    if (!phoneNumber.startsWith("91") && phoneNumber.length === 10) phoneNumber = "91" + phoneNumber;
+    
     const text = `Hi DigiBrandz, I'd like a free consultation.\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Phone:* ${formData.phone}`;
     
     const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`;
@@ -79,10 +114,11 @@ export default function ConsultationModal() {
 
               <div className="relative p-8 border-b border-border/50 bg-gradient-to-r from-muted/50 to-transparent">
                 <button
-                  onClick={onClose}
-                  className="absolute right-6 top-8 p-2 rounded-full bg-background border border-border hover:bg-brand-rose hover:text-white hover:border-brand-rose text-muted-foreground transition-all z-10 shadow-sm"
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); onClose(); }}
+                  className="absolute right-6 top-8 p-2 rounded-full bg-background border border-border hover:bg-brand-rose hover:text-white hover:border-brand-rose text-muted-foreground transition-all z-50 shadow-sm"
                 >
-                  <FaXmark size={18} />
+                  <FaXmark size={18} className="pointer-events-none" />
                 </button>
                 <div className="flex flex-col gap-2 relative z-10">
                   <span className="text-brand-rose font-bold tracking-widest uppercase text-xs">Let's Talk</span>

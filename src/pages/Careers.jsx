@@ -5,7 +5,8 @@ import { Input } from '../components/ui/input'
 import { Textarea } from '../components/ui/textarea'
 import { Label } from '../components/ui/label'
 import { FaArrowRight, FaLaptopCode, FaRocket, FaHeart, FaGlobe, FaXmark, FaLocationDot, FaClock, FaCalendarDays } from 'react-icons/fa6'
-import { CAREERS } from '../data/content'
+import { useContent } from '../contexts/ContentContext'
+import { API_BASE } from '../lib/api'
 
 // Mapping icons dynamically for the whyJoin section
 const ICONS = [
@@ -18,6 +19,50 @@ const ICONS = [
 
 export default function Careers() {
   const [selectedJob, setSelectedJob] = useState(null)
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const { careers } = useContent()
+  const [jobs, setJobs] = useState(careers.jobs || []);
+
+  React.useEffect(() => {
+    if (Array.isArray(careers.jobs) && careers.jobs.length > 0) {
+      setJobs(careers.jobs);
+    }
+  }, [careers]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccess(false);
+    setErrorMsg('');
+
+    const formData = new FormData(e.target);
+    formData.append('type', 'careers');
+    formData.append('position', selectedJob?.title || '');
+
+    try {
+      const response = await fetch(`${API_BASE}/api/forms.php`, {
+        method: 'POST',
+        body: formData
+      });
+      if (response.ok) {
+        setSuccess(true);
+        e.target.reset();
+        setTimeout(() => {
+          setSelectedJob(null);
+          setSuccess(false);
+        }, 3000);
+      } else {
+        setErrorMsg('Failed to submit application. Please try again.');
+      }
+    } catch (err) {
+      console.error(err);
+      setErrorMsg('A network error occurred. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="pt-24 pb-20 min-h-screen bg-background">
@@ -53,7 +98,7 @@ export default function Careers() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
           >
-            {CAREERS.intro}
+            {careers.intro}
           </motion.p>
 
           <motion.div
@@ -62,9 +107,9 @@ export default function Careers() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-10 flex flex-wrap justify-center gap-6 text-sm font-medium text-muted-foreground"
           >
-            <span className="flex items-center gap-2"><FaLocationDot className="text-brand-rose"/> {CAREERS.location}</span>
-            <span className="flex items-center gap-2"><FaCalendarDays className="text-brand-rose"/> {CAREERS.workingDays}</span>
-            <span className="flex items-center gap-2"><FaClock className="text-brand-rose"/> {CAREERS.workingHours}</span>
+            <span className="flex items-center gap-2"><FaLocationDot className="text-brand-rose"/> {careers.location}</span>
+            <span className="flex items-center gap-2"><FaCalendarDays className="text-brand-rose"/> {careers.workingDays}</span>
+            <span className="flex items-center gap-2"><FaClock className="text-brand-rose"/> {careers.workingHours}</span>
           </motion.div>
         </div>
       </section>
@@ -78,7 +123,7 @@ export default function Careers() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
-            {CAREERS.whyJoin.map((val, i) => (
+            {(careers.whyJoin || []).map((val, i) => (
               <motion.div 
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
@@ -99,7 +144,7 @@ export default function Careers() {
           <div className="mt-16 text-center max-w-4xl mx-auto">
             <h3 className="font-bold text-xl mb-6">Perks & Benefits</h3>
             <div className="flex flex-wrap justify-center gap-3">
-              {CAREERS.benefits.map((benefit, i) => (
+              {(careers.benefits || []).map((benefit, i) => (
                 <span key={i} className="px-4 py-2 rounded-full bg-brand-plum/10 text-brand-plum dark:bg-brand-cream/10 dark:text-brand-cream font-medium text-sm">
                   {benefit}
                 </span>
@@ -121,7 +166,7 @@ export default function Careers() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {CAREERS.jobs.map((job, i) => (
+            {jobs.map((job, i) => (
               <motion.div
                 key={job.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -141,7 +186,7 @@ export default function Careers() {
                     {job.title}
                   </h3>
                   <div className="flex items-center gap-4 text-sm text-muted-foreground font-medium mb-4">
-                    <span className="flex items-center gap-1.5"><FaGlobe /> {CAREERS.location}</span>
+                    <span className="flex items-center gap-1.5"><FaGlobe /> {job.location || careers.location}</span>
                     <span className="w-1 h-1 rounded-full bg-border" />
                     <span>{job.type}</span>
                   </div>
@@ -199,7 +244,7 @@ export default function Careers() {
                   
                   <div className="space-y-3 mb-10 text-sm font-medium text-white/80">
                     <div className="flex items-center gap-3">
-                      <FaGlobe className="text-brand-rose"/> {CAREERS.location}
+                      <FaGlobe className="text-brand-rose"/> {selectedJob.location || careers.location}
                     </div>
                     <div className="flex items-center gap-3">
                       <FaClock className="text-brand-rose"/> {selectedJob.type}
@@ -213,7 +258,7 @@ export default function Careers() {
 
                   <h4 className="font-bold text-xl text-white mb-4">Key Skills Required</h4>
                   <ul className="space-y-2">
-                    {selectedJob.skills.map((skill, idx) => (
+                    {(selectedJob.requirements || selectedJob.skills || []).map((skill, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-brand-cream/80">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-rose shrink-0 mt-2" />
                         {skill}
@@ -240,32 +285,49 @@ export default function Careers() {
                   <p className="text-muted-foreground">Please fill out the form below to apply.</p>
                 </div>
 
-                <form className="space-y-6">
+                {success ? (
+                  <div className="flex flex-col items-center justify-center h-64 text-center space-y-4">
+                    <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 text-green-600 rounded-full flex items-center justify-center text-2xl">✓</div>
+                    <h3 className="text-2xl font-bold">Application Sent!</h3>
+                    <p className="text-muted-foreground">We will review your application and get back to you.</p>
+                  </div>
+                ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {errorMsg && (
+                    <div className="bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 p-4 rounded-xl border border-red-200 dark:border-red-800 text-sm font-medium">
+                      {errorMsg}
+                    </div>
+                  )}
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="app-name">Full Name *</Label>
-                      <Input id="app-name" required className="bg-background" />
+                      <Input id="app-name" name="name" required className="bg-background" />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="app-email">Email Address *</Label>
-                      <Input id="app-email" type="email" required className="bg-background" />
+                      <Input id="app-email" name="email" type="email" required className="bg-background" />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="app-phone">Phone Number *</Label>
-                      <Input id="app-phone" type="tel" required className="bg-background" />
+                      <Input id="app-phone" name="phone" type="tel" required className="bg-background" />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="app-qual">Highest Qualification *</Label>
-                      <select id="app-qual" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                      <select id="app-qual" name="qualification" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                         <option value="" disabled selected>Select Qualification</option>
-                        <option value="Undergraduate">Undergraduate</option>
-                        <option value="Graduate">Graduate</option>
-                        <option value="Post-Graduate">Post-Graduate</option>
+                        <option value="SSC">SSC</option>
+                        <option value="HSC">HSC</option>
                         <option value="Diploma">Diploma</option>
+                        <option value="Bachelor's Degree">Bachelor's Degree</option>
+                        <option value="Master's Degree">Master's Degree</option>
+                        <option value="MBA">MBA</option>
+                        <option value="MCA">MCA</option>
+                        <option value="BCA">BCA</option>
+                        <option value="B.Tech / BE">B.Tech / BE</option>
                         <option value="Other">Other</option>
                       </select>
                     </div>
@@ -274,46 +336,45 @@ export default function Careers() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="app-exp">Total Experience *</Label>
-                      <select id="app-exp" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                      <select id="app-exp" name="experience" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                         <option value="" disabled selected>Select Experience</option>
-                        <option value="Fresher (0 Years)">Fresher (0 Years)</option>
-                        <option value="1-3 Years">1-3 Years</option>
-                        <option value="3-5 Years">3-5 Years</option>
-                        <option value="5+ Years">5+ Years</option>
+                        <option value="Fresher">Fresher</option>
+                        <option value="0–1 Year">0–1 Year</option>
+                        <option value="1–2 Years">1–2 Years</option>
+                        <option value="2–4 Years">2–4 Years</option>
+                        <option value="4–6 Years">4–6 Years</option>
+                        <option value="6+ Years">6+ Years</option>
                       </select>
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="app-portfolio">Portfolio / LinkedIn URL</Label>
-                      <Input id="app-portfolio" type="url" placeholder="https://" className="bg-background" />
+                      <Input id="app-portfolio" name="portfolio" type="url" placeholder="https://" className="bg-background" />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="app-resume">Resume / CV (PDF) *</Label>
-                      <Input id="app-resume" type="file" accept=".pdf,.doc,.docx" required className="bg-background cursor-pointer" />
+                      <Input id="app-resume" name="resume" type="file" accept=".pdf,.doc,.docx" required className="bg-background cursor-pointer" />
                     </div>
-                  </div>
-
-                  <div className="space-y-2 hidden">
-                    <Label htmlFor="app-position">Position</Label>
-                    <Input id="app-position" value={selectedJob.title} readOnly className="bg-muted text-muted-foreground" />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="app-cover">Cover Letter / Why should we hire you?</Label>
                     <Textarea 
                       id="app-cover" 
+                      name="message"
                       className="min-h-[120px] bg-background"
                       placeholder="Briefly tell us about your background and why you're a good fit..."
                     />
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full bg-brand-plum hover:bg-brand-plum/90 dark:bg-brand-cream dark:text-brand-plum dark:hover:bg-brand-cream/90 text-white font-bold h-14 text-base rounded-full">
-                    Submit Application
+                  <Button disabled={loading} type="submit" size="lg" className="w-full bg-brand-plum hover:bg-brand-plum/90 dark:bg-brand-cream dark:text-brand-plum dark:hover:bg-brand-cream/90 text-white font-bold h-14 text-base rounded-full">
+                    {loading ? "Submitting..." : "Submit Application"}
                   </Button>
                   
                 </form>
+                )}
 
               </div>
             </motion.div>

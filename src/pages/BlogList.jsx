@@ -2,16 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaArrowRight, FaRegCalendar } from 'react-icons/fa6';
+import { API_BASE } from '../lib/api';
 
 export default function BlogList() {
   const [blogs, setBlogs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/blogs')
+    fetch(`${API_BASE}/api/blogs.php`)
       .then(res => res.json())
       .then(data => {
-        setBlogs(data.blogs || []);
+        setBlogs(Array.isArray(data) ? data : (data.blogs || []));
         setIsLoading(false);
       })
       .catch(err => {

@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { FaArrowRight, FaXmark, FaCheck, FaChevronDown } from 'react-icons/fa6'
 import { Button } from './ui/button'
-import { SERVICES } from '../data/content'
+import { useContent } from '../contexts/ContentContext'
+import { useSettings } from '../contexts/SettingsContext'
 
 // Fallback background images
 const bgImages = [
@@ -18,7 +19,9 @@ const bgImages = [
 ]
 
 export default function ServicesOverview() {
+  const settings = useSettings() || {}
   const navigate = useNavigate()
+  const { services } = useContent()
 
   return (
     <section id="services" className="py-32 bg-background border-t border-border relative overflow-hidden">
@@ -48,10 +51,7 @@ export default function ServicesOverview() {
               transition={{ delay: 0.1 }}
               className="font-display font-bold text-5xl md:text-6xl lg:text-[80px] text-brand-plum dark:text-brand-cream tracking-tight leading-[1.1] mb-6"
             >
-              Everything You Need to <br className="hidden md:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-rose via-brand-plum to-brand-rose dark:from-brand-blush dark:via-brand-cream dark:to-brand-blush">
-                Build, Market & Scale
-              </span>
+              {settings.servicesTitle || "Our Expertise"}
             </motion.h2>
 
             <motion.p
@@ -61,14 +61,14 @@ export default function ServicesOverview() {
               transition={{ delay: 0.2 }}
               className="text-xl text-muted-foreground max-w-2xl leading-relaxed"
             >
-              We provide end-to-end digital solutions tailored for ambitious brands. From high-performance engineering to data-driven marketing, we deliver results.
+              {settings.servicesSubtitle || "Comprehensive digital solutions tailored to scale your business and dominate your market."}
             </motion.p>
           </div>
         </div>
 
         {/* Grid */}
         <div className="flex flex-wrap justify-center gap-4 relative z-10">
-          {SERVICES.map((service, index) => {
+          {services.map((service, index) => {
             const bgImage = bgImages[index % bgImages.length]
             
             return (
@@ -81,7 +81,7 @@ export default function ServicesOverview() {
                 {/* Background Image */}
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover/card:scale-110 transform-gpu"
-                  style={{ backgroundImage: `url('${bgImage}')` }}
+                  style={{ backgroundImage: `url('${service.featuredImage || bgImage}')` }}
                 />
                 
                 {/* Overlay */}

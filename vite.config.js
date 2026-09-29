@@ -7,7 +7,18 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: process.env.VITE_API_URL || 'http://127.0.0.1:8000',
+        changeOrigin: true,
+      }
+    }
+  },
+  build: {
+    target: 'esnext'
+  }
 })

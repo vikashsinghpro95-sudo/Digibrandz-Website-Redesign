@@ -3,9 +3,10 @@ import { motion } from 'framer-motion'
 import { FaQuoteRight } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
 import { Button } from './ui/button'
-import { TESTIMONIALS } from '../data/testimonials'
+import { useContent } from '../contexts/ContentContext'
 
 export default function Testimonials() {
+  const { testimonials } = useContent()
   return (
     <section className="py-24 bg-muted/30 border-y border-border overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
@@ -22,7 +23,7 @@ export default function Testimonials() {
         </div>
 
         <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-          {TESTIMONIALS.slice(0, 9).map((testimonial, idx) => (
+          {testimonials.slice(0, 9).map((testimonial, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 30 }}
@@ -50,7 +51,7 @@ export default function Testimonials() {
                 
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center font-display font-bold text-muted-foreground uppercase">
-                    {testimonial.author.charAt(0)}
+                    {(testimonial.author || 'C').charAt(0)}
                   </div>
                   <div>
                     <h4 className="font-bold text-foreground">{testimonial.author}</h4>

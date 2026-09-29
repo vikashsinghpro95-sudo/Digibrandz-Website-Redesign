@@ -1,12 +1,67 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaLocationDot, FaEnvelope, FaPhone, FaClock } from 'react-icons/fa6'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea'
 import { Label } from './ui/label'
 import { Button } from './ui/button'
+import { useSettings } from '../contexts/SettingsContext'
+import { turso } from '../lib/turso'
 
 export default function Contact() {
+  const settings = useSettings() || {}
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccess(false);
+    setErrorMsg('');
+
+    const formData = new FormData(e.target);
+    const selectedServices = Array.from(e.target.elements)
+      .filter(el => el.type === 'checkbox' && el.checked)
+      .map(el => el.value);
+
+    const payload = {
+      type: 'contact',
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('mobile'),
+      message: formData.get('details'),
+      company: formData.get('company'),
+      website: formData.get('website'),
+      businessType: formData.get('businessType'),
+      budget: formData.get('budget'),
+      timeline: formData.get('timeline'),
+      services: selectedServices,
+      contactMethod: formData.get('contactMethod')
+    };
+
+    try {
+      await turso.execute({
+        sql: `INSERT INTO client_requests (name, email, phone, company, service, message) VALUES (?, ?, ?, ?, ?, ?)`,
+        args: [
+          payload.name,
+          payload.email,
+          payload.phone,
+          payload.company || payload.businessType,
+          payload.services.join(', ') || 'General Enquiry',
+          payload.message
+        ]
+      });
+      setSuccess(true);
+      e.target.reset();
+    } catch (err) {
+      console.error(err);
+      setErrorMsg('A network error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-24 bg-background">
       <div className="container mx-auto px-4 md:px-6">
@@ -34,38 +89,51 @@ export default function Contact() {
             viewport={{ once: true }}
             className="w-full lg:w-3/5 bg-card border border-border p-8 md:p-10 rounded-3xl shadow-sm"
           >
-            <form className="space-y-6">
+            {success ? (
+              <div className="flex flex-col items-center justify-center h-full text-center space-y-4 py-12">
+                <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 text-green-600 rounded-full flex items-center justify-center text-2xl">✓</div>
+                <h3 className="text-2xl font-bold">Message Sent!</h3>
+                <p className="text-muted-foreground">Thank you for reaching out. We will get back to you shortly.</p>
+                <Button onClick={() => setSuccess(false)} variant="outline" className="mt-4">Send Another Message</Button>
+              </div>
+            ) : (
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {errorMsg && (
+                <div className="bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 p-4 rounded-xl border border-red-200 dark:border-red-800 text-sm font-medium">
+                  {errorMsg}
+                </div>
+              )}
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="name">Full Name *</Label>
-                  <Input id="name" placeholder="John Doe" required className="bg-background" />
+                  <Input id="name" name="name" placeholder="John Doe" required className="bg-background" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address *</Label>
-                  <Input id="email" type="email" placeholder="john@example.com" required className="bg-background" />
+                  <Input id="email" name="email" type="email" placeholder="john@example.com" required className="bg-background" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="mobile">Mobile Number *</Label>
-                  <Input id="mobile" type="tel" placeholder="+91 0000000000" required className="bg-background" />
+                  <Input id="mobile" name="mobile" type="tel" placeholder="+91 0000000000" required className="bg-background" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="company">Company Name</Label>
-                  <Input id="company" placeholder="Acme Inc." className="bg-background" />
+                  <Input id="company" name="company" placeholder="Acme Inc." className="bg-background" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="website">Website (Optional)</Label>
-                  <Input id="website" type="url" placeholder="https://example.com" className="bg-background" />
+                  <Input id="website" name="website" type="url" placeholder="https://example.com" className="bg-background" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="businessType">Business Type *</Label>
-                  <select id="businessType" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                  <select id="businessType" name="businessType" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                     <option value="" disabled selected>Select Business Type</option>
                     {["Startup", "Small Business (SME)", "Enterprise / Corporate", "E-commerce Business", "Healthcare", "Real Estate", "Education & Institute", "Restaurant & Café", "Hotel & Tourism", "Construction", "Manufacturing / Industrial", "Retail Store", "Fashion & Apparel", "Beauty & Salon", "Fitness & Gym", "Finance & Insurance", "Automobile", "Agriculture", "IT & Software", "NGO", "Government", "Other"].map(type => (
                       <option key={type} value={type}>{type}</option>
@@ -77,7 +145,7 @@ export default function Contact() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="budget">Estimated Budget *</Label>
-                  <select id="budget" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                  <select id="budget" name="budget" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                     <option value="" disabled selected>Select a range</option>
                     <option value="Under ₹20,000">Under ₹20,000</option>
                     <option value="₹20,000 - ₹25,000">₹20,000 - ₹25,000</option>
@@ -90,7 +158,7 @@ export default function Contact() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="timeline">Project Timeline *</Label>
-                  <select id="timeline" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                  <select id="timeline" name="timeline" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                     <option value="" disabled selected>Select timeline</option>
                     <option value="Immediately">Immediately</option>
                     <option value="Within 15 Days">Within 15 Days</option>
@@ -141,17 +209,19 @@ export default function Contact() {
                 <Label htmlFor="details">Project Details *</Label>
                 <Textarea 
                   id="details" 
+                  name="details"
                   placeholder="Tell us about your project goals, any specific requirements, or challenges you're facing..." 
                   className="min-h-[120px] bg-background"
                   required 
                 />
               </div>
 
-              <Button type="submit" size="lg" className="w-full bg-brand-plum hover:bg-brand-plum/90 dark:bg-brand-cream dark:text-brand-plum dark:hover:bg-brand-cream/90 text-white font-bold h-14 text-base rounded-full">
-                Submit Enquiry
+              <Button disabled={loading} type="submit" size="lg" className="w-full bg-brand-plum hover:bg-brand-plum/90 dark:bg-brand-cream dark:text-brand-plum dark:hover:bg-brand-cream/90 text-white font-bold h-14 text-base rounded-full">
+                {loading ? "Sending..." : "Submit Enquiry"}
               </Button>
               
             </form>
+            )}
           </motion.div>
 
           {/* Info Side */}
@@ -173,7 +243,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-bold text-white mb-1">Our Office</h4>
-                    <p className="leading-relaxed">Office no.23, 3rd Floor, Aston Plaza,<br/>Narhe Ambegaon Rd, above Star Bazaar,<br/>Ambegaon Budruk, Pune, Maharashtra 411046</p>
+                    <p className="leading-relaxed whitespace-pre-line">{settings.contactAddress || "Office no.23, 3rd Floor, Aston Plaza, Narhe Ambegaon Rd, above Star Bazaar, Ambegaon Budruk, Pune, Maharashtra 411046"}</p>
                   </div>
                 </div>
                 
@@ -183,7 +253,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-bold text-white mb-1">Email Us</h4>
-                    <p><a href="mailto:Digibrandzitsolutions@gmail.com" className="hover:text-brand-rose transition-colors break-all">Digibrandzitsolutions@gmail.com</a></p>
+                    <p><a href={`mailto:${settings.contactEmail || "Digibrandzitsolutions@gmail.com"}`} className="hover:text-brand-rose transition-colors break-all">{settings.contactEmail || "Digibrandzitsolutions@gmail.com"}</a></p>
                   </div>
                 </div>
                 
@@ -193,7 +263,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-bold text-white mb-1">Call Us</h4>
-                    <p><a href="tel:+918483082699" className="hover:text-brand-rose transition-colors">+91 8483082699</a></p>
+                    <p><a href={`tel:${settings.contactPhone || "+918483082699"}`} className="hover:text-brand-rose transition-colors">{settings.contactPhone || "+91 8483082699"}</a></p>
                   </div>
                 </div>
 

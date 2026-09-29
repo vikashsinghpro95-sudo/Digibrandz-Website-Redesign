@@ -1,12 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate, useLocation, Link as RouterLink } from 'react-router-dom'
 import { scroller } from 'react-scroll'
-import { FaInstagram, FaFacebook, FaLinkedin, FaYoutube, FaGithub } from 'react-icons/fa'
+import { FaInstagram, FaFacebook, FaLinkedin, FaYoutube, FaGithub, FaTwitter } from 'react-icons/fa'
+import { useSettings } from '../contexts/SettingsContext'
+import { API_BASE } from '../lib/api'
 
 export default function Footer() {
+  const settings = useSettings() || {}
   const currentYear = new Date().getFullYear()
   const navigate = useNavigate()
   const location = useLocation()
+  
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState(null)
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+    setStatus('loading');
+    try {
+      const response = await fetch(`${API_BASE}/api/newsletter.php`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      if (response.ok) {
+        setStatus('success');
+        setEmail('');
+        setTimeout(() => setStatus(null), 3000);
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus('error');
+    }
+  }
 
   const handleNavClick = (to) => {
     if (location.pathname !== '/') {
@@ -46,30 +75,36 @@ export default function Footer() {
               DigiBrandz
             </h3>
             <p className="mb-8 text-base text-brand-cream/60 leading-relaxed font-medium">
-              Your digital growth and technology partner based in Pune, India. We architect high-performance digital ecosystems that turn attention into revenue.
+              {settings.footerText || "Your digital growth and technology partner based in Pune, India. We architect high-performance digital ecosystems that turn attention into revenue."}
             </p>
             
             {/* Newsletter */}
             <div className="mb-10">
               <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4">Subscribe to our Insights</h4>
-              <div className="relative group/input">
+              <form onSubmit={handleSubscribe} className="relative group/input">
                 <input 
                   type="email" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="hello@example.com" 
+                  required
+                  disabled={status === 'loading'}
                   className="w-full bg-white/5 border border-white/10 rounded-full px-6 py-4 text-sm focus:outline-none focus:border-brand-rose/50 focus:bg-white/10 transition-all text-white placeholder:text-white/30"
                 />
-                <button className="absolute right-2 top-2 bottom-2 bg-brand-rose hover:bg-brand-rose/80 text-white px-6 rounded-full text-sm font-bold transition-colors shadow-md">
-                  Subscribe
+                <button type="submit" disabled={status === 'loading'} className="absolute right-2 top-2 bottom-2 bg-brand-rose hover:bg-brand-rose/80 disabled:opacity-50 text-white px-6 rounded-full text-sm font-bold transition-colors shadow-md">
+                  {status === 'loading' ? '...' : status === 'success' ? 'Done!' : 'Subscribe'}
                 </button>
-              </div>
+              </form>
+              {status === 'error' && <p className="text-red-400 text-xs mt-2">Subscription failed. Try again.</p>}
             </div>
 
             <div className="flex space-x-3">
               {[
-                { icon: FaInstagram, href: "https://www.instagram.com/digibrandzofficial?stkn=MWx4YjcwZ3hvc25weA==" },
-                { icon: FaFacebook, href: "https://www.facebook.com/share/19VDexiDZh/" },
-                { icon: FaLinkedin, href: "https://www.linkedin.com/company/digibrandz-it-solutions-pvt-ltd/" },
-              ].map((social, idx) => (
+                { icon: FaInstagram, href: settings.socialInstagram || "https://www.instagram.com/digibrandzofficial?stkn=MWx4YjcwZ3hvc25weA==" },
+                { icon: FaFacebook, href: settings.socialFacebook || "https://www.facebook.com/share/19VDexiDZh/" },
+                { icon: FaLinkedin, href: settings.socialLinkedIn || "https://www.linkedin.com/company/digibrandz-it-solutions-pvt-ltd/" },
+                { icon: FaTwitter, href: settings.socialTwitter || "#" }
+              ].filter(s => s.href && s.href !== "#").map((social, idx) => (
                 <a key={idx} href={social.href} target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-rose hover:text-white hover:border-brand-rose transition-all duration-300 hover:-translate-y-1 group">
                   <social.icon size={18} className="text-brand-cream/70 group-hover:text-white transition-colors" />
                 </a>
@@ -118,15 +153,15 @@ export default function Footer() {
             <ul className="space-y-6 text-base font-medium">
               <li className="flex items-start gap-4 text-brand-cream/60">
                 <div className="mt-1 w-8 h-8 shrink-0 rounded-full bg-white/5 flex items-center justify-center border border-white/10 text-white"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
-                <span>Office No. 323, Aston Plaza, Ambegaon Budruk, Pune, Maharashtra – 411046, India.</span>
+                <span>{settings.contactAddress || "Office No. 323, Aston Plaza, Ambegaon Budruk, Pune, Maharashtra – 411046, India."}</span>
               </li>
               <li className="flex items-start gap-4 text-brand-cream/60">
                 <div className="mt-1 w-8 h-8 shrink-0 rounded-full bg-white/5 flex items-center justify-center border border-white/10 text-white"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
-                <a href="mailto:Digibrandzitsolutions@gmail.com" className="hover:text-brand-rose transition-colors break-all">Digibrandzitsolutions@gmail.com</a>
+                <a href={`mailto:${settings.contactEmail || "Digibrandzitsolutions@gmail.com"}`} className="hover:text-brand-rose transition-colors break-all">{settings.contactEmail || "Digibrandzitsolutions@gmail.com"}</a>
               </li>
               <li className="flex items-start gap-4 text-brand-cream/60">
                 <div className="mt-1 w-8 h-8 shrink-0 rounded-full bg-white/5 flex items-center justify-center border border-white/10 text-white"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-                <a href="tel:+918483082699" className="hover:text-brand-rose transition-colors">+91 8483082699</a>
+                <a href={`tel:${settings.contactPhone || "+918483082699"}`} className="hover:text-brand-rose transition-colors">{settings.contactPhone || "+91 8483082699"}</a>
               </li>
             </ul>
           </div>

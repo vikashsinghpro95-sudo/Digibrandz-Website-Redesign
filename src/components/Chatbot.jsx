@@ -1,16 +1,30 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaMessage, FaXmark, FaPaperPlane, FaRobot, FaUser } from 'react-icons/fa6';
+import { FaMessage, FaXmark, FaPaperPlane, FaRobot, FaUser, FaPhone, FaEnvelope, FaWhatsapp } from 'react-icons/fa6';
+import { turso } from '../lib/turso';
+import { useSettings } from '../contexts/SettingsContext';
 
 export default function Chatbot() {
+  const { settings } = useSettings();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     { role: 'assistant', content: 'Hi there! I am the DigiBrandz AI Assistant. How can I help you scale your business today?' }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [sessionId] = useState(() => Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15));
   
   const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    if (messages.length > 1) {
+      turso.execute({
+        sql: `INSERT INTO chat_sessions (session_id, messages, last_updated) VALUES (?, ?, CURRENT_TIMESTAMP) 
+              ON CONFLICT(session_id) DO UPDATE SET messages = excluded.messages, last_updated = CURRENT_TIMESTAMP`,
+        args: [sessionId, JSON.stringify(messages)]
+      }).catch(err => console.error('Failed to log chat:', err));
+    }
+  }, [messages, sessionId]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -32,23 +46,36 @@ export default function Chatbot() {
     setMessages(updatedMessages);
     setInputValue('');
     setIsLoading(true);
-
     try {
-      const response = await fetch('http://localhost:3001/api/chat', {
+      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: updatedMessages.map(m => ({ role: m.role, content: m.content })) })
+        headers: {
+          'Authorization': `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
+          'Content-Type': 'application/json',
+          'HTTP-Referer': window.location.href,
+          'X-Title': 'DigiBrandz Chatbot'
+        },
+        body: JSON.stringify({
+          model: 'openrouter/free',
+          messages: [
+            { 
+              role: 'system', 
+              content: 'You are a helpful customer support AI for DigiBrandz, a premium digital agency. You help solve user queries and answer questions about our web development, mobile apps, digital marketing, AI, and SEO services. Be polite, concise, and professional. CRITICAL INSTRUCTIONS: 1) NEVER provide any pricing information. 2) Format your responses clearly using paragraphs (separated by double newlines) and bullet points. Do not output unformatted walls of text. 3) If the user wants to contact us, direct them to use the quick contact buttons at the bottom of the chat.' 
+            },
+            ...updatedMessages
+          ]
+        })
       });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
       const data = await response.json();
-      setMessages(prev => [...prev, { role: 'assistant', content: data.reply }]);
+      if (data.choices && data.choices.length > 0) {
+        setMessages(prev => [...prev, { role: 'assistant', content: data.choices[0].message.content }]);
+      } else {
+        throw new Error('No response from AI');
+      }
     } catch (error) {
-      console.error('Error fetching chat response:', error);
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, I am having trouble connecting right now. Please try again later.' }]);
+      console.error(error);
+      setMessages(prev => [...prev, { role: 'assistant', content: 'I apologize, but I am having trouble connecting right now. Please try again later or contact our team directly.' }]);
     } finally {
       setIsLoading(false);
     }
@@ -107,7 +134,12 @@ export default function Chatbot() {
                         ? 'bg-brand-rose text-white rounded-br-none shadow-md shadow-brand-rose/10' 
                         : 'bg-muted/50 border border-border rounded-bl-none'
                     }`}>
-                      {msg.content}
+                      {msg.content.split('\n').map((line, i) => (
+                        <React.Fragment key={i}>
+                          {line}
+                          {i !== msg.content.split('\n').length - 1 && <br />}
+                        </React.Fragment>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -130,8 +162,24 @@ export default function Chatbot() {
               <div ref={messagesEndRef} />
             </div>
 
+            {/* Quick Contact Buttons */}
+            <div className="px-4 pb-2 pt-3 bg-background/50 border-t border-border/50 flex items-center justify-around gap-2">
+              <a href={`tel:${settings?.contactPhone || '+918483082699'}`} className="flex-1 flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-muted/50 hover:bg-brand-rose hover:text-white transition-colors text-xs font-medium text-muted-foreground gap-1">
+                <FaPhone size={14} />
+                Call
+              </a>
+              <a href={`mailto:${settings?.contactEmail || 'Digibrandzitsolutions@gmail.com'}`} className="flex-1 flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-muted/50 hover:bg-brand-rose hover:text-white transition-colors text-xs font-medium text-muted-foreground gap-1">
+                <FaEnvelope size={14} />
+                Email
+              </a>
+              <a href={`https://wa.me/${(settings?.contactPhone || '+918483082699').replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="flex-1 flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-muted/50 hover:bg-green-500 hover:text-white transition-colors text-xs font-medium text-muted-foreground gap-1">
+                <FaWhatsapp size={14} />
+                WhatsApp
+              </a>
+            </div>
+
             {/* Chat Input */}
-            <div className="p-4 border-t border-border/50 bg-background/50">
+            <div className="p-4 pt-2 bg-background/50">
               <form onSubmit={handleSubmit} className="flex items-center gap-2 relative">
                 <input
                   type="text"

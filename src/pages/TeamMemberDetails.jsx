@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams, Navigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { TEAM_MEMBERS } from '../data/team'
+import { useContent } from '../contexts/ContentContext'
 import PageHeader from '../components/PageHeader'
 import LeadGenCTA from '../components/LeadGenCTA'
 import { FaLinkedin, FaTwitter, FaGithub, FaCircleCheck } from 'react-icons/fa6'
@@ -9,7 +9,8 @@ import { motion } from 'framer-motion'
 
 export default function TeamMemberDetails() {
   const { id } = useParams()
-  const member = TEAM_MEMBERS.find(m => m.id === id)
+  const { team } = useContent()
+  const member = team.find(m => String(m.id) === String(id) || m.slug === id)
 
   if (!member) {
     return <Navigate to="/team" replace />
@@ -64,9 +65,16 @@ export default function TeamMemberDetails() {
                 animate={{ opacity: 1, scale: 1 }}
                 className={`h-48 w-48 md:h-64 md:w-64 rounded-full bg-gradient-to-br ${member.color} relative overflow-hidden flex items-center justify-center mb-8 shadow-xl`}
               >
-                <span className="text-7xl md:text-8xl font-display font-bold text-white/90 drop-shadow-lg">
-                  {member.initials}
-                </span>
+                {member.image ? (
+                  <img src={member.image} alt={member.name} className="absolute inset-0 w-full h-full object-cover" />
+                ) : (
+                  <>
+                    <div className="absolute inset-0 bg-black/10" />
+                    <span className="text-7xl md:text-8xl font-display font-bold text-white/90 drop-shadow-lg">
+                      {member.initials}
+                    </span>
+                  </>
+                )}
               </motion.div>
               
               <div className="flex gap-4">

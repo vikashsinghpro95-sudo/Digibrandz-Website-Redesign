@@ -3,10 +3,11 @@ import { motion } from 'framer-motion'
 import { FaLinkedin, FaTwitter, FaEnvelope, FaArrowRight } from 'react-icons/fa6'
 import { Button } from '../components/ui/button'
 
-import { TEAM_MEMBERS } from '../data/team'
+import { useContent } from '../contexts/ContentContext'
 import { Link } from 'react-router-dom'
 
 export default function Team() {
+  const { team } = useContent()
   return (
     <div className="pt-24 pb-20 min-h-screen bg-background">
       
@@ -51,7 +52,7 @@ export default function Team() {
       <section className="py-20 bg-muted/30 border-y border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {TEAM_MEMBERS.map((member, i) => (
+            {team.map((member, i) => (
               <Link key={i} to={`/team/${member.id}`} className="block">
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
@@ -62,10 +63,16 @@ export default function Team() {
                 >
                   {/* Circular Avatar */}
                   <div className={`h-40 w-40 rounded-full bg-gradient-to-br ${member.color} relative overflow-hidden flex items-center justify-center mb-6 shadow-lg group-hover:scale-105 transition-transform duration-500`}>
-                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
-                    <span className="text-5xl font-display font-bold text-white/90 drop-shadow-md">
-                      {member.initials}
-                    </span>
+                    {member.image ? (
+                      <img src={member.image} alt={member.name} className="absolute inset-0 w-full h-full object-cover" />
+                    ) : (
+                      <>
+                        <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
+                        <span className="text-5xl font-display font-bold text-white/90 drop-shadow-md">
+                          {member.initials}
+                        </span>
+                      </>
+                    )}
                   </div>
                   
                   <h3 className="font-display font-bold text-2xl mb-1 text-foreground group-hover:text-brand-rose transition-colors">{member.name}</h3>
@@ -76,14 +83,14 @@ export default function Team() {
                   
                   <div className="flex gap-4 mt-auto">
                     {member.socials?.linkedin && (
-                      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-brand-rose hover:text-white transition-colors">
+                      <a href={member.socials.linkedin} target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-brand-rose hover:text-white transition-colors">
                         <FaLinkedin size={18} />
-                      </div>
+                      </a>
                     )}
                     {member.socials?.twitter && (
-                      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-brand-rose hover:text-white transition-colors">
+                      <a href={member.socials.twitter} target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-brand-rose hover:text-white transition-colors">
                         <FaTwitter size={18} />
-                      </div>
+                      </a>
                     )}
                     <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-brand-rose hover:text-white transition-colors">
                       <FaArrowRight size={18} />
@@ -109,9 +116,11 @@ export default function Team() {
             <p className="text-white/70 text-lg mb-10 max-w-2xl mx-auto relative z-10">
               We're always looking for brilliant minds to help us build the future of digital experiences. Explore our open roles.
             </p>
-            <Button size="lg" className="bg-brand-rose hover:bg-white hover:text-brand-plum text-white rounded-full px-10 py-6 text-lg font-bold shadow-xl transition-all hover:-translate-y-1 relative z-10" onClick={() => window.location.href = '/careers'}>
+            <Button asChild size="lg" className="bg-brand-rose hover:bg-white hover:text-brand-plum text-white rounded-full px-10 py-6 text-lg font-bold shadow-xl transition-all hover:-translate-y-1 relative z-10">
+              <Link to="/careers">
               View Open Positions
               <FaArrowRight className="ml-2" />
+              </Link>
             </Button>
           </div>
         </div>

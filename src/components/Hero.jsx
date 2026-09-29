@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import { generateSeoReport } from '../lib/seoReport'
 import { Typewriter } from 'react-simple-typewriter'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { turso } from '../lib/turso'
+import { useSettings } from '../contexts/SettingsContext'
 import { Button } from './ui/button'
 import { 
   FaArrowRight, FaSpinner, FaFilePdf, FaCode, FaLaptopCode, FaBullhorn, FaPenNib, FaGears, FaRobot,
   FaShareNodes, FaGoogle, FaMagnifyingGlass, FaMapLocationDot, FaHouseChimney, FaCartShopping, FaChartLine, FaVideo, FaUserGroup, FaWandMagicSparkles, FaMessage, FaCamera
 } from 'react-icons/fa6'
+import { API_BASE } from '../lib/api'
 
 const ICON_URLS = [
   "/icons/airtable.svg", "/icons/anthropic.svg", "/icons/asana.svg", "/icons/brevo.svg",
@@ -48,36 +52,36 @@ const HERO_SERVICES = [
 ];
 
 const FACTS = [
-  "अच्छा Content लोगों को रोकता है",
-  "सही SEO लगातार Traffic लाता है",
-  "Data देखकर बेहतर फैसले होते हैं",
-  "Social Media से Brand मजबूत होता है",
-  "सही Ads जल्दी Results दिखाते हैं",
-  "Videos ज्यादा लोगों का ध्यान खींचते हैं",
-  "भरोसा बढ़े तो Sales बढ़ती हैं",
-  "लगातार काम करने से Growth आती है",
-  "सही Audience तक पहुँचना जरूरी है",
-  "सही CTA लोगों को Action लेने देता है",
-  "Email Marketing पुराने Customers जोड़ता है",
-  "Retargeting interested Customers वापस लाती है",
-  "Analytics बताता है क्या काम कर रहा है",
-  "सही Keywords Search Traffic बढ़ाते हैं",
-  "मजबूत Branding लोगों को याद रहती है",
-  "साफ Code समझना और बदलना आसान होता है",
-  "Testing से Bugs समय पर पकड़ में आते हैं",
-  "Git से Code Changes सुरक्षित रहते हैं",
-  "अच्छी Documentation Team का समय बचाती है",
-  "Security को शुरुआत से ध्यान में रखना चाहिए",
-  "छोटे Functions Code को समझना आसान बनाते हैं",
-  "Reusable Code बार-बार मेहनत बचाता है",
-  "APIs अलग-अलग Systems को जोड़ती हैं",
-  "Database Application का Data संभालता है",
-  "Debugging से असली Problem पता चलती है",
-  "Automation बार-बार के काम को आसान बनाता है",
-  "Version Control पुराने Changes वापस लाता है",
-  "अच्छा UI Application इस्तेमाल करना आसान बनाता है",
-  "Fast Performance User Experience बेहतर करती है",
-  "AI अब Software Development का तरीका बदल रहा है"
+  "Great Content Keeps People Engaged",
+  "Right SEO Brings Consistent Traffic",
+  "Data Leads to Better Decisions",
+  "Social Media Strengthens Your Brand",
+  "Effective Ads Show Quick Results",
+  "Videos Grab More Attention",
+  "Building Trust Increases Sales",
+  "Consistency Drives Growth",
+  "Reaching the Right Audience is Key",
+  "Clear CTAs Encourage Action",
+  "Email Marketing Retains Customers",
+  "Retargeting Brings Back Interest",
+  "Analytics Shows What Works",
+  "Right Keywords Increase Search Traffic",
+  "Strong Branding is Memorable",
+  "Clean Code is Easy to Understand",
+  "Testing Catches Bugs Early",
+  "Git Keeps Code Changes Safe",
+  "Good Documentation Saves Time",
+  "Security Should Be Built-In",
+  "Small Functions Simplify Code",
+  "Reusable Code Saves Effort",
+  "APIs Connect Different Systems",
+  "Databases Secure Application Data",
+  "Debugging Finds the Root Cause",
+  "Automation Simplifies Repetitive Tasks",
+  "Version Control Recovers Old Changes",
+  "Good UI Makes Apps Easy to Use",
+  "Fast Performance Improves UX",
+  "AI is Transforming Software Development"
 ];
 
 let lastFactIndex = 1;
@@ -102,12 +106,12 @@ const BackgroundIcons = () => {
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none flex items-center justify-center bg-background">
        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-[0.03] dark:opacity-[0.05]" />
        
-       <div className="absolute inset-0 z-0 hidden md:grid grid-cols-3 sm:grid-cols-7 md:grid-cols-9 lg:grid-cols-12 gap-8 px-4">
-          {Array.from({ length: 12 }).map((_, colIndex) => {
+       <div className="absolute inset-0 z-0 hidden md:grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-8 px-4">
+          {Array.from({ length: 6 }).map((_, colIndex) => {
              const isEven = colIndex % 2 === 0;
              const startIdx = (colIndex * 13) % ICON_URLS.length;
-             // Reduced from 30 to 15 to halve DOM nodes while still spanning the entire screen
-             const columnIcons = Array.from({ length: 15 }).map((_, i) => ICON_URLS[(startIdx + i) % ICON_URLS.length]);
+             // Reduced from 30 to 10 to halve DOM nodes while still spanning the entire screen
+             const columnIcons = Array.from({ length: 10 }).map((_, i) => ICON_URLS[(startIdx + i) % ICON_URLS.length]);
              
              return (
                <div key={colIndex} className={`col-span-1 justify-center items-start overflow-visible ${getColClasses(colIndex)}`}>
@@ -142,6 +146,8 @@ const BackgroundIcons = () => {
 }
 
 export default function Hero() {
+  const settings = useSettings();
+  const prefersReducedMotion = useReducedMotion();
   const getDynamicFontSize = (text) => {
     const len = text.length;
     if (len > 35) return "text-[20px] sm:text-[28px] md:text-[34px] lg:text-[45px]";
@@ -157,6 +163,7 @@ export default function Hero() {
   const [fact2, setFact2] = useState(FACTS[1]);
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
     const interval = setInterval(() => {
       setRotation((prev) => {
         const nextRot = prev + 90;
@@ -173,7 +180,7 @@ export default function Hero() {
       });
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [prefersReducedMotion]);
 
   const handleAudit = async (e) => {
     e.preventDefault();
@@ -183,27 +190,16 @@ export default function Hero() {
     setError(null);
     
     try {
-      // Use relative path to hit the new PHP script in the public/api folder
-      const apiUrl = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5173' : '');
-      const response = await fetch(`${apiUrl}/api/audit.php`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url })
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to audit website. Check URL or try again later.');
+      const reportJsonString = await generateSeoReport(url, settings || {});
+      
+      try {
+        await turso.execute({
+          sql: 'INSERT INTO seo_audits (website_url, report_content) VALUES (?, ?)',
+          args: [url, reportJsonString]
+        });
+      } catch (e) {
+        console.error('Failed to log audit:', e);
       }
-
-      const blob = await response.blob();
-      const downloadUrl = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = downloadUrl;
-      a.download = `SEO_Audit_${new URL(url.startsWith('http') ? url : `https://${url}`).hostname || 'Report'}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      window.URL.revokeObjectURL(downloadUrl);
       
     } catch (err) {
       setError(err.message);
@@ -215,7 +211,7 @@ export default function Hero() {
   return (
     <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden pt-24 pb-16">
       
-      <BackgroundIcons />
+      {!prefersReducedMotion && <BackgroundIcons />}
 
       <div className="container relative z-10 px-4 md:px-6 mx-auto flex flex-col items-center text-center">
         
@@ -299,18 +295,22 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-medium text-foreground mb-6 max-w-4xl min-h-[80px] sm:min-h-[60px] leading-tight px-2"
           >
-            We Build Digital Experiences That Grow{' '}
+            {settings?.heroTitle || 'We Build Digital Experiences That Grow'}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-rose to-brand-blush font-bold inline-block w-[7em] text-center relative px-1 sm:px-2">
               <span className="absolute inset-0 bg-brand-rose/10 dark:bg-brand-rose/20 rounded-lg -rotate-1 scale-105 pointer-events-none" />
-              <Typewriter
-                words={['Websites.', 'Software.', 'Marketing.', 'Automation.']}
-                loop={0}
-                cursor
-                cursorStyle="_"
-                typeSpeed={70}
-                deleteSpeed={40}
-                delaySpeed={1500}
-              />
+              {!prefersReducedMotion ? (
+                <Typewriter
+                  words={['Websites.', 'Software.', 'Marketing.', 'Automation.']}
+                  loop={0}
+                  cursor
+                  cursorStyle="_"
+                  typeSpeed={70}
+                  deleteSpeed={40}
+                  delaySpeed={1500}
+                />
+              ) : (
+                'Websites.'
+              )}
             </span>
           </motion.div>
 
@@ -320,7 +320,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             className="text-lg sm:text-xl text-muted-foreground max-w-3xl mb-12 leading-relaxed px-4"
           >
-            From high-performance websites and custom software to result-driven digital marketing campaigns, we help businesses <strong className="font-semibold text-foreground">build, launch, and scale</strong> their digital presence.
+            {settings?.heroSubtitle || "From high-performance websites and custom software to result-driven digital marketing campaigns, we help businesses build, launch, and scale their digital presence."}
           </motion.p>
         </div>
 

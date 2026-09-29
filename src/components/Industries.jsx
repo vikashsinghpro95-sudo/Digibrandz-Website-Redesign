@@ -4,24 +4,28 @@ import { FaGraduationCap, FaStethoscope, FaHouse, FaCartShopping, FaLandmark, Fa
 
 import { Link } from 'react-router-dom'
 
-const INDUSTRIES = [
-  { name: "Education", icon: <FaGraduationCap />, slug: "education" },
-  { name: "Healthcare", icon: <FaStethoscope />, slug: "healthcare" },
-  { name: "Real Estate", icon: <FaHouse />, slug: "real-estate" },
-  { name: "E-Commerce", icon: <FaCartShopping />, slug: "e-commerce" },
-  { name: "Finance", icon: <FaLandmark />, slug: "finance" },
-  { name: "Manufacturing", icon: <FaIndustry />, slug: "manufacturing" },
-  { name: "Logistics", icon: <FaTruck />, slug: "logistics" },
-  { name: "Restaurants", icon: <FaUtensils />, slug: "restaurants" },
-  { name: "Travel & Tourism", icon: <FaPlane />, slug: "travel-tourism" },
-  { name: "Automotive", icon: <FaCar />, slug: "automotive" },
-  { name: "Professional Services", icon: <FaBriefcase />, slug: "professional-services" },
-  { name: "Startups", icon: <FaRocket />, slug: "startups" },
-  { name: "Retail", icon: <FaTag />, slug: "retail" },
-  { name: "Entertainment", icon: <FaTv />, slug: "entertainment" },
-]
+import { useContent } from '../contexts/ContentContext'
+
+const ICON_MAP = {
+  "education": <FaGraduationCap />,
+  "healthcare": <FaStethoscope />,
+  "real-estate": <FaHouse />,
+  "e-commerce": <FaCartShopping />,
+  "finance": <FaLandmark />,
+  "manufacturing": <FaIndustry />,
+  "logistics": <FaTruck />,
+  "restaurants": <FaUtensils />,
+  "travel-tourism": <FaPlane />,
+  "automotive": <FaCar />,
+  "professional-services": <FaBriefcase />,
+  "startups": <FaRocket />,
+  "retail": <FaTag />,
+  "entertainment": <FaTv />,
+}
 
 export default function Industries() {
+  const { industries } = useContent();
+  
   return (
     <section id="industries" className="py-24 bg-background">
       <div className="container mx-auto px-4 md:px-6">
@@ -47,19 +51,19 @@ export default function Industries() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
-          {INDUSTRIES.map((ind, idx) => (
-            <Link key={idx} to={`/industries/${ind.slug}`} className="block h-full">
+          {industries.map((ind, idx) => (
+            <Link key={idx} to={`/industries/${ind.id}`} className="block h-full">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                transition={{ duration: 0.4, delay: (idx % 10) * 0.05 }}
                 className="flex flex-col items-center text-center gap-3 group cursor-pointer h-full"
               >
                 <div className="w-16 h-16 rounded-2xl bg-card border border-border flex items-center justify-center text-brand-plum/50 dark:text-brand-cream/50 group-hover:bg-brand-rose group-hover:border-brand-rose group-hover:text-white group-hover:scale-110 transition-all duration-300 shadow-sm">
-                  {React.cloneElement(ind.icon, { size: 28 })}
+                  {ICON_MAP[ind.id] ? React.cloneElement(ICON_MAP[ind.id], { size: 28 }) : <FaBriefcase size={28} />}
                 </div>
-                <span className="font-medium text-sm text-foreground group-hover:text-brand-rose transition-colors">{ind.name}</span>
+                <span className="font-medium text-sm text-foreground group-hover:text-brand-rose transition-colors">{ind.title}</span>
               </motion.div>
             </Link>
           ))}

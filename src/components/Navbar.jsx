@@ -6,19 +6,7 @@ import { scroller, Link as ScrollLink } from 'react-scroll'
 import { useTheme } from './ThemeProvider'
 import { Button } from './ui/button'
 import MobileDrawer from './MobileDrawer'
-
-const NAV_LINKS = [
-  { name: 'Home', to: '/', isRoute: true },
-  { name: 'About', to: '/about', isRoute: true },
-  { name: 'Services', to: '/services', isRoute: true },
-  { name: 'Solutions', to: '/solutions', isRoute: true },
-  { name: 'Industries', to: '/industries', isRoute: true },
-  { name: 'Portfolio', to: '/portfolio', isRoute: true },
-  { name: 'Process', to: '/process', isRoute: true },
-  { name: 'Blog', to: '/blog', isRoute: true },
-  { name: 'Team', to: '/team', isRoute: true },
-  { name: 'Careers', to: '/careers', isRoute: true },
-]
+import { useContent } from '../contexts/ContentContext'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -26,6 +14,7 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme()
   const navigate = useNavigate()
   const location = useLocation()
+  const { navLinks } = useContent()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,13 +78,13 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-          {NAV_LINKS.map((link) => (
+        <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
+          {navLinks.map((link) => (
             link.isRoute ? (
               <RouterLink
                 key={link.name}
                 to={link.to}
-                className={`text-sm font-medium hover:text-brand-rose transition-colors cursor-pointer ${location.pathname === link.to ? 'text-brand-rose' : 'text-foreground/80'}`}
+                className={`text-xs xl:text-sm font-medium hover:text-brand-rose transition-colors cursor-pointer whitespace-nowrap ${location.pathname === link.to ? 'text-brand-rose' : 'text-foreground/80'}`}
               >
                 {link.name}
               </RouterLink>
@@ -141,11 +130,11 @@ export default function Navbar() {
       <div className="fixed bottom-6 left-0 right-0 mx-auto z-50 flex lg:hidden items-center justify-between w-[95%] max-w-[500px] bg-brand-darkPlum/95 backdrop-blur-2xl border border-white/10 rounded-2xl px-4 py-3 shadow-[0_20px_40px_rgba(0,0,0,0.4)] shadow-brand-rose/10">
         
         {[
+          { id: '/', icon: FaHouse, label: 'Home' },
           { id: '/about', icon: FaCircleInfo, label: 'About' },
           { id: '/services', icon: FaLayerGroup, label: 'Services' },
-          { id: '/solutions', icon: FaWandMagicSparkles, label: 'Solutions' },
           { id: '/industries', icon: FaBuilding, label: 'Industries' },
-          { id: '/portfolio', icon: FaBriefcase, label: 'Portfolio' },
+          { id: '/portfolio', icon: FaBriefcase, label: 'Work' },
         ].map((item) => {
           const isActive = location.pathname === item.id;
           return (

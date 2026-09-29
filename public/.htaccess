@@ -2,15 +2,54 @@
   RewriteEngine On
   RewriteBase /
 
+  # Block anything under private/
+  RewriteRule ^private(/|$) - [F,L]
+
+  # Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Security Headers
+  <IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    # Content-Security-Policy (Basic, but allows scripts from CDN which we use for Quill)
+    Header set Content-Security-Policy "default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:;"
+  </IfModule>
+
+  # Remove trailing slashes (except for directories)
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+  # Route API requests to index.php if file doesn't exist
+  RewriteCond %{REQUEST_URI} ^/api/ [NC]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^api/(.*)$ /api/index.php?request=$1 [QSA,L]
+
+  # Do NOT rewrite to React if it's hitting the API or uploads directory
+  RewriteCond %{REQUEST_URI} !^/api/ [NC]
+  RewriteCond %{REQUEST_URI} !^/uploads/ [NC]
+
+  # Route sitemap and robots to PHP handlers
+  RewriteRule ^sitemap\.xml$ /api/sitemap.php [L]
+  RewriteRule ^robots\.txt$ /api/robots.php [L]
+
   # Let Apache serve actual files (like API scripts, images, etc.)
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
 
-  # Rewrite all other requests to index.html to allow React Router to handle it
-  RewriteRule ^ index.html [L]
+  # Route frontend through SPA entry PHP (handles 301s before serving React)
+  RewriteRule ^ /api/spa_entry.php [L]
 
   # Block access to .env files for security
   <Files ".env">
     Require all denied
   </Files>
+
+  # Block access to sqlite databases
+  <FilesMatch "\.(sqlite|db)$">
+    Require all denied
+  </FilesMatch>
 </IfModule>

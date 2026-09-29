@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaRegCalendar } from 'react-icons/fa6';
+import { API_BASE } from '../lib/api';
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -11,13 +12,13 @@ export default function BlogPost() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/blogs/${slug}`)
+    fetch(`${API_BASE}/api/blogs.php?slug=${slug}`)
       .then(res => {
         if (!res.ok) throw new Error('Blog not found');
         return res.json();
       })
       .then(data => {
-        setBlog(data.blog);
+        setBlog(data);
         setIsLoading(false);
       })
       .catch(err => {

@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaArrowRight, FaXmark, FaCheck } from 'react-icons/fa6'
 import { Button } from './ui/button'
-import { CASE_STUDIES } from '../data/content'
+import { useContent } from '../contexts/ContentContext'
 import { Link } from 'react-router-dom'
 
 export default function CaseStudies({ limit }) {
   const [selectedStudy, setSelectedStudy] = useState(null)
-  
-  const displayedStudies = limit ? CASE_STUDIES.slice(0, limit) : CASE_STUDIES;
+  const { caseStudies } = useContent()
+  const displayedStudies = limit ? caseStudies.slice(0, limit) : caseStudies
 
   return (
     <section className="py-24 bg-background overflow-hidden relative">
@@ -79,7 +79,7 @@ export default function CaseStudies({ limit }) {
           ))}
         </div>
 
-        {limit && limit < CASE_STUDIES.length && (
+        {limit && limit < caseStudies.length && (
           <div className="flex justify-center mt-8">
             <Link to="/portfolio">
               <Button size="lg" className="bg-brand-rose hover:bg-white hover:text-brand-plum text-white rounded-full px-10 py-6 text-lg font-bold shadow-xl shadow-brand-rose/20 transition-all hover:-translate-y-1">
@@ -163,7 +163,7 @@ export default function CaseStudies({ limit }) {
                   <section>
                     <h4 className="font-bold text-lg text-foreground mb-4 border-l-2 border-brand-rose pl-4">The Challenge</h4>
                     <ul className="space-y-3">
-                      {selectedStudy.challenges.map((challenge, idx) => (
+                      {(selectedStudy.challenges || []).map((challenge, idx) => (
                         <li key={idx} className="flex items-start gap-3 text-muted-foreground leading-relaxed">
                           <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30 shrink-0 mt-2.5" />
                           <span>{challenge}</span>
@@ -176,11 +176,11 @@ export default function CaseStudies({ limit }) {
                   <section>
                     <h4 className="font-bold text-lg text-foreground mb-6 border-l-2 border-brand-rose pl-4">What We Delivered</h4>
                     <div className="space-y-8">
-                      {Object.entries(selectedStudy.whatWeDid).map(([category, actions], idx) => (
+                      {Object.entries(selectedStudy.whatWeDid || {}).map(([category, actions], idx) => (
                         <div key={idx}>
                           <h5 className="font-bold text-foreground mb-3">{category}</h5>
                           <ul className="space-y-3">
-                            {actions.map((action, actionIdx) => (
+                            {(actions || []).map((action, actionIdx) => (
                               <li key={actionIdx} className="flex items-start gap-3 text-muted-foreground">
                                 <FaCheck className="text-brand-rose shrink-0 mt-1" size={14} />
                                 <span className="leading-relaxed">{action}</span>
