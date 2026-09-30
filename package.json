@@ -8,6 +8,7 @@
     "dev:api": "php -S 127.0.0.1:8000 -t public",
     "dev:full": "npm-run-all --parallel dev dev:api",
     "build": "vite build",
+    "start": "node server.js",
     "lint": "oxlint",
     "preview": "vite preview"
   },
@@ -24,6 +25,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.4.0",
     "dompurify": "^3.4.15",
+    "express": "^5.2.1",
     "framer-motion": "^13.2.0",
     "gsap": "^3.15.0",
     "jspdf": "^4.2.1",
