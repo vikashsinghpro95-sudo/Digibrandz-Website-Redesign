@@ -17,7 +17,6 @@ const BlogPost = lazy(() => import('./pages/BlogPost'))
 const About = lazy(() => import('./pages/About'))
 const Services = lazy(() => import('./pages/Services'))
 const ServiceDetails = lazy(() => import('./pages/ServiceDetails'))
-const ConsultationModal = lazy(() => import('./components/ConsultationModal'))
 const Chatbot = lazy(() => import('./components/Chatbot'))
 const Solutions = lazy(() => import('./pages/Solutions'))
 const Industries = lazy(() => import('./pages/Industries'))
@@ -67,7 +66,6 @@ function PublicLayout() {
           <Outlet />
         </Suspense>
         <Suspense fallback={null}>
-          <ConsultationModal />
           <Chatbot />
         </Suspense>
       </main>

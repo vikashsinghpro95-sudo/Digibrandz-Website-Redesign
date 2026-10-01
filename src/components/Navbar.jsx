@@ -59,7 +59,7 @@ export default function Navbar() {
     }
   }
 
-  const handleContactClick = () => { window.dispatchEvent(new CustomEvent('openConsultationModal')); }
+  const handleContactClick = () => { navigate('/contact'); }
 
   return (
     <header

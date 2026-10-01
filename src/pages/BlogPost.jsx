@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaRegCalendar } from 'react-icons/fa6';
-import { API_BASE } from '../lib/api';
+import { fetchAll } from '../lib/turso';
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -12,13 +12,17 @@ export default function BlogPost() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`${API_BASE}/api/blogs.php?slug=${slug}`)
-      .then(res => {
-        if (!res.ok) throw new Error('Blog not found');
-        return res.json();
-      })
+    fetchAll(`SELECT * FROM blogs WHERE slug = '${slug}' COLLATE NOCASE LIMIT 1`)
       .then(data => {
-        setBlog(data);
+        if (!data || data.length === 0) {
+          throw new Error('Blog not found');
+        }
+        const b = data[0];
+        setBlog({
+          ...b,
+          coverImage: b.featured_image,
+          createdAt: b.created_at || b.published_at
+        });
         setIsLoading(false);
       })
       .catch(err => {

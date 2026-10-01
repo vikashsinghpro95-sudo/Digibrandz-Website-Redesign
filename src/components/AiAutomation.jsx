@@ -81,9 +81,11 @@ export default function AiAutomation() {
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
         >
-          <Button size="lg" onClick={() => window.dispatchEvent(new CustomEvent('openConsultationModal'))} className="bg-brand-rose hover:bg-brand-rose/90 text-white rounded-full px-8 shadow-[0_0_30px_rgba(189,85,121,0.4)]">
-            Automate My Business
-          </Button>
+          <Link to="/contact">
+            <Button size="lg" className="bg-brand-rose hover:bg-brand-rose/90 text-white rounded-full px-8 shadow-[0_0_30px_rgba(189,85,121,0.4)]">
+              Automate My Business
+            </Button>
+          </Link>
         </motion.div>
 
       </div>

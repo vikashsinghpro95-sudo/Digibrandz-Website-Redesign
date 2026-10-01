@@ -50,9 +50,11 @@ export default function SoftwareDevelopment() {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              <Button size="lg" onClick={() => window.dispatchEvent(new CustomEvent('openConsultationModal'))} className="bg-brand-plum hover:bg-brand-plum/90 dark:bg-brand-cream dark:text-brand-plum dark:hover:bg-brand-cream/90 text-white rounded-full">
-                Discuss Your Software Idea
-              </Button>
+              <Link to="/contact">
+                <Button size="lg" className="bg-brand-plum hover:bg-brand-plum/90 dark:bg-brand-cream dark:text-brand-plum dark:hover:bg-brand-cream/90 text-white rounded-full">
+                  Discuss Your Software Idea
+                </Button>
+              </Link>
             </motion.div>
           </div>
 

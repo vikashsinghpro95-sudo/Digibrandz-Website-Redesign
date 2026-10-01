@@ -2,17 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaArrowRight, FaRegCalendar } from 'react-icons/fa6';
-import { API_BASE } from '../lib/api';
+import { fetchAll } from '../lib/turso';
 
 export default function BlogList() {
   const [blogs, setBlogs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API_BASE}/api/blogs.php`)
-      .then(res => res.json())
+    fetchAll("SELECT * FROM blogs WHERE status = 'Published' COLLATE NOCASE ORDER BY created_at DESC")
       .then(data => {
-        setBlogs(Array.isArray(data) ? data : (data.blogs || []));
+        // Map the database columns to the frontend expected properties
+        const formattedBlogs = (data || []).map(b => ({
+          ...b,
+          coverImage: b.featured_image,
+          createdAt: b.created_at || b.published_at
+        }));
+        setBlogs(formattedBlogs);
         setIsLoading(false);
       })
       .catch(err => {

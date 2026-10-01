@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from './ui/button'
+import { Link } from 'react-router-dom'
 
 export default function LeadGenCTA() {
     return (
@@ -42,14 +43,16 @@ export default function LeadGenCTA() {
             transition={{ delay: 0.2 }}
             className="flex flex-col sm:flex-row justify-center items-center gap-4"
           >
-            <Button size="lg" onClick={() => window.dispatchEvent(new CustomEvent('openConsultationModal'))} className="bg-brand-cream text-brand-plum hover:bg-white px-8 h-14 text-base font-bold rounded-full shadow-xl shadow-brand-cream/20 transition-all hover:-translate-y-1">
-                
-              Start a Project
-            </Button>
-            <Button size="lg" onClick={() => window.dispatchEvent(new CustomEvent('openConsultationModal'))} variant="outline" className="border-brand-cream/30 text-white bg-white/5 hover:bg-white/20 hover:text-white rounded-full px-10 h-16 text-lg font-bold backdrop-blur-sm transition-transform hover:scale-105 active:scale-95 w-full sm:w-auto">
-              Book a Free Consultation
-            
+            <Link to="/contact">
+              <Button size="lg" className="bg-brand-cream text-brand-plum hover:bg-white px-8 h-14 text-base font-bold rounded-full shadow-xl shadow-brand-cream/20 transition-all hover:-translate-y-1">
+                Start a Project
               </Button>
+            </Link>
+            <Link to="/contact">
+              <Button size="lg" variant="outline" className="border-brand-cream/30 text-white bg-white/5 hover:bg-white/20 hover:text-white rounded-full px-10 h-16 text-lg font-bold backdrop-blur-sm transition-transform hover:scale-105 active:scale-95 w-full sm:w-auto">
+                Book a Free Consultation
+              </Button>
+            </Link>
           </motion.div>
 
         </div>

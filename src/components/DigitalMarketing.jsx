@@ -92,10 +92,12 @@ export default function DigitalMarketing() {
                 We don't just drive traffic; we drive revenue. Our full-funnel marketing strategies are engineered to capture high-intent audiences and convert them into loyal customers.
               </p>
               
-              <Button size="lg" onClick={() => window.dispatchEvent(new CustomEvent('openConsultationModal'))} className="bg-brand-rose hover:bg-brand-rose/90 text-white rounded-full px-8 h-14 text-base font-bold shadow-xl shadow-brand-rose/20 transition-all hover:-translate-y-1 group mb-12 w-fit">
-                See Our Marketing Results
-                <FaArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Button>
+              <Link to="/contact">
+                <Button size="lg" className="bg-brand-rose hover:bg-brand-rose/90 text-white rounded-full px-8 h-14 text-base font-bold shadow-xl shadow-brand-rose/20 transition-all hover:-translate-y-1 group mb-12 w-fit">
+                  See Our Marketing Results
+                  <FaArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
             </motion.div>
 
             {/* Premium 3D Creative Showcase (Visible on Desktop & Mobile) */}
