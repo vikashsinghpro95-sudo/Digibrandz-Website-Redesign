@@ -43,12 +43,19 @@ export default function BlogsAdmin() {
     setStatus('published');
   };
 
+  const decodeHTML = (html) => {
+    if (!html) return '';
+    const txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+  };
+
   const handleEdit = (blog) => {
     setEditingId(blog.id);
     setTitle(blog.title || '');
     setSlug(blog.slug || '');
     setExcerpt(blog.excerpt || '');
-    setContent(blog.content || '');
+    setContent(decodeHTML(blog.content || ''));
     setFeaturedImage(blog.featured_image || '');
     setStatus(blog.status || 'published');
   };

@@ -40,8 +40,16 @@ export default function BlogPost() {
     </div>
   );
 
+  // Helper to decode HTML entities (like &lt; to <) that were encoded during save
+  const decodeHTML = (html) => {
+    if (!html) return '';
+    const txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+  };
+
   // Sanitize the HTML content to prevent XSS
-  const safeHTML = DOMPurify.sanitize(blog.content);
+  const safeHTML = DOMPurify.sanitize(decodeHTML(blog.content));
 
   return (
     <div className="pt-24 pb-20 min-h-screen bg-background">
