@@ -40,8 +40,8 @@
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
 
-  # Route frontend through SPA entry PHP (handles 301s before serving React)
-  RewriteRule ^ /api/spa_entry.php [L]
+  # Route frontend to React index.html (SPA routing)
+  RewriteRule ^ /index.html [L]
 
   # Block access to .env files for security
   <Files ".env">
