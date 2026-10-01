@@ -126,6 +126,7 @@ export default function Footer() {
               <li><RouterLink to="/blog" className="text-brand-cream/60 hover:text-brand-rose transition-colors cursor-pointer flex items-center gap-2 group"><span className="w-0 group-hover:w-2 h-[1px] bg-brand-rose transition-all duration-300"></span>Blog</RouterLink></li>
               <li><RouterLink to="/team" className="text-brand-cream/60 hover:text-brand-rose transition-colors cursor-pointer flex items-center gap-2 group"><span className="w-0 group-hover:w-2 h-[1px] bg-brand-rose transition-all duration-300"></span>Our Team</RouterLink></li>
               <li><RouterLink to="/careers" className="text-brand-cream/60 hover:text-brand-rose transition-colors cursor-pointer flex items-center gap-2 group"><span className="w-0 group-hover:w-2 h-[1px] bg-brand-rose transition-all duration-300"></span>Careers <span className="ml-2 text-[10px] bg-brand-rose/20 text-brand-rose px-2 py-0.5 rounded-full border border-brand-rose/30">Hiring</span></RouterLink></li>
+              <li><RouterLink to="/contact" className="text-brand-cream/60 hover:text-brand-rose transition-colors cursor-pointer flex items-center gap-2 group"><span className="w-0 group-hover:w-2 h-[1px] bg-brand-rose transition-all duration-300"></span>Contact Us</RouterLink></li>
             </ul>
           </div>
 

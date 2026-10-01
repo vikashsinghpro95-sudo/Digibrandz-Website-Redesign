@@ -13,6 +13,7 @@ export const DEFAULT_NAV = [
   { name: 'Blog', to: '/blog', isRoute: true },
   { name: 'Team', to: '/team', isRoute: true },
   { name: 'Careers', to: '/careers', isRoute: true },
+  { name: 'Contact Us', to: '/contact', isRoute: true },
 ];
 
 export const FALLBACK_CONTENT = {
