@@ -53,7 +53,7 @@ export default function BlogPost() {
 
   return (
     <div className="pt-24 pb-20 min-h-screen bg-background">
-      <article className="container mx-auto px-4 md:px-6 max-w-4xl">
+      <article className="container mx-auto px-4 md:px-6 max-w-3xl">
         
         {/* Back Link */}
         <Link to="/blog" className="inline-flex items-center gap-2 text-muted-foreground hover:text-brand-rose transition-colors font-semibold text-sm mb-10">
@@ -79,7 +79,8 @@ export default function BlogPost() {
 
         {/* Content (Prose) */}
         <div 
-          className="prose prose-lg dark:prose-invert prose-headings:font-display prose-headings:font-bold prose-a:text-brand-rose hover:prose-a:text-brand-rose/80 max-w-none"
+          className="prose prose-lg md:prose-xl dark:prose-invert prose-headings:font-display prose-headings:font-bold prose-a:text-brand-rose hover:prose-a:text-brand-rose/80 mx-auto w-full break-words prose-img:rounded-2xl prose-img:shadow-lg prose-img:w-full overflow-hidden"
+          style={{ overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-word' }}
           dangerouslySetInnerHTML={{ __html: safeHTML }}
         />
 
