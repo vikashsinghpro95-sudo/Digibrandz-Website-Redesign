@@ -53,6 +53,9 @@ export default function Contact() {
         ]
       });
       setSuccess(true);
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', 'SubmitApplication');
+      }
       e.target.reset();
     } catch (err) {
       console.error(err);
