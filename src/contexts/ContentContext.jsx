@@ -28,7 +28,7 @@ export function ContentProvider({ children }) {
         fetchAll('SELECT * FROM team_members ORDER BY display_order ASC, id ASC'),
         fetchAll('SELECT * FROM testimonials ORDER BY id ASC'),
         fetchAll('SELECT * FROM industries ORDER BY display_order ASC, id ASC'),
-        fetchAll('SELECT * FROM jobs ORDER BY created_at DESC'),
+        fetchAll('SELECT * FROM jobs ORDER BY display_order ASC, created_at DESC'),
         fetchAll('SELECT * FROM nav_links ORDER BY display_order ASC, id ASC'),
       ])
 

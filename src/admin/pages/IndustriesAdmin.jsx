@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import SortableTable from '../components/SortableTable';
 import { turso, fetchAll } from '../../lib/turso';
 
 export default function IndustriesAdmin() {
@@ -78,18 +79,22 @@ export default function IndustriesAdmin() {
           <button type="submit" className="bg-brand-plum text-white px-6 py-2 rounded-lg">{editingId ? 'Update' : 'Create'}</button>
         </form>
       </div>
-      <div className="bg-white rounded-xl border border-zinc-200 shadow-sm overflow-hidden">
-        <table className="w-full text-left text-sm">
-          <thead className="bg-zinc-50 border-b border-zinc-200">
-            <tr><th className="px-6 py-3">Title</th><th className="px-6 py-3 text-right">Actions</th></tr>
-          </thead>
-          <tbody className="divide-y divide-zinc-100">
-            {items.map(item => (
-              <tr key={item.id}><td className="px-6 py-4">{item.title}</td><td className="px-6 py-4 text-right space-x-3"><button onClick={() => handleEdit(item)} className="text-brand-plum">Edit</button><button onClick={() => handleDelete(item.id)} className="text-red-500">Delete</button></td></tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <SortableTable 
+        items={items}
+        onReorder={async (newItems) => {
+          setItems(newItems);
+          try {
+            await Promise.all(newItems.map((item, index) => turso.execute({ sql: 'UPDATE industries SET display_order = ? WHERE id = ?', args: [index, item.id] })));
+          } catch (err) { alert('Order update failed'); fetchItems(); }
+        }}
+        columns={[{ label: 'Title' }, { label: 'Actions', className: 'text-right' }]}
+        renderRow={(item) => (
+          <>
+            <td className="px-6 py-4">{item.title}</td>
+            <td className="px-6 py-4 text-right space-x-3"><button onClick={() => handleEdit(item)} className="text-brand-plum">Edit</button><button onClick={() => handleDelete(item.id)} className="text-red-500">Delete</button></td>
+          </>
+        )}
+      />
     </div>
   );
 }

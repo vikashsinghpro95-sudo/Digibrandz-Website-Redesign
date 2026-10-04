@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import SortableTable from '../components/SortableTable';
 import { turso, fetchAll } from '../../lib/turso';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
@@ -24,7 +25,7 @@ export default function BlogsAdmin() {
   const fetchBlogs = async () => {
     setLoading(true);
     try {
-      const data = await fetchAll('SELECT * FROM blogs ORDER BY id DESC');
+      const data = await fetchAll('SELECT * FROM blogs ORDER BY display_order ASC, id DESC');
       setBlogs(data);
     } catch (e) {
       console.error(e);
@@ -138,40 +139,31 @@ export default function BlogsAdmin() {
         </form>
       </div>
 
-      <div className="bg-white rounded-xl border border-zinc-200 shadow-sm overflow-hidden">
-        <table className="w-full text-left text-sm">
-          <thead className="bg-zinc-50 border-b border-zinc-200">
-            <tr>
-              <th className="px-6 py-3 font-medium text-zinc-500">Title</th>
-              <th className="px-6 py-3 font-medium text-zinc-500">Slug</th>
-              <th className="px-6 py-3 font-medium text-zinc-500">Status</th>
-              <th className="px-6 py-3 font-medium text-zinc-500 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-zinc-100">
-            {blogs.map(blog => (
-              <tr key={blog.id} className="hover:bg-zinc-50">
-                <td className="px-6 py-4 font-medium text-zinc-900">{blog.title}</td>
-                <td className="px-6 py-4 text-zinc-500">{blog.slug}</td>
-                <td className="px-6 py-4">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${blog.status === 'published' ? 'bg-green-100 text-green-700' : 'bg-zinc-100 text-zinc-700'}`}>
-                    {blog.status}
-                  </span>
-                </td>
-                <td className="px-6 py-4 text-right space-x-3">
-                  <button onClick={() => handleEdit(blog)} className="text-brand-plum hover:underline">Edit</button>
-                  <button onClick={() => handleDelete(blog.id)} className="text-red-500 hover:underline">Delete</button>
-                </td>
-              </tr>
-            ))}
-            {blogs.length === 0 && (
-              <tr>
-                <td colSpan="4" className="px-6 py-8 text-center text-zinc-500">No blogs found.</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+      <SortableTable 
+        items={blogs}
+        onReorder={async (newItems) => {
+          setBlogs(newItems);
+          try {
+            await Promise.all(newItems.map((item, index) => turso.execute({ sql: 'UPDATE blogs SET display_order = ? WHERE id = ?', args: [index, item.id] })));
+          } catch (err) { alert('Order update failed'); fetchBlogs(); }
+        }}
+        columns={[{ label: 'Title' }, { label: 'Slug' }, { label: 'Status' }, { label: 'Actions', className: 'text-right' }]}
+        renderRow={(blog) => (
+          <>
+            <td className="px-6 py-4 font-medium text-zinc-900">{blog.title}</td>
+            <td className="px-6 py-4 text-zinc-500">{blog.slug}</td>
+            <td className="px-6 py-4">
+              <span className={`px-2 py-1 rounded-full text-xs font-medium ${blog.status === 'published' ? 'bg-green-100 text-green-700' : 'bg-zinc-100 text-zinc-700'}`}>
+                {blog.status}
+              </span>
+            </td>
+            <td className="px-6 py-4 text-right space-x-3">
+              <button onClick={() => handleEdit(blog)} className="text-brand-plum font-medium hover:text-brand-plum/80">Edit</button>
+              <button onClick={() => handleDelete(blog.id)} className="text-red-600 font-medium hover:text-red-800">Delete</button>
+            </td>
+          </>
+        )}
+      />
     </div>
   );
 }

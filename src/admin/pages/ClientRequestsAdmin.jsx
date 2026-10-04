@@ -81,7 +81,7 @@ export default function ClientRequestsAdmin() {
                   <div className="flex gap-2">
                     <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
                       req.status === 'new' ? 'bg-blue-100 text-blue-700' : 
-                      req.status === 'contacted' ? 'bg-yellow-100 text-yellow-700' :
+                      req.status === 'contacted' ? 'bg-orange-100 text-orange-700' :
                       'bg-green-100 text-green-700'
                     }`}>
                       {req.status || 'new'}

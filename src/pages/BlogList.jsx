@@ -9,7 +9,7 @@ export default function BlogList() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchAll("SELECT * FROM blogs WHERE status = 'Published' COLLATE NOCASE ORDER BY created_at DESC")
+    fetchAll("SELECT * FROM blogs WHERE status = 'Published' COLLATE NOCASE ORDER BY display_order ASC, created_at DESC")
       .then(data => {
         // Map the database columns to the frontend expected properties
         const formattedBlogs = (data || []).map(b => ({
