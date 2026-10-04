@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { UploadCloud, X, Loader2 } from 'lucide-react';
 
+const IMGBB_API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
+
 export default function ImageUpload({ value, onChange, placeholder }) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(null);
@@ -10,29 +12,54 @@ export default function ImageUpload({ value, onChange, placeholder }) {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Validate type
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
+    if (!allowedTypes.includes(file.type)) {
+      setError('Invalid file type. Allowed: JPEG, PNG, GIF, WebP, SVG');
+      return;
+    }
+
+    // Validate size (5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      setError('File too large. Maximum size is 5MB.');
+      return;
+    }
+
+    if (!IMGBB_API_KEY) {
+      setError('Image upload not configured. Please add VITE_IMGBB_API_KEY to your .env file.');
+      return;
+    }
+
     setUploading(true);
     setError(null);
 
-    const formData = new FormData();
-    formData.append('image', file);
-
     try {
-      const response = await fetch(`/api/upload`, {
+      // Convert file to base64
+      const base64 = await fileToBase64(file);
+      // Strip the data:image/...;base64, prefix
+      const base64Data = base64.split(',')[1];
+
+      const formData = new FormData();
+      formData.append('key', IMGBB_API_KEY);
+      formData.append('image', base64Data);
+      formData.append('name', file.name.replace(/\.[^.]+$/, ''));
+
+      // Upload directly to ImgBB from browser — no server needed
+      const response = await fetch('https://api.imgbb.com/1/upload', {
         method: 'POST',
         body: formData,
       });
 
       const data = await response.json();
 
-      if (!response.ok || data.error) {
-        throw new Error(data.error || 'Upload failed');
+      if (!data.success) {
+        throw new Error(data.error?.message || 'Upload to ImgBB failed');
       }
 
-      // ImgBB returns a full CDN URL
-      onChange(data.url);
+      onChange(data.data.url);
     } catch (err) {
-      console.error(err);
-      setError(err.message || 'Error uploading image');
+      console.error('Upload error:', err);
+      setError(err.message || 'Error uploading image. Please try again.');
     } finally {
       setUploading(false);
       if (fileInputRef.current) fileInputRef.current.value = '';
@@ -42,14 +69,14 @@ export default function ImageUpload({ value, onChange, placeholder }) {
   return (
     <div className="w-full">
       <div className="flex gap-2">
-        <input 
-          type="text" 
-          className="flex-1 p-2 border rounded-lg bg-zinc-50 focus:bg-white transition-colors" 
-          value={value || ''} 
-          onChange={e => onChange(e.target.value)} 
-          placeholder={placeholder || "https://example.com/image.jpg"} 
+        <input
+          type="text"
+          className="flex-1 p-2 border rounded-lg bg-zinc-50 focus:bg-white transition-colors"
+          value={value || ''}
+          onChange={e => onChange(e.target.value)}
+          placeholder={placeholder || 'https://example.com/image.jpg'}
         />
-        <button 
+        <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
           disabled={uploading}
@@ -59,23 +86,29 @@ export default function ImageUpload({ value, onChange, placeholder }) {
           {uploading ? 'Uploading...' : 'Upload Image'}
         </button>
       </div>
-      
+
       {error && <p className="text-red-500 text-xs mt-1 font-medium">{error}</p>}
-      
-      <input 
-        type="file" 
-        ref={fileInputRef} 
-        onChange={handleUpload} 
-        accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml" 
-        className="hidden" 
+
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleUpload}
+        accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml"
+        className="hidden"
       />
-      
+
       {value && (
         <div className="mt-3 relative inline-block border border-zinc-200 rounded-lg overflow-hidden bg-zinc-50">
-          <img src={value} alt="Preview" className="h-24 w-auto object-contain" onError={(e) => e.target.style.display = 'none'} onLoad={(e) => e.target.style.display = 'block'} />
-          <button 
-            type="button" 
-            onClick={() => onChange('')} 
+          <img
+            src={value}
+            alt="Preview"
+            className="h-24 w-auto object-contain"
+            onError={e => e.target.style.display = 'none'}
+            onLoad={e => e.target.style.display = 'block'}
+          />
+          <button
+            type="button"
+            onClick={() => onChange('')}
             className="absolute top-1 right-1 bg-black/50 hover:bg-red-500 text-white rounded-full p-1 transition-colors"
           >
             <X className="w-3 h-3" />
@@ -84,4 +117,13 @@ export default function ImageUpload({ value, onChange, placeholder }) {
       )}
     </div>
   );
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = err => reject(err);
+  });
 }
