@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { UploadCloud, X, Loader2 } from 'lucide-react';
-import { API_BASE } from '../../lib/api';
 
 export default function ImageUpload({ value, onChange, placeholder }) {
   const [uploading, setUploading] = useState(false);
@@ -18,26 +17,19 @@ export default function ImageUpload({ value, onChange, placeholder }) {
     formData.append('image', file);
 
     try {
-      const response = await fetch(`${API_BASE}/api/upload.php`, {
+      const response = await fetch(`/api/upload`, {
         method: 'POST',
         body: formData,
       });
 
-      if (!response.ok) {
-        throw new Error('Upload failed');
+      const data = await response.json();
+
+      if (!response.ok || data.error) {
+        throw new Error(data.error || 'Upload failed');
       }
 
-      const data = await response.json();
-      if (data.error) throw new Error(data.error);
-
-      // Successfully uploaded, set the URL
-      // If we are developing locally, API_BASE might be http://localhost:8000
-      // In production, the URL starts with /uploads/
-      const finalUrl = data.url.startsWith('/') && API_BASE 
-        ? `${API_BASE}${data.url}` 
-        : data.url;
-
-      onChange(finalUrl);
+      // ImgBB returns a full CDN URL
+      onChange(data.url);
     } catch (err) {
       console.error(err);
       setError(err.message || 'Error uploading image');
