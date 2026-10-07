@@ -12,7 +12,7 @@ import LeadGenCTA from '../components/LeadGenCTA';
 
 export default function Services() {
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-white flex flex-col">
       <PageHeader 
         title="Our Services" 
         subtitle="Comprehensive digital solutions designed to scale your brand and drive measurable growth." 

@@ -5,7 +5,7 @@ import { FaNetworkWired } from 'react-icons/fa6'
 
 export default function MobileAppDevelopment() {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-24 bg-white">
       <div className="container mx-auto px-4 md:px-6 text-center">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
@@ -21,7 +21,7 @@ export default function MobileAppDevelopment() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="text-lg text-muted-foreground max-w-2xl mx-auto mb-16 leading-relaxed"
+          className="text-lg text-black/70 max-w-2xl mx-auto mb-16 leading-relaxed"
         >
           We build native and cross-platform mobile experiences that users love. Whether you're targeting iOS, Android, or both, we deliver seamless performance and stunning design.
         </motion.p>

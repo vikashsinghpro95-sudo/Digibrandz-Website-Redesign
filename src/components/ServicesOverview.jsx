@@ -25,7 +25,7 @@ export default function ServicesOverview({ hideHeader = false }) {
   const { services } = useContent()
 
   return (
-    <section id="services" className={`bg-background border-t border-border relative overflow-hidden ${hideHeader ? 'py-16' : 'py-32'}`}>
+    <section id="services" className={`bg-white border-t border-black/10 relative overflow-hidden ${hideHeader ? 'py-16' : 'py-32'}`}>
       
       {/* Decorative */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-[#C5FA01]/10 to-transparent pointer-events-none" />

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { FaMagnifyingGlass, FaArrowPointer, FaShareNodes, FaFileLines, FaEnvelope, FaUsers, FaArrowTrendUp, FaArrowRight } from 'react-icons/fa6'
 import { FaFacebook } from 'react-icons/fa'
 import { Button } from './ui/button'
+import AnimatedHeading from './ui/AnimatedHeading'
 
 const SUB_SERVICES = [
   { 
@@ -58,7 +59,7 @@ const SUB_SERVICES = [
 
 export default function DigitalMarketing() {
   return (
-    <section className="py-24 relative bg-background overflow-hidden">
+    <section className="py-24 relative bg-white overflow-hidden">
       
       {/* Dynamic Glows */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#C5FA01]/10 rounded-full blur-[150px] pointer-events-none will-change-transform transform-gpu" />
@@ -83,10 +84,7 @@ export default function DigitalMarketing() {
                 Digital Marketing
               </div>
               
-              <h2 className="font-display font-bold text-5xl md:text-6xl text-black mb-6 leading-tight tracking-tight">
-                Turn Attention <br/>
-                <span className="text-transparent bg-clip-text bg-[#C5FA01]">Into Customers</span>
-              </h2>
+              <AnimatedHeading text="Turn Attention Into Customers" className="font-display font-bold text-5xl md:text-6xl text-black mb-6 leading-tight tracking-tight" />
               
               <p className="text-lg text-black/80 leading-relaxed mb-8 font-medium max-w-md">
                 We don't just drive traffic; we drive revenue. Our full-funnel marketing strategies are engineered to capture high-intent audiences and convert them into loyal customers.

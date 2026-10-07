@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs"
+import AnimatedHeading from './ui/AnimatedHeading'
 
 const TECH_CATEGORIES = {
   "Frontend": ["React", "Angular", "Vue", "HTML", "CSS", "JavaScript", "TypeScript"],
@@ -13,18 +14,11 @@ const TECH_CATEGORIES = {
 
 export default function TechStack() {
   return (
-    <section className="py-24 bg-muted/30 border-y border-border">
+    <section className="py-24 bg-white">
       <div className="container mx-auto px-4 md:px-6">
         
         <div className="text-center mb-12">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-display font-bold text-4xl md:text-5xl text-black  mb-6"
-          >
-            Powered by <span className="text-black ">Modern Technologies</span>
-          </motion.h2>
+          <AnimatedHeading text="Powered by Modern Technologies" className="font-display font-bold text-4xl md:text-5xl text-black mb-6" />
         </div>
 
         <Tabs defaultValue="Frontend" className="w-full max-w-5xl mx-auto">
@@ -33,7 +27,7 @@ export default function TechStack() {
               <TabsTrigger 
                 key={cat} 
                 value={cat}
-                className="rounded-full px-6 py-2.5 data-[state=active]:bg-[#C5FA01] data-[state=active]:text-black =active]:bg-[#C5FA01] =active]:text-black border border-transparent data-[state=inactive]:border-border hover:bg-muted transition-colors"
+                className="rounded-full px-6 py-2.5 data-[state=active]:bg-[#C5FA01] data-[state=active]:text-black =active]:bg-[#C5FA01] =active]:text-black border border-transparent data-[state=inactive]:border-black/10 hover:bg-muted transition-colors"
               >
                 {cat}
               </TabsTrigger>
@@ -51,7 +45,7 @@ export default function TechStack() {
                 {techs.map(tech => (
                   <div 
                     key={tech} 
-                    className="px-6 py-4 bg-background border border-border rounded-xl shadow-sm text-foreground font-medium hover:border-black hover:text-black  transition-colors flex items-center justify-center min-w-[120px]"
+                    className="px-6 py-4 bg-white border border-black/10 rounded-xl shadow-sm text-black font-medium hover:border-black hover:text-black  transition-colors flex items-center justify-center min-w-[120px]"
                   >
                     {tech}
                   </div>

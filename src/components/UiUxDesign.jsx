@@ -21,7 +21,7 @@ export default function UiUxDesign() {
   const lineWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
 
   return (
-    <section ref={containerRef} className="py-24 bg-background overflow-hidden relative">
+    <section ref={containerRef} className="py-24 bg-white overflow-hidden relative">
       <div className="container mx-auto px-4 md:px-6">
         
         <div className="text-center max-w-3xl mx-auto mb-20">
@@ -38,7 +38,7 @@ export default function UiUxDesign() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-lg text-muted-foreground leading-relaxed"
+            className="text-lg text-black/70 leading-relaxed"
           >
             We combine aesthetics with human psychology. Our UI/UX process ensures that every digital product we create is not only visually stunning but also highly intuitive and conversion-optimized.
           </motion.p>

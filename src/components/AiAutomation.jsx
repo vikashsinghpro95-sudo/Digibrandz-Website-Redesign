@@ -2,6 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { FaRobot, FaMessage, FaPhone, FaGear, FaPenNib, FaBrain, FaDiagramProject, FaGauge, FaFileInvoice, FaWandMagicSparkles, FaCubes } from 'react-icons/fa6'
 import { Button } from './ui/button'
+import AnimatedHeading from './ui/AnimatedHeading'
 
 import { Link } from 'react-router-dom'
 
@@ -21,7 +22,7 @@ const AI_SERVICES = [
 
 export default function AiAutomation() {
   return (
-    <section className="py-24 relative overflow-hidden bg-background">
+    <section className="py-24 relative overflow-hidden bg-white">
       {/* Futuristic Background Gradients */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#C5FA01]/10 rounded-full blur-[120px] transform-gpu" />
