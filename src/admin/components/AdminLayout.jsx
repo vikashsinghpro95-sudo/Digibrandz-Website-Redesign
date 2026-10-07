@@ -30,7 +30,7 @@ export default function AdminLayout() {
       {/* Sidebar */}
       <aside className="w-64 bg-zinc-950 text-zinc-300 flex flex-col shadow-xl z-20">
         <div className="h-16 flex items-center px-6 border-b border-zinc-800">
-          <span className="text-xl font-bold text-black tracking-tight">DigiBrandz CMS</span>
+          <span className="text-xl font-bold text-[#C5FA01] tracking-tight">DigiBrandz CMS</span>
         </div>
         
         <nav className="flex-1 py-6 px-3 space-y-1">
