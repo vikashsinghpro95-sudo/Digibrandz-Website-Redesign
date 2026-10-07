@@ -21,7 +21,7 @@ export default function TrustedBy() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-sm font-bold tracking-[0.2em] text-brand-rose uppercase mb-3">
+          <h3 className="text-sm font-bold tracking-[0.2em] text-black  uppercase mb-3">
             Trusted by Businesses That Want to Grow
           </h3>
           <p className="text-base text-muted-foreground max-w-xl mx-auto font-medium">

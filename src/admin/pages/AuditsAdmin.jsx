@@ -87,7 +87,7 @@ export default function AuditsAdmin() {
                     <td className="px-6 py-4 font-medium text-zinc-900">{audit.website_url}</td>
                     <td className="px-6 py-4 text-zinc-500">{new Date(audit.created_at + 'Z').toLocaleString()}</td>
                     <td className="px-6 py-4 text-right space-x-3">
-                      <button onClick={() => downloadAudit(audit)} className="text-brand-plum hover:text-brand-rose font-medium text-sm flex items-center gap-1 inline-flex">
+                      <button onClick={() => downloadAudit(audit)} className="text-black hover:text-black  font-medium text-sm flex items-center gap-1 inline-flex">
                         <Download className="w-4 h-4" /> Download
                       </button>
                       <button onClick={() => deleteAudit(audit.id)} className="text-red-500 hover:text-red-700 font-medium text-sm inline-flex">

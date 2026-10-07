@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import AnimatedHeading from './ui/AnimatedHeading';
 import {
   Accordion,
   AccordionContent,
@@ -40,14 +41,7 @@ export default function FAQ() {
       <div className="container mx-auto px-4 md:px-6">
         
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-display font-bold text-4xl md:text-5xl text-brand-plum dark:text-brand-cream mb-6"
-          >
-            Frequently Asked <span className="text-brand-rose">Questions</span>
-          </motion.h2>
+          <AnimatedHeading text="Frequently Asked Questions" className="font-display font-bold text-4xl md:text-5xl text-black  mb-6" />
         </div>
 
         <motion.div 
@@ -59,7 +53,7 @@ export default function FAQ() {
           <Accordion type="single" collapsible className="w-full">
             {FAQS.map((faq, idx) => (
               <AccordionItem key={idx} value={`item-${idx}`} className="border-b border-border py-2">
-                <AccordionTrigger className="text-left font-display font-semibold text-lg md:text-xl text-foreground hover:text-brand-rose hover:no-underline transition-colors">
+                <AccordionTrigger className="text-left font-display font-semibold text-lg md:text-xl text-foreground hover:text-black  hover:no-underline transition-colors">
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground leading-relaxed text-base">

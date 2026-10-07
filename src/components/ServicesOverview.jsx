@@ -5,6 +5,7 @@ import { FaArrowRight, FaXmark, FaCheck, FaChevronDown } from 'react-icons/fa6'
 import { Button } from './ui/button'
 import { useContent } from '../contexts/ContentContext'
 import { useSettings } from '../contexts/SettingsContext'
+import AnimatedHeading from './ui/AnimatedHeading';
 
 // Fallback background images
 const bgImages = [
@@ -18,95 +19,89 @@ const bgImages = [
   "/images/services/mobile.jpg"
 ]
 
-export default function ServicesOverview() {
+export default function ServicesOverview({ hideHeader = false }) {
   const settings = useSettings() || {}
   const navigate = useNavigate()
   const { services } = useContent()
 
   return (
-    <section id="services" className="py-32 bg-background border-t border-border relative overflow-hidden">
+    <section id="services" className={`bg-background border-t border-border relative overflow-hidden ${hideHeader ? 'py-16' : 'py-32'}`}>
       
       {/* Decorative */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-blush/10 to-transparent pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-1/2 h-full bg-gradient-to-r from-brand-plum/5 to-transparent pointer-events-none" />
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#C5FA01]/10 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-1/2 h-full bg-[#C5FA01]/5 to-transparent pointer-events-none" />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-24 gap-10 lg:gap-8">
-          <div className="max-w-4xl">
+        {!hideHeader && (
+          <div className="text-center max-w-4xl mx-auto mb-20 flex flex-col items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-rose/10 border border-brand-rose/20 text-brand-rose text-sm font-bold tracking-wide uppercase mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C5FA01]/10 border border-black/20 text-black text-sm font-bold tracking-wide uppercase mb-6"
             >
-              <span className="w-2 h-2 rounded-full bg-brand-rose animate-pulse" />
-              Our Expertise
+              <span className="w-2 h-2 rounded-full bg-[#C5FA01] animate-pulse" />
+              Services
             </motion.div>
 
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="font-display font-bold text-5xl md:text-6xl lg:text-[80px] text-brand-plum dark:text-brand-cream tracking-tight leading-[1.1] mb-6"
-            >
-              {settings.servicesTitle || "Our Expertise"}
-            </motion.h2>
+            <AnimatedHeading 
+              text={settings.servicesTitle || "Our Expertise"} 
+              className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-black tracking-tight leading-tight mb-6" 
+            />
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-muted-foreground max-w-2xl leading-relaxed"
+              className="text-lg md:text-xl text-black/70 max-w-2xl mx-auto leading-relaxed"
             >
               {settings.servicesSubtitle || "Comprehensive digital solutions tailored to scale your business and dominate your market."}
             </motion.p>
           </div>
-        </div>
+        )}
 
         {/* Grid */}
         <div className="flex flex-wrap justify-center gap-4 relative z-10">
           {services.map((service, index) => {
-            const bgImage = bgImages[index % bgImages.length]
+            const bgImage = bgImages[index % bgImages.length];
             
             return (
-               <motion.div
-                layoutId={service.id}
-                onClick={() => navigate(`/services/${service.id}`)}
-                key={service.id}
-                className="group/card w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.75rem)] lg:w-[calc(25%-0.75rem)] xl:w-[calc(20%-0.8rem)] rounded-xl border border-border/50 p-5 flex flex-col justify-between cursor-pointer overflow-hidden relative transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-lg min-h-[220px] transform-gpu"
+              <motion.div
+                layoutId={service.id || service.slug}
+                onClick={() => navigate(`/services/${service.slug || service.id}`)}
+                key={service.slug || service.id}
+                className="group/card w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.75rem)] lg:w-[calc(25%-0.75rem)] xl:w-[calc(20%-0.8rem)] rounded-2xl border border-black/10 bg-white shadow-sm hover:shadow-xl cursor-pointer overflow-hidden relative transition-all duration-300 flex flex-col hover:-translate-y-1"
               >
-                {/* Background Image */}
-                <div 
-                  className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover/card:scale-110 transform-gpu"
-                  style={{ backgroundImage: `url('${service.featuredImage || bgImage}')` }}
-                />
-                
-                {/* Overlay */}
-                <div className="absolute inset-0 z-0 bg-brand-darkPlum opacity-80 mix-blend-overlay transition-opacity duration-500 group-hover/card:opacity-70" />
-                <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/95 via-black/60 to-black/20" />
-                
-                {/* Top Section */}
-                <div className="relative z-10 flex justify-end items-start">
-                  <div className="flex items-center gap-2 opacity-0 -translate-x-4 group-hover/card:opacity-100 group-hover/card:translate-x-0 transition-all duration-300">
-                    <span className="text-xs font-bold text-white uppercase tracking-wider">Explore</span>
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center bg-white/20 backdrop-blur-md border border-white/20 text-white shadow-md text-sm">
-                      <FaArrowRight />
-                    </div>
+                {/* Image Section (Top half) */}
+                <div className="relative h-40 overflow-hidden shrink-0">
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover/card:scale-110"
+                    style={{ backgroundImage: `url('${service.featuredImage || bgImage}')` }}
+                  />
+                  <div className="absolute inset-0 bg-[#C5FA01]/30 mix-blend-multiply transition-opacity group-hover/card:opacity-0" />
+                  
+                  {/* Explore Badge */}
+                  <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-sm opacity-0 -translate-y-2 group-hover/card:opacity-100 group-hover/card:translate-y-0 transition-all duration-300">
+                    <span className="text-[10px] font-bold text-black uppercase tracking-wider">Explore</span>
+                    <FaArrowRight className="text-[10px] text-black" />
                   </div>
                 </div>
                 
-                {/* Bottom Section */}
-                <div className="relative z-10 mt-auto pt-4 text-white transform transition-transform duration-500 group-hover/card:-translate-y-1">
-                  <div className="w-8 h-1 bg-brand-rose mb-3 rounded-full opacity-0 scale-x-0 origin-left group-hover/card:opacity-100 group-hover/card:scale-x-100 transition-all duration-500 delay-75" />
-                  <h3 className="font-display font-bold text-lg mb-2 text-white group-hover/card:text-brand-cream transition-colors drop-shadow-md leading-tight">
+                {/* Content Section (Bottom half) */}
+                <div className="p-5 flex flex-col grow">
+                  <h3 className="font-display font-bold text-lg mb-2 text-black leading-tight">
                     {service.title}
                   </h3>
-                  <p className="text-xs leading-relaxed text-white/80 drop-shadow-sm line-clamp-2">
+                  <p className="text-xs leading-relaxed text-black/70 line-clamp-3">
                     {service.description}
                   </p>
+                  
+                  {/* Bottom Line Accent */}
+                  <div className="mt-auto pt-4">
+                    <div className="w-8 h-1 bg-[#C5FA01] rounded-full group-hover/card:w-full transition-all duration-500 ease-out" />
+                  </div>
                 </div>
               </motion.div>
             )

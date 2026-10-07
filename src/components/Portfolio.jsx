@@ -48,9 +48,9 @@ export default function Portfolio() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-display font-bold text-4xl md:text-5xl text-brand-plum dark:text-brand-cream mb-2"
+            className="font-display font-bold text-4xl md:text-5xl text-black  mb-2"
           >
-            Our Work <span className="text-brand-rose">Speaks for Us</span>
+            Our Work <span className="text-black ">Speaks for Us</span>
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -71,7 +71,7 @@ export default function Portfolio() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="group relative flex flex-col bg-background border border-border rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:border-brand-rose/50 transition-all"
+              className="group relative flex flex-col bg-background border border-border rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:border-black/50 transition-all"
             >
               
               {/* Image Placeholder */}
@@ -79,12 +79,12 @@ export default function Portfolio() {
                 {!item.isReal ? (
                   <span className="text-muted-foreground/50 font-medium tracking-widest uppercase">Placeholder Image</span>
                 ) : (
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand-plum to-brand-rose opacity-80" />
+                  <div className="absolute inset-0 bg-[#C5FA01] opacity-80" />
                 )}
                 
                 {/* Overlay link button */}
-                <div className="absolute inset-0 bg-brand-plum/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
-                  <div className="w-16 h-16 rounded-full bg-white text-brand-plum flex items-center justify-center translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
+                <div className="absolute inset-0 bg-[#C5FA01]/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
+                  <div className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
                     <FaArrowUpRightFromSquare size={24} />
                   </div>
                 </div>
@@ -94,7 +94,7 @@ export default function Portfolio() {
               <div className="p-8 flex flex-col flex-grow">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <span className="text-brand-rose text-sm font-bold uppercase tracking-wider mb-1 block">
+                    <span className="text-black  text-sm font-bold uppercase tracking-wider mb-1 block">
                       {item.industry}
                     </span>
                     <h3 className="font-display font-bold text-2xl text-foreground">
@@ -103,7 +103,7 @@ export default function Portfolio() {
                   </div>
                 </div>
 
-                <div className="text-sm font-medium text-brand-plum/70 dark:text-brand-cream/70 mb-4">
+                <div className="text-sm font-medium text-black/70  mb-4">
                   {item.services}
                 </div>
                 

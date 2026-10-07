@@ -8,8 +8,8 @@ export default function NotFound() {
   return (
     <div className="min-h-[80vh] flex items-center justify-center relative overflow-hidden py-24">
       {/* Background Gradients */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-rose/20 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-plum/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#C5FA01]/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#C5FA01]/20 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container relative z-10 px-4 flex flex-col items-center text-center">
         <motion.div
@@ -19,7 +19,7 @@ export default function NotFound() {
           className="relative"
         >
           <h1 className="text-[120px] sm:text-[180px] md:text-[220px] font-display font-black leading-none tracking-tighter select-none">
-            <span className="text-transparent bg-clip-text bg-gradient-to-br from-brand-rose via-white to-brand-plum drop-shadow-2xl">
+            <span className="text-transparent bg-clip-text bg-[#C5FA01] via-white to-[#C5FA01] drop-shadow-2xl">
               404
             </span>
           </h1>
@@ -31,7 +31,7 @@ export default function NotFound() {
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full whitespace-nowrap"
           >
             <div className="bg-background/80 backdrop-blur-md border border-white/10 px-6 py-2 sm:px-8 sm:py-3 rounded-full inline-block shadow-xl shadow-brand-rose/10 transform rotate-[-5deg]">
-              <span className="text-xl sm:text-2xl font-bold tracking-widest uppercase text-brand-rose">
+              <span className="text-xl sm:text-2xl font-bold tracking-widest uppercase text-black ">
                 Page Not Found
               </span>
             </div>
@@ -49,7 +49,7 @@ export default function NotFound() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button asChild size="lg" className="rounded-full px-8 bg-gradient-to-r from-brand-rose to-brand-plum text-white hover:shadow-[0_0_20px_rgba(235,17,140,0.4)] transition-all">
+            <Button asChild size="lg" className="rounded-full px-8 bg-[#C5FA01] text-black hover:shadow-[0_0_20px_rgba(235,17,140,0.4)] transition-all">
               <Link to="/">
                 <FaHouseChimney className="mr-2" /> Back to Home
               </Link>

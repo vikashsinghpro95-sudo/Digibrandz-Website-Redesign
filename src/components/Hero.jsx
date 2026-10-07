@@ -10,6 +10,7 @@ import {
   FaArrowRight, FaSpinner, FaFilePdf, FaCode, FaLaptopCode, FaBullhorn, FaPenNib, FaGears, FaRobot,
   FaShareNodes, FaGoogle, FaMagnifyingGlass, FaMapLocationDot, FaHouseChimney, FaCartShopping, FaChartLine, FaVideo, FaUserGroup, FaWandMagicSparkles, FaMessage, FaCamera
 } from 'react-icons/fa6'
+import * as FaIcons from 'react-icons/fa6'
 import { API_BASE } from '../lib/api'
 
 const ICON_URLS = [
@@ -34,22 +35,7 @@ const ICON_URLS = [
   "/icons/youtube.svg", "/icons/zapier.svg", "/icons/zendesk.svg", "/icons/zoho.svg"
 ]
 
-const HERO_SERVICES = [
-  { id: "social-media-management", name: "Social Media Management", icon: <FaShareNodes /> },
-  { id: "meta-ads", name: "Meta Ads", icon: <FaBullhorn /> },
-  { id: "google-ads", name: "Google Ads / PPC", icon: <FaGoogle /> },
-  { id: "website-seo", name: "Website SEO", icon: <FaMagnifyingGlass /> },
-  { id: "google-my-business", name: "Local SEO", icon: <FaMapLocationDot /> },
-  { id: "website-app-development", name: "Web & App Dev", icon: <FaLaptopCode /> },
-  { id: "real-estate-lead-gen", name: "Real Estate Lead Gen", icon: <FaHouseChimney /> },
-  { id: "ecommerce-quick-commerce", name: "E-Commerce", icon: <FaCartShopping /> },
-  { id: "performance-marketing", name: "Performance Marketing", icon: <FaChartLine /> },
-  { id: "ai-video-creation", name: "AI Video Creation", icon: <FaVideo /> },
-  { id: "influencer-marketing", name: "Influencer Marketing", icon: <FaUserGroup /> },
-  { id: "video-editing-creative-designing", name: "Video & Design", icon: <FaWandMagicSparkles /> },
-  { id: "whatsapp-sms-marketing", name: "WhatsApp & SMS", icon: <FaMessage /> },
-  { id: "videography-photography", name: "Photography", icon: <FaCamera /> }
-];
+
 
 const FACTS = [
   "Great Content Keeps People Engaged",
@@ -104,7 +90,7 @@ const BackgroundIcons = () => {
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none flex items-center justify-center bg-background">
-       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-[0.03] dark:opacity-[0.05]" />
+       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-[0.03] .05]" />
        
        <div className="absolute inset-0 z-0 hidden md:grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-8 px-4">
           {Array.from({ length: 6 }).map((_, colIndex) => {
@@ -122,12 +108,12 @@ const BackgroundIcons = () => {
                   >
                      <div className="flex flex-col gap-8 pb-8">
                        {columnIcons.map((url, i) => (
-                         <img key={`a-${i}`} src={url} alt="" className="w-10 h-10 object-contain dark:invert opacity-40 flex-shrink-0" loading="lazy" />
+                         <img key={`a-${i}`} src={url} alt="" className="w-10 h-10 object-contain  opacity-40 flex-shrink-0" loading="lazy" />
                        ))}
                      </div>
                      <div className="flex flex-col gap-8 pb-8">
                        {columnIcons.map((url, i) => (
-                         <img key={`b-${i}`} src={url} alt="" className="w-10 h-10 object-contain dark:invert opacity-40 flex-shrink-0" loading="lazy" />
+                         <img key={`b-${i}`} src={url} alt="" className="w-10 h-10 object-contain  opacity-40 flex-shrink-0" loading="lazy" />
                        ))}
                      </div>
                   </motion.div>
@@ -161,6 +147,13 @@ export default function Hero() {
   const [rotation, setRotation] = useState(0);
   const [fact1, setFact1] = useState(FACTS[0]);
   const [fact2, setFact2] = useState(FACTS[1]);
+  const [heroServices, setHeroServices] = useState([]);
+
+  useEffect(() => {
+    turso.execute('SELECT * FROM hero_services ORDER BY sort_order ASC')
+      .then(res => setHeroServices(res.rows))
+      .catch(console.error);
+  }, []);
 
   useEffect(() => {
     if (prefersReducedMotion) return;
@@ -222,8 +215,8 @@ export default function Hero() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mb-8"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background border border-border shadow-sm text-sm font-semibold text-brand-plum dark:text-brand-cream">
-            <span className="flex h-2 w-2 rounded-full bg-brand-rose animate-pulse"></span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background border border-border shadow-sm text-sm font-semibold text-black ">
+            <span className="flex h-2 w-2 rounded-full bg-[#C5FA01] animate-pulse"></span>
             Your Growth & Technology Partner
           </div>
         </motion.div>
@@ -232,7 +225,7 @@ export default function Hero() {
         <div className="flex flex-col items-center">
           
           {/* 3D Box Infinite Roll Container */}
-          <div className="h-[90px] sm:h-[120px] lg:h-[150px] flex justify-center items-center mb-6 sm:mb-10 relative w-full max-w-5xl" style={{ perspective: 1200 }}>
+          <div className="h-[70px] sm:h-[120px] lg:h-[150px] flex justify-center items-center mb-6 sm:mb-10 relative w-full max-w-5xl" style={{ perspective: 1200 }}>
             <motion.div
               animate={{ rotateX: rotation }}
               transition={{ duration: 0.8, ease: [0.65, 0, 0.35, 1] }}
@@ -241,11 +234,12 @@ export default function Hero() {
             >
               {/* Front Face (English) */}
               <div 
-                className="absolute inset-0 flex items-center justify-center [transform:translateZ(45px)] sm:[transform:translateZ(60px)] lg:[transform:translateZ(75px)]"
+                className="absolute inset-0 flex items-center justify-center [transform:translateZ(35px)] sm:[transform:translateZ(60px)] lg:[transform:translateZ(75px)]"
                 style={{ backfaceVisibility: 'hidden' }}
               >
-                <h1 className="font-display font-bold text-[65px] sm:text-[90px] md:text-[100px] lg:text-[130px] leading-none tracking-tight select-none">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-br from-brand-plum to-brand-rose py-4 inline-block">
+                <h1 className="font-display font-bold text-[45px] xs:text-[50px] sm:text-[90px] md:text-[100px] lg:text-[130px] leading-none tracking-tight select-none relative z-10 whitespace-nowrap">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[40px] sm:h-[60px] bg-[#C5FA01] -skew-x-12 z-[-1]"></div>
+                  <span className="text-black py-4 inline-block relative z-10">
                     DigiBrandz
                   </span>
                 </h1>
@@ -253,11 +247,12 @@ export default function Hero() {
 
               {/* Bottom Face (Hindi Fact 1) - Appears when rolling UP (+90deg) */}
               <div 
-                className="absolute inset-0 flex items-center justify-center [transform:rotateX(-90deg)_translateZ(45px)] sm:[transform:rotateX(-90deg)_translateZ(60px)] lg:[transform:rotateX(-90deg)_translateZ(75px)]"
+                className="absolute inset-0 flex items-center justify-center [transform:rotateX(-90deg)_translateZ(35px)] sm:[transform:rotateX(-90deg)_translateZ(60px)] lg:[transform:rotateX(-90deg)_translateZ(75px)]"
                 style={{ backfaceVisibility: 'hidden' }}
               >
-                <h1 className={`font-sans font-black ${getDynamicFontSize(fact1)} leading-[1.2] tracking-tight select-none w-full text-center px-2 transition-all duration-300`}>
-                  <span className="text-transparent bg-clip-text bg-gradient-to-br from-brand-rose to-brand-plum drop-shadow-sm py-4 inline-block">
+                <h1 className={`font-sans font-black ${getDynamicFontSize(fact1)} leading-[1.2] tracking-tight select-none w-full text-center px-2 transition-all duration-300 relative z-10 whitespace-nowrap`}>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] sm:w-[80%] h-[40px] sm:h-[60px] bg-[#C5FA01] -skew-x-12 z-[-1]"></div>
+                  <span className="text-black drop-shadow-sm py-4 inline-block relative z-10">
                     {fact1}
                   </span>
                 </h1>
@@ -265,11 +260,12 @@ export default function Hero() {
 
               {/* Back Face (English) - Appears when rolling UP (+180deg) */}
               <div 
-                className="absolute inset-0 flex items-center justify-center [transform:rotateX(-180deg)_translateZ(45px)] sm:[transform:rotateX(-180deg)_translateZ(60px)] lg:[transform:rotateX(-180deg)_translateZ(75px)]"
+                className="absolute inset-0 flex items-center justify-center [transform:rotateX(-180deg)_translateZ(35px)] sm:[transform:rotateX(-180deg)_translateZ(60px)] lg:[transform:rotateX(-180deg)_translateZ(75px)]"
                 style={{ backfaceVisibility: 'hidden' }}
               >
-                <h1 className="font-display font-bold text-[65px] sm:text-[90px] md:text-[100px] lg:text-[130px] leading-none tracking-tight select-none">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-br from-brand-plum to-brand-rose py-4 inline-block">
+                <h1 className="font-display font-bold text-[45px] xs:text-[50px] sm:text-[90px] md:text-[100px] lg:text-[130px] leading-none tracking-tight select-none relative z-10 whitespace-nowrap">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[40px] sm:h-[60px] bg-[#C5FA01] -skew-x-12 z-[-1]"></div>
+                  <span className="text-black py-4 inline-block relative z-10">
                     DigiBrandz
                   </span>
                 </h1>
@@ -280,8 +276,9 @@ export default function Hero() {
                 className="absolute inset-0 flex items-center justify-center [transform:rotateX(-270deg)_translateZ(45px)] sm:[transform:rotateX(-270deg)_translateZ(60px)] lg:[transform:rotateX(-270deg)_translateZ(75px)]"
                 style={{ backfaceVisibility: 'hidden' }}
               >
-                <h1 className={`font-sans font-black ${getDynamicFontSize(fact2)} leading-[1.2] tracking-tight select-none w-full text-center px-2 transition-all duration-300`}>
-                  <span className="text-transparent bg-clip-text bg-gradient-to-br from-brand-rose to-brand-plum drop-shadow-sm py-4 inline-block">
+                <h1 className={`font-sans font-black ${getDynamicFontSize(fact2)} leading-[1.2] tracking-tight select-none w-full text-center px-2 transition-all duration-300 relative z-10`}>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[40px] bg-[#C5FA01] -skew-x-12 z-[-1]"></div>
+                  <span className="text-black drop-shadow-sm py-4 inline-block relative z-10">
                     {fact2}
                   </span>
                 </h1>
@@ -296,8 +293,8 @@ export default function Hero() {
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-medium text-foreground mb-6 max-w-4xl min-h-[80px] sm:min-h-[60px] leading-tight px-2"
           >
             {settings?.heroTitle || 'We Build Digital Experiences That Grow'}{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-rose to-brand-blush font-bold inline-block w-[7em] text-center relative px-1 sm:px-2">
-              <span className="absolute inset-0 bg-brand-rose/10 dark:bg-brand-rose/20 rounded-lg -rotate-1 scale-105 pointer-events-none" />
+            <span className="text-black relative z-10 font-bold inline-block w-[7em] text-center px-1 sm:px-2">
+              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[40px] bg-[#C5FA01] -skew-x-12 z-[-1]" />
               {!prefersReducedMotion ? (
                 <Typewriter
                   words={['Websites.', 'Software.', 'Marketing.', 'Automation.']}
@@ -331,7 +328,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
           className="w-full max-w-2xl mx-auto mb-16 flex flex-col items-center"
         >
-          <form onSubmit={handleAudit} className="w-full relative flex flex-col sm:flex-row items-center gap-2 p-2 bg-background/80 backdrop-blur-xl border-2 border-brand-rose/50 rounded-3xl sm:rounded-full shadow-[0_0_40px_-10px_rgba(255,8,68,0.5)]">
+          <form onSubmit={handleAudit} className="w-full relative flex flex-col sm:flex-row items-center gap-2 p-2 bg-background/80 backdrop-blur-xl border-2 border-black/50 rounded-3xl sm:rounded-full shadow-[0_0_40px_-10px_rgba(255,8,68,0.5)]">
             <input 
               type="text" 
               placeholder="Enter your website URL (e.g. apple.com)" 
@@ -344,7 +341,7 @@ export default function Hero() {
               type="submit"
               disabled={loading || !url}
               size="lg" 
-              className="w-full sm:w-auto bg-gradient-to-r from-[#ff0844] to-[#ffb199] hover:from-[#e0003b] hover:to-[#ff9b7d] text-white rounded-full px-8 h-14 sm:h-16 text-lg font-black tracking-wide shadow-xl shadow-brand-rose/30 transition-all hover:-translate-y-1 group disabled:opacity-70 disabled:hover:-translate-y-0"
+              className="w-full sm:w-auto bg-[#C5FA01] hover:from-white hover:to-[#C5FA01] text-black rounded-full px-8 h-14 sm:h-16 text-lg font-black tracking-wide shadow-xl shadow-brand-rose/30 transition-all hover:-translate-y-1 group disabled:opacity-70 disabled:hover:-translate-y-0"
             >
               {loading ? (
                 <>
@@ -361,10 +358,10 @@ export default function Hero() {
           </form>
           {error && <p className="text-destructive text-sm mt-4 font-medium">{error}</p>}
           
-          <div className="flex items-center justify-center gap-6 mt-12 mb-6">
-            <span className="h-px w-12 bg-border"></span>
-            <span className="text-sm font-semibold text-muted-foreground tracking-widest uppercase">Explore Our Services</span>
-            <span className="h-px w-12 bg-border"></span>
+          <div className="flex items-center justify-center gap-3 md:gap-6 mt-8 md:mt-12 mb-6 px-4">
+            <span className="h-px w-8 md:w-12 bg-border shrink-0"></span>
+            <span className="text-xs md:text-sm font-semibold text-muted-foreground tracking-widest uppercase text-center shrink-0">Explore Our Services</span>
+            <span className="h-px w-8 md:w-12 bg-border shrink-0"></span>
           </div>
         </motion.div>
 
@@ -373,23 +370,25 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="flex flex-wrap justify-center gap-4 w-full max-w-4xl mx-auto"
+          className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3 md:gap-4 w-full max-w-5xl mx-auto py-4 md:py-6 px-4"
         >
-          {HERO_SERVICES.map((service, idx) => (
-            <Link to={`/services/${service.id}`} key={idx} className="block w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)]">
+          {heroServices.map((service, idx) => {
+            const IconComponent = FaIcons[service.icon] || FaIcons.FaBriefcase;
+            return (
+            <Link to={`/services/${service.id}`} key={idx} className="block w-full sm:w-auto">
               <motion.div 
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="group flex items-center gap-3 px-5 py-4 rounded-2xl bg-background/50 backdrop-blur-xl border border-border/60 shadow-lg hover:shadow-brand-rose/20 hover:border-brand-rose/40 transition-all cursor-pointer h-full"
+                whileHover={{ scale: 1.05 }}
+                className="group flex items-center justify-center sm:justify-start gap-2 px-5 py-4 sm:py-3 rounded-xl bg-[#C5FA01] text-black shadow-sm hover:shadow-lg cursor-pointer transition-all duration-300"
               >
-                <div className="w-10 h-10 rounded-full bg-brand-plum/10 dark:bg-brand-cream/10 flex flex-shrink-0 items-center justify-center text-brand-plum dark:text-brand-cream group-hover:bg-brand-rose group-hover:text-white transition-colors">
-                  {service.icon}
+                <div className="flex flex-shrink-0 items-center justify-center text-black/70 group-hover:text-black">
+                  <IconComponent />
                 </div>
-                <span className="text-sm md:text-base font-bold text-foreground/90 group-hover:text-brand-rose transition-colors">
+                <span className="text-sm md:text-base font-bold whitespace-nowrap">
                   {service.name}
                 </span>
               </motion.div>
             </Link>
-          ))}
+          )})}
         </motion.div>
 
       </div>

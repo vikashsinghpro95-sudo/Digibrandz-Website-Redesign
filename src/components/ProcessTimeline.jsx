@@ -38,10 +38,10 @@ export default function ProcessTimeline() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-display font-bold text-4xl md:text-5xl text-brand-plum dark:text-brand-cream mb-6"
+            className="font-display font-bold text-4xl md:text-5xl text-black  mb-6"
           >
             From Idea to Launch — <br/>
-            <span className="text-brand-rose">A Simple Process</span>
+            <span className="text-black ">A Simple Process</span>
           </motion.h2>
         </div>
 
@@ -52,7 +52,7 @@ export default function ProcessTimeline() {
           
           {/* Animated Fill Track */}
           <motion.div 
-            className="absolute top-0 left-[28px] md:left-1/2 w-1 h-full bg-gradient-to-b from-brand-rose to-brand-blush md:-translate-x-1/2 rounded-full origin-top"
+            className="absolute top-0 left-[28px] md:left-1/2 w-1 h-full bg-[#C5FA01] md:-translate-x-1/2 rounded-full origin-top"
             style={{ scaleY }}
           />
 
@@ -67,8 +67,8 @@ export default function ProcessTimeline() {
                   <div className="hidden md:block md:w-5/12" />
                   
                   {/* Center Node */}
-                  <div className="absolute left-[8px] md:left-1/2 -translate-x-0 md:-translate-x-1/2 w-10 h-10 rounded-full bg-background border-4 border-brand-rose z-10 flex items-center justify-center">
-                    <div className="w-3 h-3 bg-brand-rose rounded-full" />
+                  <div className="absolute left-[8px] md:left-1/2 -translate-x-0 md:-translate-x-1/2 w-10 h-10 rounded-full bg-background border-4 border-black z-10 flex items-center justify-center">
+                    <div className="w-3 h-3 bg-[#C5FA01] rounded-full" />
                   </div>
 
                   {/* Content Card */}
@@ -79,8 +79,8 @@ export default function ProcessTimeline() {
                     transition={{ duration: 0.6, type: "spring" }}
                     className={`w-full md:w-5/12 pl-16 md:pl-0 ${isEven ? 'md:text-left' : 'md:text-right'}`}
                   >
-                    <div className="bg-card border border-border p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-brand-rose/50 transition-all">
-                      <span className="text-brand-rose font-bold text-sm uppercase tracking-wider mb-2 block">Step 0{idx + 1}</span>
+                    <div className="bg-card border border-border p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-black/50 transition-all">
+                      <span className="text-black  font-bold text-sm uppercase tracking-wider mb-2 block">Step 0{idx + 1}</span>
                       <h3 className="font-display font-bold text-2xl text-foreground mb-2">{step.title}</h3>
                       <p className="text-muted-foreground leading-relaxed">{step.desc}</p>
                     </div>

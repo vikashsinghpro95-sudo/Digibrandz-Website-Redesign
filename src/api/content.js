@@ -118,12 +118,12 @@ export function normalizeCaseStudies(data) {
 }
 
 const TEAM_COLORS = [
-  'from-brand-rose to-[#ff0844]',
+  'from-white to-[#C5FA01]',
   'from-blue-500 to-cyan-400',
-  'from-brand-plum to-purple-500',
+  'from-white to-purple-500',
   'from-emerald-400 to-teal-500',
-  'from-orange-400 to-brand-rose',
-  'from-indigo-400 to-brand-plum',
+  'from-orange-400 to-[#C5FA01]',
+  'from-indigo-400 to-[#C5FA01]',
 ];
 
 export function normalizeTeam(data) {

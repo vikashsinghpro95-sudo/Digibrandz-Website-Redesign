@@ -7,6 +7,7 @@ import { Label } from './ui/label'
 import { Button } from './ui/button'
 import { useSettings } from '../contexts/SettingsContext'
 import { turso } from '../lib/turso'
+import AnimatedHeading from './ui/AnimatedHeading';
 
 export default function Contact() {
   const settings = useSettings() || {}
@@ -70,14 +71,7 @@ export default function Contact() {
       <div className="container mx-auto px-4 md:px-6">
         
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-display font-bold text-4xl md:text-5xl text-brand-plum dark:text-brand-cream mb-6"
-          >
-            Let's Talk About <span className="text-brand-rose">Your Project</span>
-          </motion.h2>
+          <AnimatedHeading text="Let's Talk About Your Project" className="font-display font-bold text-4xl md:text-5xl text-black  mb-6" />
           <p className="text-lg text-muted-foreground">
             Fill out the form below or reach out to us directly. We usually respond within 24 hours.
           </p>
@@ -94,7 +88,7 @@ export default function Contact() {
           >
             {success ? (
               <div className="flex flex-col items-center justify-center h-full text-center space-y-4 py-12">
-                <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 text-green-600 rounded-full flex items-center justify-center text-2xl">✓</div>
+                <div className="w-16 h-16 bg-green-100  text-green-600 rounded-full flex items-center justify-center text-2xl">✓</div>
                 <h3 className="text-2xl font-bold">Message Sent!</h3>
                 <p className="text-muted-foreground">Thank you for reaching out. We will get back to you shortly.</p>
                 <Button onClick={() => setSuccess(false)} variant="outline" className="mt-4">Send Another Message</Button>
@@ -102,7 +96,7 @@ export default function Contact() {
             ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
               {errorMsg && (
-                <div className="bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 p-4 rounded-xl border border-red-200 dark:border-red-800 text-sm font-medium">
+                <div className="bg-red-100  text-red-600  p-4 rounded-xl border border-red-200  text-sm font-medium">
                   {errorMsg}
                 </div>
               )}
@@ -183,7 +177,7 @@ export default function Contact() {
                     "Videography & Photography", "Other"
                   ].map((service) => (
                     <label key={service} className="flex items-center gap-3 text-sm cursor-pointer group">
-                      <input type="checkbox" className="w-4 h-4 rounded border-border text-brand-rose focus:ring-brand-rose/20 cursor-pointer accent-brand-rose" value={service} />
+                      <input type="checkbox" className="w-4 h-4 rounded border-border text-black  focus:ring-brand-rose/20 cursor-pointer accent-brand-rose" value={service} />
                       <span className="text-muted-foreground group-hover:text-foreground transition-colors">{service}</span>
                     </label>
                   ))}
@@ -219,7 +213,7 @@ export default function Contact() {
                 />
               </div>
 
-              <Button disabled={loading} type="submit" size="lg" className="w-full bg-brand-plum hover:bg-brand-plum/90 dark:bg-brand-cream dark:text-brand-plum dark:hover:bg-brand-cream/90 text-white font-bold h-14 text-base rounded-full">
+              <Button disabled={loading} type="submit" size="lg" className="w-full bg-[#C5FA01] hover:bg-[#C5FA01]/90   :bg-[#C5FA01]/90 text-black font-bold h-14 text-base rounded-full">
                 {loading ? "Sending..." : "Submit Enquiry"}
               </Button>
               
@@ -234,48 +228,48 @@ export default function Contact() {
             viewport={{ once: true }}
             className="w-full lg:w-2/5 flex flex-col gap-8"
           >
-            <div className="bg-brand-plum dark:bg-brand-darkPlum text-white rounded-3xl p-8 relative overflow-hidden flex-grow shadow-md">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-brand-rose/20 rounded-full blur-[60px] transform-gpu" />
+            <div className="bg-[#C5FA01]  text-black rounded-3xl p-8 relative overflow-hidden flex-grow shadow-md">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-[#C5FA01]/20 rounded-full blur-[60px] transform-gpu" />
               
-              <h3 className="font-display font-bold text-2xl mb-8 text-brand-cream relative z-10">Contact Information</h3>
+              <h3 className="font-display font-bold text-2xl mb-8 text-black relative z-10">Contact Information</h3>
               
-              <div className="space-y-6 relative z-10 text-brand-cream/90">
+              <div className="space-y-6 relative z-10 text-black/90">
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-brand-rose">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-black ">
                     <FaLocationDot size={20} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-white mb-1">Our Office</h4>
+                    <h4 className="font-bold text-black mb-1">Our Office</h4>
                     <p className="leading-relaxed whitespace-pre-line">{settings.contactAddress || "Office no.23, 3rd Floor, Aston Plaza, Narhe Ambegaon Rd, above Star Bazaar, Ambegaon Budruk, Pune, Maharashtra 411046"}</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-brand-rose">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-black ">
                     <FaEnvelope size={20} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-white mb-1">Email Us</h4>
-                    <p><a href={`mailto:${settings.contactEmail || "Digibrandzitsolutions@gmail.com"}`} className="hover:text-brand-rose transition-colors break-all">{settings.contactEmail || "Digibrandzitsolutions@gmail.com"}</a></p>
+                    <h4 className="font-bold text-black mb-1">Email Us</h4>
+                    <p><a href={`mailto:${settings.contactEmail || "Digibrandzitsolutions@gmail.com"}`} className="hover:text-black  transition-colors break-all">{settings.contactEmail || "Digibrandzitsolutions@gmail.com"}</a></p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-brand-rose">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-black ">
                     <FaPhone size={20} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-white mb-1">Call Us</h4>
-                    <p><a href={`tel:${settings.contactPhone || "+918483082699"}`} className="hover:text-brand-rose transition-colors">{settings.contactPhone || "+91 8483082699"}</a></p>
+                    <h4 className="font-bold text-black mb-1">Call Us</h4>
+                    <p><a href={`tel:${settings.contactPhone || "+918483082699"}`} className="hover:text-black  transition-colors">{settings.contactPhone || "+91 8483082699"}</a></p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-brand-rose">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-black ">
                     <FaClock size={20} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-white mb-1">Working Hours</h4>
+                    <h4 className="font-bold text-black mb-1">Working Hours</h4>
                     <p>Monday - Saturday: 10:00 AM - 6:30 PM</p>
                   </div>
                 </div>

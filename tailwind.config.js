@@ -40,11 +40,9 @@ export default {
   				foreground: '#601D49'
   			},
   			brand: {
-  				plum: '#601D49',
-  				darkPlum: '#1A0E15',
-  				rose: '#BD5579',
-  				blush: '#EA9D9D',
-  				cream: '#FFEBB8'
+  				accent: '#C5FA01',
+  				base: '#FFFFFF',
+  				dark: '#000000'
   			},
   			destructive: {
   				DEFAULT: 'hsl(var(--destructive))',

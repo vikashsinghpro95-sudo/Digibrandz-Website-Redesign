@@ -93,7 +93,7 @@ export default function ServicesAdmin() {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold text-zinc-900">Manage Services</h2>
-        {editingId !== null && <button onClick={resetForm} className="text-sm text-brand-plum">Cancel Edit</button>}
+        {editingId !== null && <button onClick={resetForm} className="text-sm text-black">Cancel Edit</button>}
       </div>
       <div className="bg-white p-6 rounded-xl border border-zinc-200 shadow-sm">
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -112,7 +112,7 @@ export default function ServicesAdmin() {
             <div><label className="block text-sm font-medium mb-1">Status</label><select className="w-full p-2 border rounded-lg" value={status} onChange={e => setStatus(e.target.value)}><option value="published">Published</option><option value="draft">Draft</option></select></div>
             <div><label className="block text-sm font-medium mb-1">Display Order</label><input type="number" className="w-full p-2 border rounded-lg" value={displayOrder} onChange={e => setDisplayOrder(parseInt(e.target.value))} /></div>
           </div>
-          <button type="submit" className="bg-brand-plum text-white px-6 py-2 rounded-lg">{editingId ? 'Update Service' : 'Create Service'}</button>
+          <button type="submit" className="bg-[#C5FA01] text-black px-6 py-2 rounded-lg">{editingId ? 'Update Service' : 'Create Service'}</button>
         </form>
       </div>
       <SortableTable 
@@ -127,7 +127,7 @@ export default function ServicesAdmin() {
         renderRow={(item) => (
           <>
             <td className="px-6 py-4">{item.title}</td>
-            <td className="px-6 py-4 text-right space-x-3"><button onClick={() => handleEdit(item)} className="text-brand-plum">Edit</button><button onClick={() => handleDelete(item.id)} className="text-red-500">Delete</button></td>
+            <td className="px-6 py-4 text-right space-x-3"><button onClick={() => handleEdit(item)} className="text-black">Edit</button><button onClick={() => handleDelete(item.id)} className="text-red-500">Delete</button></td>
           </>
         )}
       />

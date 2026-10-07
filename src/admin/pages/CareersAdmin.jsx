@@ -80,7 +80,7 @@ export default function CareersAdmin() {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold text-zinc-900">Manage Careers</h2>
-        {editingId !== null && <button onClick={resetForm} className="text-sm text-brand-plum">Cancel Edit</button>}
+        {editingId !== null && <button onClick={resetForm} className="text-sm text-black">Cancel Edit</button>}
       </div>
       <div className="bg-white p-6 rounded-xl border border-zinc-200 shadow-sm">
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -98,7 +98,7 @@ export default function CareersAdmin() {
           </div>
           <div><label className="block text-sm font-medium mb-1">Description</label><textarea className="w-full p-2 border rounded-lg h-24" value={description} onChange={e => setDescription(e.target.value)} /></div>
           <div><label className="block text-sm font-medium mb-1">Requirements (One per line)</label><textarea className="w-full p-2 border rounded-lg h-24" value={requirements} onChange={e => setRequirements(e.target.value)} /></div>
-          <button type="submit" className="bg-brand-plum text-white px-6 py-2 rounded-lg">{editingId ? 'Update' : 'Create'}</button>
+          <button type="submit" className="bg-[#C5FA01] text-black px-6 py-2 rounded-lg">{editingId ? 'Update' : 'Create'}</button>
         </form>
       </div>
       <SortableTable 
@@ -119,7 +119,7 @@ export default function CareersAdmin() {
                 {item.status || 'open'}
               </span>
             </td>
-            <td className="px-6 py-4 text-right space-x-3"><button onClick={() => handleEdit(item)} className="text-brand-plum">Edit</button><button onClick={() => handleDelete(item.id)} className="text-red-500">Delete</button></td>
+            <td className="px-6 py-4 text-right space-x-3"><button onClick={() => handleEdit(item)} className="text-black">Edit</button><button onClick={() => handleDelete(item.id)} className="text-red-500">Delete</button></td>
           </>
         )}
       />

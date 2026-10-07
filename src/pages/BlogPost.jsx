@@ -36,7 +36,7 @@ export default function BlogPost() {
     <div className="min-h-screen flex flex-col items-center justify-center pt-24 text-center">
       <h1 className="text-4xl font-display font-bold text-foreground mb-4">Post Not Found</h1>
       <p className="text-muted-foreground mb-8">The article you're looking for doesn't exist or was removed.</p>
-      <Link to="/blog" className="text-brand-rose hover:underline font-bold flex items-center gap-2"><FaArrowLeft /> Back to Blog</Link>
+      <Link to="/blog" className="text-black  hover:underline font-bold flex items-center gap-2"><FaArrowLeft /> Back to Blog</Link>
     </div>
   );
 
@@ -56,14 +56,14 @@ export default function BlogPost() {
       <article className="container mx-auto px-4 md:px-6 max-w-3xl">
         
         {/* Back Link */}
-        <Link to="/blog" className="inline-flex items-center gap-2 text-muted-foreground hover:text-brand-rose transition-colors font-semibold text-sm mb-10">
+        <Link to="/blog" className="inline-flex items-center gap-2 text-muted-foreground hover:text-black  transition-colors font-semibold text-sm mb-10">
           <FaArrowLeft /> Back to Insights
         </Link>
 
         {/* Header */}
         <header className="mb-12">
           <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground uppercase tracking-widest mb-6">
-            <FaRegCalendar className="text-brand-rose" />
+            <FaRegCalendar className="text-black " />
             {new Date(blog.createdAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
           </div>
           <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight tracking-tight mb-8">
@@ -79,7 +79,7 @@ export default function BlogPost() {
 
         {/* Content (Prose) */}
         <div 
-          className="prose prose-lg md:prose-xl dark:prose-invert prose-headings:font-display prose-headings:font-bold prose-a:text-brand-rose hover:prose-a:text-brand-rose/80 mx-auto w-full break-words prose-img:rounded-2xl prose-img:shadow-lg prose-img:w-full overflow-hidden"
+          className="prose prose-lg md:prose-xl  prose-headings:font-display prose-headings:font-bold prose-a:text-black  hover:prose-a:text-black/80  mx-auto w-full break-words prose-img:rounded-2xl prose-img:shadow-lg prose-img:w-full overflow-hidden"
           style={{ overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-word' }}
           dangerouslySetInnerHTML={{ __html: safeHTML }}
         />
@@ -89,8 +89,8 @@ export default function BlogPost() {
           <div>
             <h4 className="font-bold text-foreground">Share this article</h4>
             <div className="flex gap-4 mt-4">
-              <button className="text-muted-foreground hover:text-brand-rose">Twitter</button>
-              <button className="text-muted-foreground hover:text-brand-rose">LinkedIn</button>
+              <button className="text-muted-foreground hover:text-black ">Twitter</button>
+              <button className="text-muted-foreground hover:text-black ">LinkedIn</button>
             </div>
           </div>
         </footer>

@@ -31,7 +31,7 @@ export default function SoftwareDevelopment() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="font-display font-bold text-4xl md:text-5xl text-brand-plum dark:text-brand-cream mb-6"
+              className="font-display font-bold text-4xl md:text-5xl text-black  mb-6"
             >
               Software Built Around Your Business
             </motion.h2>
@@ -51,7 +51,7 @@ export default function SoftwareDevelopment() {
               transition={{ delay: 0.2 }}
             >
               <Link to="/contact">
-                <Button size="lg" className="bg-brand-plum hover:bg-brand-plum/90 dark:bg-brand-cream dark:text-brand-plum dark:hover:bg-brand-cream/90 text-white rounded-full">
+                <Button size="lg" className="bg-[#C5FA01] hover:bg-[#C5FA01]/90   :bg-[#C5FA01]/90 text-black rounded-full">
                   Discuss Your Software Idea
                 </Button>
               </Link>
@@ -67,12 +67,12 @@ export default function SoftwareDevelopment() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.05 }}
-                    className="group bg-white dark:bg-white/5 border border-border dark:border-white/10 hover:border-brand-rose dark:hover:border-brand-rose/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full cursor-pointer"
+                    className="group bg-white  border border-border  hover:border-black :border-black/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full cursor-pointer"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-brand-plum/5 dark:bg-white/10 text-brand-plum dark:text-brand-cream flex items-center justify-center text-xl mb-4 group-hover:bg-brand-rose group-hover:text-white transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-[#C5FA01]/5  text-black  flex items-center justify-center text-xl mb-4 group-hover:bg-[#C5FA01] group-hover:text-black transition-colors">
                       {item.icon}
                     </div>
-                    <h3 className="font-display font-bold text-lg text-foreground dark:text-white group-hover:text-brand-rose transition-colors">
+                    <h3 className="font-display font-bold text-lg text-foreground  group-hover:text-black  transition-colors">
                       {item.name}
                     </h3>
                   </motion.div>

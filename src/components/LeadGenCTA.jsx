@@ -2,36 +2,29 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from './ui/button'
 import { Link } from 'react-router-dom'
+import AnimatedHeading from './ui/AnimatedHeading';
 
 export default function LeadGenCTA() {
     return (
     <section className="relative overflow-hidden">
       {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-plum to-brand-rose z-0" />
+      <div className="absolute inset-0 bg-[#C5FA01] z-0" />
       
       {/* Decorative Overlays */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-blush/20 to-transparent mix-blend-overlay pointer-events-none z-0" />
-      <div className="absolute bottom-0 left-0 w-1/2 h-full bg-gradient-to-t from-brand-darkPlum/50 to-transparent mix-blend-overlay pointer-events-none z-0" />
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#C5FA01]/20 to-transparent mix-blend-overlay pointer-events-none z-0" />
+      <div className="absolute bottom-0 left-0 w-1/2 h-full bg-[#C5FA01]/50 to-transparent mix-blend-overlay pointer-events-none z-0" />
       
       <div className="container mx-auto px-4 md:px-6 relative z-10 py-32">
         <div className="max-w-4xl mx-auto text-center">
           
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight tracking-tight"
-          >
-            Have an Idea? <br className="hidden sm:block"/>
-            Let's Build It <span className="text-brand-cream">Together.</span>
-          </motion.h2>
+          <AnimatedHeading text="Have an Idea? Let's Build It Together." className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-black mb-6 leading-tight tracking-tight" />
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-xl md:text-2xl text-white/80 mb-12 font-medium"
+            className="text-xl md:text-2xl text-black mb-12 font-medium"
           >
             Whether it's a disruptive app, a high-converting website, or a full-scale digital marketing campaign—we're ready when you are.
           </motion.p>
@@ -44,12 +37,12 @@ export default function LeadGenCTA() {
             className="flex flex-col sm:flex-row justify-center items-center gap-4"
           >
             <Link to="/contact">
-              <Button size="lg" className="bg-brand-cream text-brand-plum hover:bg-white px-8 h-14 text-base font-bold rounded-full shadow-xl shadow-brand-cream/20 transition-all hover:-translate-y-1">
+              <Button size="lg" className="bg-[#C5FA01] text-black hover:bg-white px-8 h-14 text-base font-bold rounded-full shadow-xl shadow-brand-cream/20 transition-all hover:-translate-y-1">
                 Start a Project
               </Button>
             </Link>
             <Link to="/contact">
-              <Button size="lg" variant="outline" className="border-brand-cream/30 text-white bg-white/5 hover:bg-white/20 hover:text-white rounded-full px-10 h-16 text-lg font-bold backdrop-blur-sm transition-transform hover:scale-105 active:scale-95 w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="border-black/30 text-black bg-white/5 hover:bg-white/20 hover:text-black rounded-full px-10 h-16 text-lg font-bold backdrop-blur-sm transition-transform hover:scale-105 active:scale-95 w-full sm:w-auto">
                 Book a Free Consultation
               </Button>
             </Link>

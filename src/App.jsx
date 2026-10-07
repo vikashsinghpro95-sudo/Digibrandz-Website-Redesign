@@ -38,10 +38,12 @@ const IndustriesAdmin = lazy(() => import('./admin/pages/IndustriesAdmin'))
 const PortfolioAdmin = lazy(() => import('./admin/pages/PortfolioAdmin'))
 const TeamAdmin = lazy(() => import('./admin/pages/TeamAdmin'))
 const CareersAdmin = lazy(() => import('./admin/pages/CareersAdmin'))
+const JobApplicationsAdmin = lazy(() => import('./admin/pages/JobApplicationsAdmin'))
 const SettingsAdmin = lazy(() => import('./admin/pages/SettingsAdmin'))
 const ClientRequestsAdmin = lazy(() => import('./admin/pages/ClientRequestsAdmin'))
 const AuditsAdmin = lazy(() => import('./admin/pages/AuditsAdmin'))
 const ChatsAdmin = lazy(() => import('./admin/pages/ChatsAdmin'))
+const HeroServicesAdmin = lazy(() => import('./admin/pages/HeroServicesAdmin'))
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -59,7 +61,7 @@ function ScrollToTop() {
 
 function PublicLayout() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-brand-rose/30 selection:text-brand-rose">
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-[#C5FA01]/30 selection:text-black ">
       <Navbar />
       <main className="flex-grow">
         <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
@@ -153,10 +155,12 @@ function App() {
                   <Route index element={<Dashboard />} />
                   <Route path="blogs" element={<BlogsAdmin />} />
                   <Route path="services" element={<ServicesAdmin />} />
+                  <Route path="hero-services" element={<HeroServicesAdmin />} />
                   <Route path="industries" element={<IndustriesAdmin />} />
                   <Route path="portfolio" element={<PortfolioAdmin />} />
                   <Route path="team" element={<TeamAdmin />} />
                   <Route path="careers" element={<CareersAdmin />} />
+                  <Route path="job-applications" element={<JobApplicationsAdmin />} />
                   <Route path="settings" element={<SettingsAdmin />} />
                   <Route path="client-requests" element={<ClientRequestsAdmin />} />
                   <Route path="audits" element={<AuditsAdmin />} />

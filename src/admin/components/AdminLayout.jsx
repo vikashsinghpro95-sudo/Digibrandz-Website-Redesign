@@ -7,10 +7,12 @@ const navItems = [
   { name: 'Dashboard', to: '/admin', icon: LayoutDashboard, end: true },
   { name: 'Blogs', to: '/admin/blogs', icon: FileText },
   { name: 'Services', to: '/admin/services', icon: Briefcase },
+  { name: 'Hero Services', to: '/admin/hero-services', icon: Briefcase },
   { name: 'Portfolio (Case Studies)', to: '/admin/portfolio', icon: LayoutTemplate },
   { name: 'Industries', to: '/admin/industries', icon: Briefcase },
   { name: 'Team', to: '/admin/team', icon: Users },
   { name: 'Careers', to: '/admin/careers', icon: Briefcase },
+  { name: 'Job Applications', to: '/admin/job-applications', icon: Briefcase },
   { name: 'Client Requests', to: '/admin/client-requests', icon: MessageSquare },
   { name: 'SEO Audits', to: '/admin/audits', icon: FileText },
   { name: 'AI Chats', to: '/admin/chats', icon: MessageSquare },
@@ -20,7 +22,7 @@ const navItems = [
 export default function AdminLayout() {
   const { isAuthenticated, isLoading, user, logout } = useAuth();
 
-  if (isLoading) return <div className="min-h-screen flex items-center justify-center bg-zinc-950 text-white">Loading...</div>;
+  if (isLoading) return <div className="min-h-screen flex items-center justify-center bg-zinc-950 text-black">Loading...</div>;
   if (!isAuthenticated) return <Navigate to="/admin/login" />;
 
   return (
@@ -28,7 +30,7 @@ export default function AdminLayout() {
       {/* Sidebar */}
       <aside className="w-64 bg-zinc-950 text-zinc-300 flex flex-col shadow-xl z-20">
         <div className="h-16 flex items-center px-6 border-b border-zinc-800">
-          <span className="text-xl font-bold text-white tracking-tight">DigiBrandz CMS</span>
+          <span className="text-xl font-bold text-black tracking-tight">DigiBrandz CMS</span>
         </div>
         
         <nav className="flex-1 py-6 px-3 space-y-1">
@@ -39,7 +41,7 @@ export default function AdminLayout() {
               end={item.end}
               className={({ isActive }) =>
                 `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
-                  isActive ? 'bg-zinc-800 text-white font-medium' : 'hover:bg-zinc-900 hover:text-white'
+                  isActive ? 'bg-zinc-800 text-black font-medium' : 'hover:bg-zinc-900 hover:text-black'
                 }`
               }
             >
@@ -52,7 +54,7 @@ export default function AdminLayout() {
         <div className="p-4 border-t border-zinc-800">
           <button
             onClick={logout}
-            className="flex items-center gap-3 px-3 py-2 w-full rounded-lg text-zinc-400 hover:bg-zinc-900 hover:text-white transition-colors"
+            className="flex items-center gap-3 px-3 py-2 w-full rounded-lg text-zinc-400 hover:bg-zinc-900 hover:text-black transition-colors"
           >
             <LogOut className="w-5 h-5" />
             Logout
@@ -67,9 +69,9 @@ export default function AdminLayout() {
           {user && (
             <div className="flex items-center gap-3">
               <span className="text-sm font-medium text-zinc-600">
-                Welcome, <span className="text-brand-plum font-bold">{user.username}</span>
+                Welcome, <span className="text-black font-bold">{user.username}</span>
               </span>
-              <span className="w-8 h-8 rounded-full bg-brand-rose text-white flex items-center justify-center font-bold text-sm">
+              <span className="w-8 h-8 rounded-full bg-[#C5FA01] text-black flex items-center justify-center font-bold text-sm">
                 {user.username.charAt(0).toUpperCase()}
               </span>
             </div>

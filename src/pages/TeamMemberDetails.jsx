@@ -51,12 +51,12 @@ export default function TeamMemberDetails() {
         breadcrumbs={['Team', member.name]}
       />
 
-      <section className="py-20 relative">
+      <section className="py-20 relative bg-background">
         <div className="container mx-auto px-4 max-w-5xl">
           
-          <div className="bg-card rounded-[3rem] p-8 md:p-12 border border-border shadow-2xl relative overflow-hidden flex flex-col md:flex-row gap-12 items-start">
+          <div className="bg-white rounded-[3rem] p-8 md:p-12 border border-border shadow-2xl relative overflow-hidden flex flex-col md:flex-row gap-12 items-start">
             {/* Background Glow */}
-            <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-brand-rose/5 rounded-full blur-[80px] transform-gpu pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#C5FA01]/5 rounded-full blur-[80px] transform-gpu pointer-events-none" />
             
             {/* Avatar Section */}
             <div className="w-full md:w-1/3 flex flex-col items-center shrink-0 relative z-10">
@@ -70,7 +70,7 @@ export default function TeamMemberDetails() {
                 ) : (
                   <>
                     <div className="absolute inset-0 bg-black/10" />
-                    <span className="text-7xl md:text-8xl font-display font-bold text-white/90 drop-shadow-lg">
+                    <span className="text-7xl md:text-8xl font-display font-bold text-black drop-shadow-lg">
                       {member.initials}
                     </span>
                   </>
@@ -79,17 +79,17 @@ export default function TeamMemberDetails() {
               
               <div className="flex gap-4">
                 {member.socials?.linkedin && (
-                  <a href={member.socials.linkedin} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-brand-rose hover:text-white transition-colors shadow-sm">
+                  <a href={member.socials.linkedin} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-black hover:bg-[#C5FA01] hover:text-black transition-colors shadow-sm">
                     <FaLinkedin size={20} />
                   </a>
                 )}
                 {member.socials?.twitter && (
-                  <a href={member.socials.twitter} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-brand-rose hover:text-white transition-colors shadow-sm">
+                  <a href={member.socials.twitter} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-black hover:bg-[#C5FA01] hover:text-black transition-colors shadow-sm">
                     <FaTwitter size={20} />
                   </a>
                 )}
                 {member.socials?.github && (
-                  <a href={member.socials.github} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-foreground hover:bg-brand-rose hover:text-white transition-colors shadow-sm">
+                  <a href={member.socials.github} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-black hover:bg-[#C5FA01] hover:text-black transition-colors shadow-sm">
                     <FaGithub size={20} />
                   </a>
                 )}
@@ -103,22 +103,22 @@ export default function TeamMemberDetails() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
               >
-                <h2 className="text-3xl font-bold mb-2 font-display text-foreground">{member.name}</h2>
-                <p className="text-brand-rose font-semibold text-lg uppercase tracking-wider mb-8">{member.role}</p>
+                <h2 className="text-3xl font-bold mb-2 font-display text-black">{member.name}</h2>
+                <p className="text-black  font-semibold text-lg uppercase tracking-wider mb-8">{member.role}</p>
                 
-                <h3 className="text-xl font-bold mb-4 font-display text-foreground">Biography</h3>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-10">
+                <h3 className="text-xl font-bold mb-4 font-display text-black">Biography</h3>
+                <p className="text-lg text-black/80 leading-relaxed mb-10">
                   {member.fullBio || member.bio}
                 </p>
 
                 {member.expertise && member.expertise.length > 0 && (
                   <>
-                    <h3 className="text-xl font-bold mb-6 font-display text-foreground">Areas of Expertise</h3>
+                    <h3 className="text-xl font-bold mb-6 font-display text-black">Areas of Expertise</h3>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {member.expertise.map((skill, idx) => (
                         <li key={idx} className="flex items-center gap-3">
-                          <FaCircleCheck className="text-brand-rose shrink-0" />
-                          <span className="text-muted-foreground font-medium">{skill}</span>
+                          <FaCircleCheck className="text-black  shrink-0" />
+                          <span className="text-black/80 font-medium">{skill}</span>
                         </li>
                       ))}
                     </ul>

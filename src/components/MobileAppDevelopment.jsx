@@ -11,9 +11,9 @@ export default function MobileAppDevelopment() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-display font-bold text-4xl md:text-5xl text-brand-plum dark:text-brand-cream mb-6"
+          className="font-display font-bold text-4xl md:text-5xl text-black  mb-6"
         >
-          Turn Your Idea Into a <span className="text-brand-rose">Powerful Mobile App</span>
+          Turn Your Idea Into a <span className="text-black ">Powerful Mobile App</span>
         </motion.h2>
         
         <motion.p 
@@ -34,11 +34,11 @@ export default function MobileAppDevelopment() {
           transition={{ delay: 0.2, duration: 0.8 }}
           className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70"
         >
-          <div className="flex flex-col items-center gap-2 hover:opacity-100 hover:text-brand-rose transition-all">
+          <div className="flex flex-col items-center gap-2 hover:opacity-100 hover:text-black  transition-all">
             <SiAndroid size={48} />
             <span className="text-sm font-medium">Android</span>
           </div>
-          <div className="flex flex-col items-center gap-2 hover:opacity-100 hover:text-brand-rose transition-all">
+          <div className="flex flex-col items-center gap-2 hover:opacity-100 hover:text-black  transition-all">
             <SiApple size={48} />
             <span className="text-sm font-medium">iOS</span>
           </div>
@@ -54,7 +54,7 @@ export default function MobileAppDevelopment() {
             <SiFirebase size={48} />
             <span className="text-sm font-medium">Firebase</span>
           </div>
-          <div className="flex flex-col items-center gap-2 hover:opacity-100 hover:text-brand-plum dark:hover:text-brand-cream transition-all">
+          <div className="flex flex-col items-center gap-2 hover:opacity-100 hover:text-black :text-black transition-all">
             <FaNetworkWired size={48} />
             <span className="text-sm font-medium">REST APIs</span>
           </div>

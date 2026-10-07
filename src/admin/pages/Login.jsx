@@ -47,7 +47,7 @@ export default function Login() {
             <input
               type="text"
               required
-              className="w-full px-4 py-2.5 rounded-lg border border-zinc-300 focus:ring-2 focus:ring-brand-plum focus:border-brand-plum outline-none transition-shadow"
+              className="w-full px-4 py-2.5 rounded-lg border border-zinc-300 focus:ring-2 focus:ring-brand-plum focus:border-black outline-none transition-shadow"
               value={username}
               onChange={e => setUsername(e.target.value)}
             />
@@ -57,7 +57,7 @@ export default function Login() {
             <input
               type="password"
               required
-              className="w-full px-4 py-2.5 rounded-lg border border-zinc-300 focus:ring-2 focus:ring-brand-plum focus:border-brand-plum outline-none transition-shadow"
+              className="w-full px-4 py-2.5 rounded-lg border border-zinc-300 focus:ring-2 focus:ring-brand-plum focus:border-black outline-none transition-shadow"
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
@@ -65,7 +65,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-brand-plum text-white font-semibold py-2.5 rounded-lg hover:bg-brand-darkPlum transition-colors disabled:opacity-50"
+            className="w-full bg-[#C5FA01] text-black font-semibold py-2.5 rounded-lg hover:bg-[#C5FA01] transition-colors disabled:opacity-50"
           >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>

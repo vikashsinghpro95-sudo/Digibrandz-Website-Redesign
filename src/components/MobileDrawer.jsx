@@ -31,13 +31,13 @@ export default function MobileDrawer({ isOpen, onClose }) {
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed bottom-0 left-0 right-0 z-40 bg-brand-darkPlum/95 backdrop-blur-3xl border-t border-white/10 rounded-t-[2.5rem] shadow-[0_-20px_40px_rgba(0,0,0,0.5)] lg:hidden flex flex-col max-h-[85vh]"
+            className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-3xl border-t border-black/10 rounded-t-[2.5rem] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] lg:hidden flex flex-col max-h-[85vh]"
           >
-            <div className="flex justify-between items-center p-8 border-b border-white/10 shrink-0">
-              <h2 className="font-display font-bold text-2xl text-brand-cream">More Options</h2>
+            <div className="flex justify-between items-center p-8 border-b border-black/10 shrink-0">
+              <h2 className="font-display font-bold text-2xl text-black">More Options</h2>
               <button 
                 onClick={onClose}
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-brand-cream hover:bg-brand-rose transition-colors"
+                className="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center text-black hover:bg-[#C5FA01] transition-colors"
               >
                 <FaXmark size={18} />
               </button>
@@ -71,11 +71,11 @@ export default function MobileDrawer({ isOpen, onClose }) {
                       onClick={onClose}
                       className={`flex items-center gap-3 p-4 rounded-2xl border transition-colors block w-full h-full ${
                         location.pathname === link.to 
-                          ? 'border-brand-rose bg-brand-rose/10 text-brand-rose shadow-sm' 
-                          : 'border-white/10 bg-white/5 hover:bg-white/10 text-brand-cream/80'
+                          ? 'border-black bg-[#C5FA01]/10 text-black shadow-sm' 
+                          : 'border-black/10 bg-black/5 hover:bg-black/10 text-black/80'
                       }`}
                     >
-                      <link.icon size={20} className={location.pathname === link.to ? 'text-brand-rose' : 'text-brand-cream/60'} />
+                      <link.icon size={20} className={location.pathname === link.to ? 'text-black' : 'text-black/60'} />
                       <span className="font-bold text-sm tracking-wide">{link.name}</span>
                     </Link>
                   </motion.div>

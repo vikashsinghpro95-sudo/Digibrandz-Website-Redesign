@@ -95,7 +95,7 @@ export default function BlogsAdmin() {
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold text-zinc-900">Manage Blogs</h2>
         {editingId !== null && (
-          <button onClick={resetForm} className="text-sm text-brand-plum font-medium">Cancel Edit</button>
+          <button onClick={resetForm} className="text-sm text-black font-medium">Cancel Edit</button>
         )}
       </div>
 
@@ -133,7 +133,7 @@ export default function BlogsAdmin() {
               <ReactQuill theme="snow" value={content} onChange={setContent} className="h-64 mb-12" />
             </div>
           </div>
-          <button type="submit" className="bg-brand-plum text-white px-6 py-2 rounded-lg hover:bg-brand-darkPlum">
+          <button type="submit" className="bg-[#C5FA01] text-black px-6 py-2 rounded-lg hover:bg-[#C5FA01]">
             {editingId ? 'Update Blog' : 'Publish Blog'}
           </button>
         </form>
@@ -158,7 +158,7 @@ export default function BlogsAdmin() {
               </span>
             </td>
             <td className="px-6 py-4 text-right space-x-3">
-              <button onClick={() => handleEdit(blog)} className="text-brand-plum font-medium hover:text-brand-plum/80">Edit</button>
+              <button onClick={() => handleEdit(blog)} className="text-black font-medium hover:text-black/80">Edit</button>
               <button onClick={() => handleDelete(blog.id)} className="text-red-600 font-medium hover:text-red-800">Delete</button>
             </td>
           </>

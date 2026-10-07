@@ -15,9 +15,9 @@ export default function WebDevelopment() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-display font-bold text-4xl md:text-5xl text-brand-plum dark:text-brand-cream mb-6"
+          className="font-display font-bold text-4xl md:text-5xl text-black  mb-6"
         >
-          Websites That Look Great. <span className="text-brand-rose">Perform Better.</span>
+          Websites That Look Great. <span className="text-black ">Perform Better.</span>
         </motion.h2>
         
         <motion.p 
@@ -40,7 +40,7 @@ export default function WebDevelopment() {
           {TYPES.map((type, idx) => (
             <span 
               key={idx}
-              className="px-5 py-2.5 bg-background border border-border text-foreground rounded-full text-sm font-medium shadow-sm hover:border-brand-rose hover:text-brand-rose transition-colors cursor-default"
+              className="px-5 py-2.5 bg-background border border-border text-foreground rounded-full text-sm font-medium shadow-sm hover:border-black hover:text-black  transition-colors cursor-default"
             >
               {type}
             </span>

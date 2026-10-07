@@ -18,10 +18,10 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {cards.map((c) => (
           <NavLink key={c.title} to={c.to} className="bg-white rounded-2xl p-6 shadow-sm border border-zinc-100 hover:shadow-md transition-shadow group flex flex-col">
-            <div className={`w-12 h-12 rounded-xl text-white flex items-center justify-center mb-4 ${c.color}`}>
+            <div className={`w-12 h-12 rounded-xl text-black flex items-center justify-center mb-4 ${c.color}`}>
               <c.icon className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-semibold text-zinc-900 group-hover:text-brand-plum transition-colors">{c.title}</h3>
+            <h3 className="text-lg font-semibold text-zinc-900 group-hover:text-black transition-colors">{c.title}</h3>
             <p className="text-zinc-500 text-sm mt-1">{c.desc}</p>
           </NavLink>
         ))}

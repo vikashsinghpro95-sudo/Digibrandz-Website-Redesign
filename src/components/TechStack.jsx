@@ -21,9 +21,9 @@ export default function TechStack() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-display font-bold text-4xl md:text-5xl text-brand-plum dark:text-brand-cream mb-6"
+            className="font-display font-bold text-4xl md:text-5xl text-black  mb-6"
           >
-            Powered by <span className="text-brand-rose">Modern Technologies</span>
+            Powered by <span className="text-black ">Modern Technologies</span>
           </motion.h2>
         </div>
 
@@ -33,7 +33,7 @@ export default function TechStack() {
               <TabsTrigger 
                 key={cat} 
                 value={cat}
-                className="rounded-full px-6 py-2.5 data-[state=active]:bg-brand-plum data-[state=active]:text-white dark:data-[state=active]:bg-brand-cream dark:data-[state=active]:text-brand-plum border border-transparent data-[state=inactive]:border-border hover:bg-muted transition-colors"
+                className="rounded-full px-6 py-2.5 data-[state=active]:bg-[#C5FA01] data-[state=active]:text-black =active]:bg-[#C5FA01] =active]:text-black border border-transparent data-[state=inactive]:border-border hover:bg-muted transition-colors"
               >
                 {cat}
               </TabsTrigger>
@@ -51,7 +51,7 @@ export default function TechStack() {
                 {techs.map(tech => (
                   <div 
                     key={tech} 
-                    className="px-6 py-4 bg-background border border-border rounded-xl shadow-sm text-foreground font-medium hover:border-brand-rose hover:text-brand-rose transition-colors flex items-center justify-center min-w-[120px]"
+                    className="px-6 py-4 bg-background border border-border rounded-xl shadow-sm text-foreground font-medium hover:border-black hover:text-black  transition-colors flex items-center justify-center min-w-[120px]"
                   >
                     {tech}
                   </div>

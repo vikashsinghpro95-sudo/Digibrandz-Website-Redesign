@@ -6,6 +6,22 @@ export default function ClientRequestsAdmin() {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedRequest, setSelectedRequest] = useState(null);
+  const [filterStatus, setFilterStatus] = useState('All');
+
+  const getStatusColor = (status) => {
+    switch (status?.toLowerCase()) {
+      case 'new': return 'bg-blue-100 text-blue-700';
+      case 'contacted': return 'bg-yellow-100 text-yellow-700';
+      case 'calling status': return 'bg-purple-100 text-purple-700';
+      case 'positive': return 'bg-emerald-100 text-emerald-700';
+      case 'negative': return 'bg-red-100 text-red-700';
+      case 'follow-up 1': return 'bg-orange-100 text-orange-700';
+      case 'follow-up 2': return 'bg-orange-200 text-orange-800';
+      case 'interested': return 'bg-green-100 text-green-700';
+      case 'not interested': return 'bg-zinc-200 text-zinc-700';
+      default: return 'bg-blue-100 text-blue-700';
+    }
+  };
 
   useEffect(() => {
     fetchRequests();
@@ -60,16 +76,32 @@ export default function ClientRequestsAdmin() {
       <div className="flex gap-6 flex-1 min-h-0">
         {/* List side */}
         <div className="w-1/3 bg-white rounded-xl border border-zinc-200 shadow-sm overflow-hidden flex flex-col h-[70vh]">
-          <div className="bg-zinc-50 border-b border-zinc-200 p-4 shrink-0">
+          <div className="bg-zinc-50 border-b border-zinc-200 p-4 shrink-0 flex justify-between items-center">
             <h3 className="font-semibold text-zinc-700">Inbox ({requests.length})</h3>
+            <select 
+              value={filterStatus} 
+              onChange={(e) => setFilterStatus(e.target.value)}
+              className="text-xs border border-zinc-200 rounded p-1 bg-white text-zinc-700"
+            >
+              <option value="All">All Leads</option>
+              <option value="new">New</option>
+              <option value="contacted">Contacted</option>
+              <option value="calling status">Calling Status</option>
+              <option value="positive">Positive</option>
+              <option value="negative">Negative</option>
+              <option value="follow-up 1">Follow-up 1</option>
+              <option value="follow-up 2">Follow-up 2</option>
+              <option value="interested">Interested</option>
+              <option value="not interested">Not Interested</option>
+            </select>
           </div>
           <div className="overflow-auto flex-1">
             <ul className="divide-y divide-zinc-100">
-              {requests.map(req => (
+              {requests.filter(req => filterStatus === 'All' || (req.status || 'new') === filterStatus).map(req => (
                 <li 
                   key={req.id} 
                   onClick={() => setSelectedRequest(req)}
-                  className={`p-4 cursor-pointer hover:bg-zinc-50 transition-colors ${selectedRequest?.id === req.id ? 'bg-zinc-50 border-l-4 border-brand-plum' : 'border-l-4 border-transparent'}`}
+                  className={`p-4 cursor-pointer hover:bg-zinc-50 transition-colors ${selectedRequest?.id === req.id ? 'bg-zinc-50 border-l-4 border-black' : 'border-l-4 border-transparent'}`}
                 >
                   <div className="flex justify-between items-start mb-1">
                     <span className="font-semibold text-zinc-900 truncate pr-2">{req.name}</span>
@@ -79,11 +111,7 @@ export default function ClientRequestsAdmin() {
                   </div>
                   <div className="text-sm text-zinc-600 truncate mb-2">{req.company || req.service}</div>
                   <div className="flex gap-2">
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                      req.status === 'new' ? 'bg-blue-100 text-blue-700' : 
-                      req.status === 'contacted' ? 'bg-orange-100 text-orange-700' :
-                      'bg-green-100 text-green-700'
-                    }`}>
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${getStatusColor(req.status || 'new')}`}>
                       {req.status || 'new'}
                     </span>
                   </div>
@@ -111,11 +139,17 @@ export default function ClientRequestsAdmin() {
                   <select 
                     value={selectedRequest.status || 'new'} 
                     onChange={(e) => handleUpdateStatus(selectedRequest.id, e.target.value)}
-                    className="text-sm border border-zinc-200 rounded-lg p-2 bg-zinc-50"
+                    className="text-sm border border-zinc-200 rounded-lg p-2 bg-zinc-50 font-medium"
                   >
                     <option value="new">New</option>
                     <option value="contacted">Contacted</option>
-                    <option value="closed">Closed</option>
+                    <option value="calling status">Calling Status</option>
+                    <option value="positive">Positive</option>
+                    <option value="negative">Negative</option>
+                    <option value="follow-up 1">Follow-up 1</option>
+                    <option value="follow-up 2">Follow-up 2</option>
+                    <option value="interested">Interested</option>
+                    <option value="not interested">Not Interested</option>
                   </select>
                   <button onClick={() => handleDelete(selectedRequest.id)} className="text-sm text-red-500 hover:underline">
                     Delete

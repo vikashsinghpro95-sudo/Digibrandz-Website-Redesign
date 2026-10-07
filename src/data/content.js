@@ -1,9 +1,9 @@
 export const ABOUT_US = {
   story: "Established in 2024, DigiBrandz IT Solutions was built with one mission—to help businesses grow, innovate, and succeed in the digital world. What started as a vision has quickly evolved into a results-driven Digital Marketing & IT Solutions Company, empowering startups, SMEs, and enterprises with innovative digital strategies. Today, we deliver end-to-end solutions including Website Development, Search Engine Optimization (SEO), Social Media Marketing, Google Ads, Meta Ads, Performance Marketing, Branding, AI Video Creation, and creative design services. Guided by innovation, transparency, and measurable results, we partner with businesses to build strong brands, generate quality leads, and achieve long-term digital success.",
-  vision: "To become a globally recognized digital transformation partner by empowering businesses with innovative technology, creative strategies, and result-driven digital solutions that inspire growth and create lasting impact.",
-  mission: "Our mission is to help businesses succeed in the digital world by delivering SEO-focused websites, powerful branding, AI-powered video solutions, performance marketing, and customer-centric digital strategies that generate measurable results and long-term value.",
-  team: "Behind every successful project is a passionate team of creative designers, developers, digital marketers, SEO specialists, Photo/Videography, Meta Ads Experts, GMB Experts, AI creators, content strategists, and branding experts. We work collaboratively to deliver innovative solutions that help our clients stand out in today's competitive digital landscape.",
-  office: "Our workspace is designed to inspire creativity, collaboration, and innovation. From brainstorming ideas to launching successful digital campaigns, our office reflects the energy and passion that drive DigiBrandz IT Solutions. Every corner is built to encourage teamwork, creativity, and continuous learning.",
+  vision: "To help brands across India grow with a strong, result-driven digital presence.",
+  mission: "To deliver creative, transparent and data-backed marketing that turns attention into real business growth.",
+  team: "A dedicated team of strategists, designers and marketers who treat your brand as their own.",
+  office: "A collaborative space where strategy meets execution. Clients are always welcome to visit and discuss their brand with us.",
   awards: "Our greatest achievement is the trust and success of our clients. DigiBrandz continues to earn recognition for delivering innovative digital solutions, exceptional customer experiences, and measurable business results. As we grow, we remain committed to maintaining the highest standards of creativity, quality, and digital excellence."
 };
 
@@ -1488,8 +1488,8 @@ export const CASE_STUDIES = [
       ]
     }
   },
-  
-  
+
+
 
 ];
 

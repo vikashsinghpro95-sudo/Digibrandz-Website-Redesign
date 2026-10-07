@@ -54,7 +54,7 @@ export default function SettingsAdmin() {
       <div className="bg-white p-6 rounded-xl border border-zinc-200 shadow-sm">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-brand-plum border-b pb-2">Company Info</h3>
+            <h3 className="text-lg font-semibold text-black border-b pb-2">Company Info</h3>
             <div className="grid grid-cols-2 gap-4">
               <div><label className="block text-sm font-medium mb-1">Company Name</label><input type="text" className="w-full p-2 border rounded-lg" value={settings.companyName || ''} onChange={e => handleChange('companyName', e.target.value)} /></div>
               <div><label className="block text-sm font-medium mb-1">Phone Number</label><input type="text" className="w-full p-2 border rounded-lg" value={settings.contactPhone || ''} onChange={e => handleChange('contactPhone', e.target.value)} /></div>
@@ -63,7 +63,7 @@ export default function SettingsAdmin() {
             </div>
           </div>
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-brand-plum border-b pb-2">Social Links</h3>
+            <h3 className="text-lg font-semibold text-black border-b pb-2">Social Links</h3>
             <div className="grid grid-cols-2 gap-4">
               <div><label className="block text-sm font-medium mb-1">LinkedIn</label><input type="url" className="w-full p-2 border rounded-lg" value={settings.socialLinkedIn || ''} onChange={e => handleChange('socialLinkedIn', e.target.value)} /></div>
               <div><label className="block text-sm font-medium mb-1">Twitter</label><input type="url" className="w-full p-2 border rounded-lg" value={settings.socialTwitter || ''} onChange={e => handleChange('socialTwitter', e.target.value)} /></div>
@@ -71,7 +71,7 @@ export default function SettingsAdmin() {
               <div><label className="block text-sm font-medium mb-1">Instagram</label><input type="url" className="w-full p-2 border rounded-lg" value={settings.socialInstagram || ''} onChange={e => handleChange('socialInstagram', e.target.value)} /></div>
             </div>
           </div>
-          <button type="submit" disabled={saving} className="bg-brand-plum text-white px-8 py-3 rounded-lg font-semibold">{saving ? 'Saving...' : 'Save All Settings'}</button>
+          <button type="submit" disabled={saving} className="bg-[#C5FA01] text-black px-8 py-3 rounded-lg font-semibold">{saving ? 'Saving...' : 'Save All Settings'}</button>
         </form>
       </div>
     </div>

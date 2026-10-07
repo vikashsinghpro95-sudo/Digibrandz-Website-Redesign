@@ -4,6 +4,7 @@ import { FaArrowRight, FaXmark, FaCheck } from 'react-icons/fa6'
 import { Button } from './ui/button'
 import { useContent } from '../contexts/ContentContext'
 import { Link } from 'react-router-dom'
+import AnimatedHeading from './ui/AnimatedHeading';
 
 export default function CaseStudies({ limit }) {
   const [selectedStudy, setSelectedStudy] = useState(null)
@@ -15,15 +16,7 @@ export default function CaseStudies({ limit }) {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-display font-bold text-4xl md:text-5xl text-brand-plum dark:text-brand-cream mb-6"
-          >
-            Real Problems. Real Solutions. <br className="hidden sm:block"/>
-            <span className="text-brand-rose">Real Results.</span>
-          </motion.h2>
+          <AnimatedHeading text="Real Problems. Real Solutions. Real Results." className="font-display font-bold text-4xl md:text-5xl text-black mb-6" />
         </div>
 
         {/* Grid Container */}
@@ -36,13 +29,13 @@ export default function CaseStudies({ limit }) {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: (index % 3) * 0.1, duration: 0.5 }}
               onClick={() => setSelectedStudy(study)}
-              className="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] bg-card/95 border border-border/40 rounded-[2rem] p-8 md:p-10 shadow-[0_4px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_40px_rgba(189,85,121,0.08)] hover:-translate-y-2 hover:bg-card hover:border-brand-rose/20 transition-all duration-500 cursor-pointer group flex flex-col justify-between relative overflow-hidden transform-gpu"
+              className="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] bg-card/95 border border-border/40 rounded-[2rem] p-8 md:p-10 shadow-[0_4px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_40px_rgba(189,85,121,0.08)] hover:-translate-y-2 hover:bg-card hover:border-black/20 transition-all duration-500 cursor-pointer group flex flex-col justify-between relative overflow-hidden transform-gpu"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-brand-rose/5 rounded-full blur-[40px] group-hover:bg-brand-rose/10 transition-colors transform-gpu" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#C5FA01]/5 rounded-full blur-[40px] group-hover:bg-[#C5FA01]/10 transition-colors transform-gpu" />
               
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-6 gap-4">
-                  <span className="text-brand-rose font-bold text-[10px] sm:text-xs uppercase tracking-widest block bg-brand-rose/5 border border-brand-rose/10 w-fit px-4 py-1.5 rounded-full">
+                  <span className="text-black  font-bold text-[10px] sm:text-xs uppercase tracking-widest block bg-[#C5FA01]/5 border border-black/10 w-fit px-4 py-1.5 rounded-full">
                     {study.industry}
                   </span>
                   {study.logo && (
@@ -51,7 +44,7 @@ export default function CaseStudies({ limit }) {
                     </div>
                   )}
                 </div>
-                <h3 className="font-display font-bold text-2xl md:text-3xl text-foreground mb-4 leading-tight group-hover:text-brand-rose transition-colors line-clamp-2">
+                <h3 className="font-display font-bold text-2xl md:text-3xl text-foreground mb-4 leading-tight group-hover:text-black  transition-colors line-clamp-2">
                   {study.client}
                 </h3>
                 <p className="text-base text-muted-foreground/90 line-clamp-3 mb-8 leading-relaxed font-medium">
@@ -59,7 +52,7 @@ export default function CaseStudies({ limit }) {
                 </p>
               </div>
               <div className="flex items-center justify-between gap-4 mt-auto pt-6 border-t border-border/40 relative z-10">
-                <div className="flex items-center gap-2 text-sm font-bold text-foreground group-hover:text-brand-rose transition-colors">
+                <div className="flex items-center gap-2 text-sm font-bold text-foreground group-hover:text-black  transition-colors">
                   Read Case Study
                   <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -68,7 +61,7 @@ export default function CaseStudies({ limit }) {
                     href={study.website} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="text-xs font-bold text-muted-foreground hover:text-white transition-all px-4 py-2 rounded-full bg-muted/30 hover:bg-brand-plum border border-transparent hover:border-brand-plum w-fit shadow-sm"
+                    className="text-xs font-bold text-muted-foreground hover:text-black transition-all px-4 py-2 rounded-full bg-muted/30 hover:bg-[#C5FA01] border border-transparent hover:border-black w-fit shadow-sm"
                     onClick={(e) => e.stopPropagation()}
                   >
                     Visit Site
@@ -82,7 +75,7 @@ export default function CaseStudies({ limit }) {
         {limit && limit < caseStudies.length && (
           <div className="flex justify-center mt-8">
             <Link to="/portfolio">
-              <Button size="lg" className="bg-brand-rose hover:bg-white hover:text-brand-plum text-white rounded-full px-10 py-6 text-lg font-bold shadow-xl shadow-brand-rose/20 transition-all hover:-translate-y-1">
+              <Button size="lg" className="bg-[#C5FA01] hover:bg-white hover:text-black text-black rounded-full px-10 py-6 text-lg font-bold shadow-xl shadow-brand-rose/20 transition-all hover:-translate-y-1">
                 Show More Case Studies
                 <FaArrowRight className="ml-2" />
               </Button>
@@ -126,7 +119,7 @@ export default function CaseStudies({ limit }) {
                       <img src={selectedStudy.logo} alt={`${selectedStudy.client} logo`} className="h-full w-full object-contain" />
                     </div>
                   )}
-                  <span className="text-brand-rose font-bold text-[10px] uppercase tracking-widest bg-brand-rose/5 border border-brand-rose/10 px-3 py-1 rounded-full">
+                  <span className="text-black  font-bold text-[10px] uppercase tracking-widest bg-[#C5FA01]/5 border border-black/10 px-3 py-1 rounded-full">
                     {selectedStudy.industry}
                   </span>
                 </div>
@@ -140,7 +133,7 @@ export default function CaseStudies({ limit }) {
                     href={selectedStudy.website} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="inline-flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-rose transition-colors group"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-foreground hover:text-black  transition-colors group"
                   >
                     Visit Live Project <FaArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
                   </a>
@@ -153,7 +146,7 @@ export default function CaseStudies({ limit }) {
                   
                   {/* Overview */}
                   <section>
-                    <h4 className="font-bold text-lg text-foreground mb-4 border-l-2 border-brand-rose pl-4">Overview</h4>
+                    <h4 className="font-bold text-lg text-foreground mb-4 border-l-2 border-black pl-4">Overview</h4>
                     <p className="text-muted-foreground leading-relaxed text-lg">
                       {selectedStudy.overview}
                     </p>
@@ -161,7 +154,7 @@ export default function CaseStudies({ limit }) {
 
                   {/* The Challenge */}
                   <section>
-                    <h4 className="font-bold text-lg text-foreground mb-4 border-l-2 border-brand-rose pl-4">The Challenge</h4>
+                    <h4 className="font-bold text-lg text-foreground mb-4 border-l-2 border-black pl-4">The Challenge</h4>
                     <ul className="space-y-3">
                       {(selectedStudy.challenges || []).map((challenge, idx) => (
                         <li key={idx} className="flex items-start gap-3 text-muted-foreground leading-relaxed">
@@ -174,7 +167,7 @@ export default function CaseStudies({ limit }) {
 
                   {/* What We Did */}
                   <section>
-                    <h4 className="font-bold text-lg text-foreground mb-6 border-l-2 border-brand-rose pl-4">What We Delivered</h4>
+                    <h4 className="font-bold text-lg text-foreground mb-6 border-l-2 border-black pl-4">What We Delivered</h4>
                     <div className="space-y-8">
                       {Object.entries(selectedStudy.whatWeDid || {}).map(([category, actions], idx) => (
                         <div key={idx}>
@@ -182,7 +175,7 @@ export default function CaseStudies({ limit }) {
                           <ul className="space-y-3">
                             {(actions || []).map((action, actionIdx) => (
                               <li key={actionIdx} className="flex items-start gap-3 text-muted-foreground">
-                                <FaCheck className="text-brand-rose shrink-0 mt-1" size={14} />
+                                <FaCheck className="text-black  shrink-0 mt-1" size={14} />
                                 <span className="leading-relaxed">{action}</span>
                               </li>
                             ))}

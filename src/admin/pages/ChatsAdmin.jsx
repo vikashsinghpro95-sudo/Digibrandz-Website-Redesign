@@ -99,7 +99,7 @@ export default function ChatsAdmin() {
                  <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-zinc-50/30">
                    {selectedChat.messages.filter(m => m.role !== 'system').map((msg, i) => (
                      <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                       <div className={`max-w-[75%] rounded-2xl px-4 py-3 text-sm ${msg.role === 'user' ? 'bg-brand-plum text-white rounded-br-none' : 'bg-white border border-zinc-200 text-zinc-800 rounded-bl-none shadow-sm'}`}>
+                       <div className={`max-w-[75%] rounded-2xl px-4 py-3 text-sm ${msg.role === 'user' ? 'bg-[#C5FA01] text-black rounded-br-none' : 'bg-white border border-zinc-200 text-zinc-800 rounded-bl-none shadow-sm'}`}>
                          {msg.content}
                        </div>
                      </div>

@@ -80,7 +80,7 @@ export default function ImageUpload({ value, onChange, placeholder }) {
           type="button"
           onClick={() => fileInputRef.current?.click()}
           disabled={uploading}
-          className="bg-brand-plum text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 hover:bg-brand-plum/90 disabled:opacity-70 whitespace-nowrap"
+          className="bg-[#C5FA01] text-black px-4 py-2 rounded-lg font-medium flex items-center gap-2 hover:bg-[#C5FA01]/90 disabled:opacity-70 whitespace-nowrap"
         >
           {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <UploadCloud className="w-4 h-4" />}
           {uploading ? 'Uploading...' : 'Upload Image'}
@@ -109,7 +109,7 @@ export default function ImageUpload({ value, onChange, placeholder }) {
           <button
             type="button"
             onClick={() => onChange('')}
-            className="absolute top-1 right-1 bg-black/50 hover:bg-red-500 text-white rounded-full p-1 transition-colors"
+            className="absolute top-1 right-1 bg-black/50 hover:bg-red-500 text-[#C5FA01] rounded-full p-1 transition-colors"
           >
             <X className="w-3 h-3" />
           </button>

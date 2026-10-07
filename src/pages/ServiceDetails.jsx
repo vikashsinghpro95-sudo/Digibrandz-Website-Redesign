@@ -69,23 +69,23 @@ export default function ServiceDetails() {
         breadcrumbs={['Services', service.title]}
       />
 
-      <section className="py-20 relative">
+      <section className="py-20 relative bg-black">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="bg-card rounded-3xl p-8 md:p-12 border border-border shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-brand-rose/5 rounded-full blur-[80px] transform-gpu" />
-            <h2 className="text-3xl font-bold mb-6 font-display text-foreground relative z-10">Overview</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed relative z-10 mb-12">
+            <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#C5FA01]/5 rounded-full blur-[80px] transform-gpu" />
+            <h2 className="text-3xl font-bold mb-6 font-display text-[#C5FA01] relative z-10">Overview</h2>
+            <p className="text-lg text-[#C5FA01]/80 leading-relaxed relative z-10 mb-12">
               {description}
             </p>
 
             {offers.length > 0 && (
               <>
-                <h3 className="text-2xl font-bold mb-6 font-display text-foreground relative z-10">What We Offer</h3>
+                <h3 className="text-2xl font-bold mb-6 font-display text-[#C5FA01] relative z-10">What We Offer</h3>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
                   {offers.map((offer, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <FaCircleCheck className="text-brand-rose mt-1 shrink-0" />
-                      <span className="text-muted-foreground">{offer}</span>
+                      <FaCircleCheck className="text-[#C5FA01]  mt-1 shrink-0" />
+                      <span className="text-[#C5FA01]/80">{offer}</span>
                     </li>
                   ))}
                 </ul>
@@ -101,7 +101,7 @@ export default function ServiceDetails() {
                   {faqs.map((faq, idx) => (
                     <AccordionItem key={idx} value={`faq-${idx}`}>
                       <AccordionTrigger className="text-left text-base font-bold">{faq.q}</AccordionTrigger>
-                      <AccordionContent className="text-muted-foreground text-base leading-relaxed">
+                      <AccordionContent className="text-[#C5FA01]/80 text-base leading-relaxed">
                         {faq.a}
                       </AccordionContent>
                     </AccordionItem>

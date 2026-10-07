@@ -41,7 +41,7 @@ function AnimatedCounter({ value, suffix, duration = 2 }) {
   }, [value, duration, isInView])
 
   return (
-    <div ref={nodeRef} className="font-display font-bold text-5xl md:text-6xl text-brand-plum dark:text-brand-cream mb-2">
+    <div ref={nodeRef} className="font-display font-bold text-5xl md:text-6xl text-black  mb-2">
       {count}{suffix}
     </div>
   )
@@ -57,10 +57,10 @@ export default function Statistics() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-display font-bold text-4xl md:text-5xl text-brand-plum dark:text-brand-cream mb-6"
+            className="font-display font-bold text-4xl md:text-5xl text-black  mb-6"
           >
             Building Digital Success, <br className="hidden sm:block"/>
-            <span className="text-brand-rose">One Project at a Time</span>
+            <span className="text-black ">One Project at a Time</span>
           </motion.h2>
         </div>
 

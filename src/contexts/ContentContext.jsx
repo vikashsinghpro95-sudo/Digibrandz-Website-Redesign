@@ -23,13 +23,13 @@ export function ContentProvider({ children }) {
     const load = async () => {
       const results = await Promise.allSettled([
         fetchAll('SELECT setting_key, setting_value FROM settings'),
-        fetchAll('SELECT * FROM services ORDER BY display_order ASC, id ASC'),
+        fetchAll("SELECT * FROM services WHERE status = 'published' ORDER BY display_order ASC, id ASC"),
         fetchAll('SELECT * FROM case_studies ORDER BY display_order ASC, id ASC'),
         fetchAll('SELECT * FROM team_members ORDER BY display_order ASC, id ASC'),
         fetchAll('SELECT * FROM testimonials ORDER BY id ASC'),
-        fetchAll('SELECT * FROM industries ORDER BY display_order ASC, id ASC'),
-        fetchAll('SELECT * FROM jobs ORDER BY display_order ASC, created_at DESC'),
-        fetchAll('SELECT * FROM nav_links ORDER BY display_order ASC, id ASC'),
+        fetchAll("SELECT * FROM industries ORDER BY display_order ASC, id ASC"),
+        fetchAll("SELECT * FROM jobs WHERE status = 'open' ORDER BY display_order ASC, created_at DESC"),
+        fetchAll("SELECT * FROM nav_links ORDER BY display_order ASC, id ASC"),
       ])
 
       const value = (index) => (results[index].status === 'fulfilled' ? results[index].value : null)

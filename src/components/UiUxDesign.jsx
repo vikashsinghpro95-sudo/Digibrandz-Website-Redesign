@@ -29,9 +29,9 @@ export default function UiUxDesign() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-display font-bold text-4xl md:text-5xl text-brand-plum dark:text-brand-cream mb-6"
+            className="font-display font-bold text-4xl md:text-5xl text-black  mb-6"
           >
-            Design That Users <span className="text-brand-rose">Love to Use</span>
+            Design That Users <span className="text-black ">Love to Use</span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -51,7 +51,7 @@ export default function UiUxDesign() {
           {/* Animated Connecting Line */}
           <motion.div 
             style={{ width: lineWidth }}
-            className="absolute top-1/2 left-0 h-1 bg-gradient-to-r from-brand-rose to-brand-blush -translate-y-1/2 origin-left" 
+            className="absolute top-1/2 left-0 h-1 bg-[#C5FA01] -translate-y-1/2 origin-left" 
           />
 
           <div className="relative z-10 flex justify-between">
@@ -62,9 +62,9 @@ export default function UiUxDesign() {
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ delay: idx * 0.1, type: "spring", stiffness: 200, damping: 20 }}
-                  className="w-14 h-14 rounded-full bg-background border-4 border-background shadow-md flex items-center justify-center text-brand-plum dark:text-brand-cream relative z-10 mb-4"
+                  className="w-14 h-14 rounded-full bg-background border-4 border-background shadow-md flex items-center justify-center text-black  relative z-10 mb-4"
                 >
-                  <div className="w-full h-full rounded-full bg-brand-rose/10 flex items-center justify-center">
+                  <div className="w-full h-full rounded-full bg-[#C5FA01]/10 flex items-center justify-center">
                     {React.cloneElement(step.icon, { size: 20 })}
                   </div>
                 </motion.div>
@@ -79,7 +79,7 @@ export default function UiUxDesign() {
           <div className="absolute top-0 left-7 w-1 h-full bg-border" />
           <motion.div 
             style={{ height: lineWidth }}
-            className="absolute top-0 left-7 w-1 bg-gradient-to-b from-brand-rose to-brand-blush origin-top" 
+            className="absolute top-0 left-7 w-1 bg-[#C5FA01] origin-top" 
           />
           {PROCESS.map((step, idx) => (
             <div key={idx} className="flex items-center gap-6 relative z-10">
@@ -88,9 +88,9 @@ export default function UiUxDesign() {
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ delay: idx * 0.1 }}
-                className="w-14 h-14 shrink-0 rounded-full bg-background border-4 border-background shadow-md flex items-center justify-center text-brand-plum dark:text-brand-cream"
+                className="w-14 h-14 shrink-0 rounded-full bg-background border-4 border-background shadow-md flex items-center justify-center text-black "
               >
-                <div className="w-full h-full rounded-full bg-brand-rose/10 flex items-center justify-center">
+                <div className="w-full h-full rounded-full bg-[#C5FA01]/10 flex items-center justify-center">
                   {React.cloneElement(step.icon, { size: 20 })}
                 </div>
               </motion.div>

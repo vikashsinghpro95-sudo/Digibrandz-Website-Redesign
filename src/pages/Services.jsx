@@ -18,7 +18,7 @@ export default function Services() {
         subtitle="Comprehensive digital solutions designed to scale your brand and drive measurable growth." 
         breadcrumbs={['Services']} 
       />
-      <ServicesOverview />
+      <ServicesOverview hideHeader />
       <DigitalMarketing />
       <SoftwareDevelopment />
       <WebDevelopment />
