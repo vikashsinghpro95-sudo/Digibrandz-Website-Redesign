@@ -4,6 +4,7 @@ import DOMPurify from 'dompurify';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaRegCalendar } from 'react-icons/fa6';
 import { fetchAll } from '../lib/turso';
+import { Helmet } from 'react-helmet-async';
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -21,7 +22,7 @@ export default function BlogPost() {
         setBlog({
           ...b,
           coverImage: b.featured_image,
-          createdAt: b.created_at || b.published_at
+          createdAt: b.published_at || b.created_at
         });
         setIsLoading(false);
       })
@@ -32,7 +33,7 @@ export default function BlogPost() {
   }, [slug]);
 
   if (isLoading) return <div className="min-h-screen flex items-center justify-center pt-24 text-muted-foreground">Loading...</div>;
-  if (error || !blog) return (
+  if (error || !blog || blog.status === 'Inactive' || blog.status === 'draft') return (
     <div className="min-h-screen flex flex-col items-center justify-center pt-24 text-center">
       <h1 className="text-4xl font-display font-bold text-foreground mb-4">Post Not Found</h1>
       <p className="text-muted-foreground mb-8">The article you're looking for doesn't exist or was removed.</p>
@@ -50,9 +51,25 @@ export default function BlogPost() {
 
   // Sanitize the HTML content to prevent XSS
   const safeHTML = DOMPurify.sanitize(decodeHTML(blog.content));
+  const pageUrl = blog.canonical_url || `https://digibrandz.com/blog/${blog.slug}`;
+  const metaTitle = blog.meta_title || `${blog.title} | DigiBrandz`;
+  const metaDescription = blog.meta_description || blog.excerpt || `Read ${blog.title} on DigiBrandz IT Solutions.`;
+  const altText = blog.image_alt_text || blog.title;
 
   return (
     <div className="pt-24 pb-20 min-h-screen bg-background">
+      <Helmet>
+        <title>{metaTitle}</title>
+        <meta name="description" content={metaDescription} />
+        {blog.focus_keyword && <meta name="keywords" content={blog.focus_keyword} />}
+        <link rel="canonical" href={pageUrl} />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={pageUrl} />
+        {blog.coverImage && <meta property="og:image" content={blog.coverImage} />}
+      </Helmet>
+
       <article className="container mx-auto px-4 md:px-6 max-w-3xl">
         
         {/* Back Link */}
@@ -72,7 +89,7 @@ export default function BlogPost() {
           
           {blog.coverImage && (
             <div className="w-full h-[300px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-border">
-              <img src={blog.coverImage} alt={blog.title} className="w-full h-full object-cover" />
+              <img src={blog.coverImage} alt={altText} className="w-full h-full object-cover" />
             </div>
           )}
         </header>
