@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FaLocationDot, FaEnvelope, FaPhone, FaClock } from 'react-icons/fa6'
+import { FaLocationDot, FaEnvelope, FaPhone, FaClock, FaPaperPlane, FaSpinner } from 'react-icons/fa6'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea'
 import { Label } from './ui/label'
@@ -213,8 +213,23 @@ export default function Contact() {
                 />
               </div>
 
-              <Button disabled={loading} type="submit" size="lg" className="w-full bg-[#C5FA01] hover:bg-[#C5FA01]/90   :bg-[#C5FA01]/90 text-black font-bold h-14 text-base rounded-full">
-                {loading ? "Sending..." : "Submit Enquiry"}
+              <Button 
+                disabled={loading} 
+                type="submit" 
+                size="lg" 
+                className="w-full bg-[#C5FA01] text-black font-extrabold text-base h-14 rounded-full border-2 border-black shadow-[0_4px_14px_rgba(0,0,0,0.15)] hover:bg-black hover:text-[#C5FA01] hover:border-black hover:shadow-[0_6px_25px_rgba(197,250,1,0.4)] transition-all duration-300 transform active:scale-[0.99] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
+              >
+                {loading ? (
+                  <>
+                    <FaSpinner className="w-5 h-5 animate-spin mr-2" />
+                    <span>Sending Enquiry...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Submit Enquiry</span>
+                    <FaPaperPlane className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
+                  </>
+                )}
               </Button>
               
             </form>

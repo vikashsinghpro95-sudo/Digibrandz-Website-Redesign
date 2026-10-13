@@ -27,7 +27,7 @@ export default function TechStack() {
               <TabsTrigger 
                 key={cat} 
                 value={cat}
-                className="rounded-full px-6 py-2.5 data-[state=active]:bg-[#C5FA01] data-[state=active]:text-black =active]:bg-[#C5FA01] =active]:text-black border border-transparent data-[state=inactive]:border-black/10 hover:bg-muted transition-colors"
+                className="rounded-full px-6 py-2.5 data-[state=active]:bg-[#C5FA01] data-[state=active]:text-black border border-transparent data-[state=inactive]:border-black/10 hover:bg-muted transition-colors font-medium"
               >
                 {cat}
               </TabsTrigger>

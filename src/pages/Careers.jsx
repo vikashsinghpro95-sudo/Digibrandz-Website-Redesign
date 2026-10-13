@@ -4,7 +4,7 @@ import { Button } from '../components/ui/button'
 import { Input } from '../components/ui/input'
 import { Textarea } from '../components/ui/textarea'
 import { Label } from '../components/ui/label'
-import { FaArrowRight, FaLaptopCode, FaRocket, FaHeart, FaGlobe, FaXmark, FaLocationDot, FaClock, FaCalendarDays } from 'react-icons/fa6'
+import { FaArrowRight, FaLaptopCode, FaRocket, FaHeart, FaGlobe, FaXmark, FaLocationDot, FaClock, FaCalendarDays, FaPaperPlane, FaSpinner } from 'react-icons/fa6'
 import { useContent } from '../contexts/ContentContext'
 import { API_BASE } from '../lib/api'
 
@@ -405,8 +405,23 @@ export default function Careers() {
                     />
                   </div>
 
-                  <Button disabled={loading} type="submit" size="lg" className="w-full bg-[#C5FA01] hover:bg-[#C5FA01]/90   :bg-[#C5FA01]/90 text-black font-bold h-14 text-base rounded-full">
-                    {loading ? "Submitting..." : "Submit Application"}
+                  <Button 
+                    disabled={loading} 
+                    type="submit" 
+                    size="lg" 
+                    className="w-full bg-[#C5FA01] text-black font-extrabold text-base h-14 rounded-full border-2 border-black shadow-[0_4px_14px_rgba(0,0,0,0.15)] hover:bg-black hover:text-[#C5FA01] hover:border-black hover:shadow-[0_6px_25px_rgba(197,250,1,0.4)] transition-all duration-300 transform active:scale-[0.99] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
+                  >
+                    {loading ? (
+                      <>
+                        <FaSpinner className="w-5 h-5 animate-spin mr-2" />
+                        <span>Submitting...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Submit Application</span>
+                        <FaPaperPlane className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
+                      </>
+                    )}
                   </Button>
                   
                 </form>

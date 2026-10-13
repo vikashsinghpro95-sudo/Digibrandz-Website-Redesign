@@ -45,7 +45,7 @@ export default function SoftwareDevelopment() {
               transition={{ delay: 0.2 }}
             >
               <Link to="/contact">
-                <Button size="lg" className="bg-[#C5FA01] hover:bg-[#C5FA01]/90   :bg-[#C5FA01]/90 text-black rounded-full">
+                <Button size="lg" className="bg-[#C5FA01] hover:bg-[#C5FA01]/90 text-black font-bold rounded-full shadow-md">
                   Discuss Your Software Idea
                 </Button>
               </Link>
